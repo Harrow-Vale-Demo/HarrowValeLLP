@@ -1,0 +1,19 @@
+{
+  "name": "nz-skills-marketplace",
+  "owner": {
+    "name": "Negative Zero",
+    "email": "emily.donovan@negativezero.com"
+  },
+  "description": "Internal Negative Zero skills marketplace.",
+  "plugins": [
+    {
+      "name": "term-sheet-review-plugin",
+      "source": "./plugins/term-sheet-review-plugin",
+      "description": "Review venture term sheets across formats against a fixed DD checklist.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Emily Donovan"
+      }
+    }
+  ]
+}

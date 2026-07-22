@@ -1,0 +1,9 @@
+{
+  "name": "term-sheet-review-plugin",
+  "description": "Adds the term-sheet-review skill: a consistent, plain-English first-pass review of venture term sheets (SAFEs, priced rounds, convertible notes) against a fixed DD checklist.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Emily Donovan",
+    "email": "emily.donovan@negativezero.com"
+  }
+}
