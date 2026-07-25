@@ -19,12 +19,16 @@
 | Security / ranking | **Unsecured**; ranks behind secured creditors | "Security" |
 | Governing law | England and Wales | Footer |
 | Pro-rata rights | Not stated | — |
+| Founder vesting schedule | Not stated | — |
+| Legal fees & expenses | Not stated | — |
 
 ## Part B — Flags for a lawyer's attention
 - 🔴 **1.5x change-of-control premium** — on a CoC before conversion, the noteholder can take principal + interest + a 1.5x premium. Enhanced exit return; confirm the company modelled this into any near-term M&A scenario.
 - 🟡 **8% compounding interest** — within the 5–10% norm but compounding annually and rolled to conversion; the effective conversion amount grows over the 24-month term. Note the accrual mechanics.
 - 🟡 **Pre-money cap (£8m)** — cap stated pre-money; fine, just noted so it isn't confused with a post-money figure.
 - ⚪ **Pro-rata / follow-on rights not stated** — none in the note. Confirm whether Fenwick expects them.
+- ⚪ **Founder vesting not stated** — notes don't typically include vesting terms, but confirm founders have appropriate vesting in place via employment/founders' agreements.
+- ⚪ **Legal fees not stated** — silent on allocation of deal costs. Confirm who pays and any cap.
 - 🟡 **Unsecured, ranks behind secured creditors** — standard for this instrument; noted so the ranking is explicit if the company later takes on secured debt.
 
 ## Part C — DD checklist coverage

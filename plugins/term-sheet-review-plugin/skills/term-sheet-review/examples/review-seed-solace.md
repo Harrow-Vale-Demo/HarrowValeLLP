@@ -23,6 +23,8 @@
 | Option pool | Not stated | — |
 | Governing law | England and Wales | Bullet |
 | Side letters | Reviewer note: "confirm no side letters exist before closing" | Notes for reviewer |
+| Founder vesting schedule | Not stated | — |
+| Legal fees & expenses | Not stated | — |
 
 ## Part B — Flags for a lawyer's attention
 - 🟡 **30-day exclusivity** — within norm (30–45 days); noted.
@@ -31,6 +33,8 @@
 - 🟡 **Observer seat only** — matches the seed-stage baseline (no board seat at seed); no concern, noted for completeness.
 - 🟡 **Reviewer flag — side letters** — the document itself says confirm no side letters exist. Action item before closing.
 - 🟡 **14-day IP diligence window** — short window; ensure IP assignments are ready to review quickly.
+- ⚪ **Founder vesting not stated** — seed investors typically require founder vesting (standard: 4 years, 1-year cliff). Confirm vesting schedule exists or will be put in place.
+- ⚪ **Legal fees not stated** — silent on deal costs. For seed rounds, company typically pays capped investor fees (£10k–£20k). Clarify before signing.
 
 *Economics (1x non-participating, broad-based WA, observer-only, pro-rata yes) are all at the seed-stage baseline — no 🔴 Review flags.*
 

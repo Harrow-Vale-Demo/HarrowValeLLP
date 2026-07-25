@@ -25,6 +25,8 @@
 | Exclusivity | 45 days | §8 |
 | Conditions to closing | DD per standard checklist; clean disclosure letter; Investment Agreement, Amended Articles, Shareholders' Agreement | §7 |
 | Governing law | England and Wales | Footer |
+| Founder vesting schedule | Not stated | — |
+| Legal fees & expenses | Not stated | — |
 
 ## Part B — Flags for a lawyer's attention
 *Severity: 🔴 Review · 🟡 Note · ⚪ Omission. Described, not adjudicated.*
@@ -32,6 +34,8 @@
 - 🟡 **45-day exclusivity** — within the 30–45 day norm, at the top of the band. Note only.
 - ⚪ **No option pool created this round** — cap table confirms none. Common to establish/expand a pool at Series A; where a pool is created *later*, dilution falls on existing holders including the new investor. Flag for the lawyer to confirm timing is intended.
 - ⚪ **Pro-rata rights not stated** — a lead investor at Series A would usually expect pro-rata follow-on rights; absent from the term sheet. Confirm whether these sit in the Shareholders' Agreement.
+- ⚪ **Founder vesting not stated** — at Series A, investors typically require founder vesting (standard: 4 years, 1-year cliff). May be in a separate Founders' Agreement or Shareholders' Agreement — confirm.
+- ⚪ **Legal fees not stated** — term sheet silent on who pays legal costs and whether there's a cap on investor fees the company covers. Typical for Series A is company pays capped investor fees (£25k–£50k). Clarify before closing.
 - 🟡 **Info-rights threshold 2%** — reasonable; noted for completeness.
 
 *Liquidation preference (1x non-participating), anti-dilution (broad-based WA) and board (proportional, founders retain 2/3) are all at the market-standard baseline — no 🔴 Review flags on economics.*

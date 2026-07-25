@@ -19,6 +19,9 @@ firm-specific standard is later supplied, it overrides this file.
 | Interest (convertible note) | 5–10% p.a. | 🟡 outside that band |
 | Exclusivity | 30–45 days | 🟡 materially longer |
 | Option pool | Sized and (usually) created at/around priced rounds | ⚪ none created — note dilution timing question |
+| Founder vesting | 4 years total, 1-year cliff | 🟡 shorter cliff (<12 months) or longer total (>4 years); 🔴 no vesting or immediate full vest |
+| Vesting acceleration | Double-trigger on change of control (if any) | 🔴 single-trigger acceleration (founders fully vest on sale — misaligns incentives post-acquisition) |
+| Legal fees | Company pays investor's reasonable legal fees, capped (typically £10k–£25k early stage, £25k–£50k Series A) | 🟡 no cap stated; 🔴 uncapped or unusually high cap (>£50k for seed/A) |
 
 ## Clauses that always warrant a flag when present
 - **MFN (most-favoured-nation)** on a SAFE/note → 🔴 Review — investor gets the benefit of later, better terms.

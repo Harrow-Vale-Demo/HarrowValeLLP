@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{COMPANY}} — Term-Sheet Review</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm 2cm;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #1a1a1a;
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 2cm;
+            background: #fff;
+        }
+
+        /* Letterhead */
+        .letterhead {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 1em;
+            margin-bottom: 2em;
+        }
+
+        .firm-name {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #2c3e50;
+            letter-spacing: 0.05em;
+            margin: 0;
+        }
+
+        .firm-tagline {
+            font-size: 9pt;
+            color: #666;
+            font-style: italic;
+            margin: 0.25em 0 0 0;
+        }
+
+        /* Memo header */
+        .memo-header {
+            margin-bottom: 2em;
+            font-size: 10pt;
+        }
+
+        .memo-header table {
+            border-collapse: collapse;
+        }
+
+        .memo-header td {
+            padding: 0.2em 0;
+            vertical-align: top;
+        }
+
+        .memo-header td:first-child {
+            font-weight: bold;
+            width: 100px;
+            color: #555;
+        }
+
+        .memo-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 1.5em 0 0.5em 0;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.25em;
+        }
+
+        .memo-subtitle {
+            font-size: 10pt;
+            color: #666;
+            font-style: italic;
+            margin: 0 0 1.5em 0;
+        }
+
+        /* Sections */
+        h2 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 1.5em 0 0.5em 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.25em;
+        }
+
+        h3 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #333;
+            margin: 1em 0 0.5em 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+            font-size: 10pt;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 0.5em;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Key terms table */
+        table.key-terms td:first-child {
+            width: 30%;
+            font-weight: 500;
+        }
+
+        table.key-terms td:nth-child(2) {
+            width: 40%;
+        }
+
+        table.key-terms td:nth-child(3) {
+            width: 30%;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        /* Flags */
+        .flag-red {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .flag-yellow {
+            color: #d68910;
+            font-weight: bold;
+        }
+
+        .flag-white {
+            color: #666;
+            font-weight: bold;
+        }
+
+        .flag-item {
+            margin: 0.5em 0;
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+        }
+
+        /* Checklist */
+        .checklist-section {
+            font-weight: bold;
+            margin-top: 1em;
+            color: #2c3e50;
+        }
+
+        .checklist-item {
+            margin: 0.25em 0 0.25em 1.5em;
+            font-size: 10pt;
+        }
+
+        .status-present {
+            color: #27ae60;
+        }
+
+        .status-missing {
+            color: #c0392b;
+        }
+
+        .status-na {
+            color: #888;
+        }
+
+        .coverage-tally {
+            font-weight: bold;
+            background: #f9f9f9;
+            padding: 0.5em;
+            margin: 1em 0;
+            border-left: 3px solid #2c3e50;
+        }
+
+        /* Summary box */
+        .summary-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-left: 4px solid #2c3e50;
+            padding: 1em;
+            margin: 1.5em 0;
+        }
+
+        /* Footer */
+        .memo-footer {
+            margin-top: 3em;
+            padding-top: 1em;
+            border-top: 1px solid #ccc;
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .confidential {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #c0392b;
+            font-size: 8pt;
+            letter-spacing: 0.1em;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="letterhead">
+        <p class="firm-name">HARROW & VALE LLP</p>
+        <p class="firm-tagline">Solicitors · Clerkenwell, London</p>
+    </div>
+
+    <div class="memo-header">
+        <table>
+            <tr>
+                <td>TO:</td>
+                <td>{{RECIPIENT}}</td>
+            </tr>
+            <tr>
+                <td>FROM:</td>
+                <td>{{AUTHOR}} (AI-assisted review)</td>
+            </tr>
+            <tr>
+                <td>DATE:</td>
+                <td>{{DATE}}</td>
+            </tr>
+            <tr>
+                <td>RE:</td>
+                <td>{{COMPANY}} — {{INSTRUMENT}} Review</td>
+            </tr>
+            <tr>
+                <td>REF:</td>
+                <td>{{MATTER_REF}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <p class="confidential">Privileged & Confidential — Internal Working Document</p>
+
+    <h1 class="memo-title">Term-Sheet Review — {{COMPANY}} {{INSTRUMENT}}</h1>
+    <p class="memo-subtitle">First-pass associate review for lawyer sign-off. Not legal advice. All values traceable to the source document; nothing inferred.</p>
+
+    <div class="memo-content">
+        <!-- CONTENT PLACEHOLDER: The skill output (Parts A-D) is inserted here -->
+        {{CONTENT}}
+    </div>
+
+    <div class="memo-footer">
+        <p><strong>Checklist coverage:</strong> All {{CHECKLIST_COUNT}} items accounted for.</p>
+        <p>This review was prepared with AI assistance using the firm's approved term-sheet review skill. A qualified solicitor must verify all extracted terms and flags before reliance. This document does not constitute legal advice.</p>
+        <p style="margin-top: 1em;">Harrow & Vale LLP · Chancery Lane · London EC4</p>
+    </div>
+</body>
+</html>

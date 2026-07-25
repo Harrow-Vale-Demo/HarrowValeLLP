@@ -21,6 +21,8 @@
 | Governing law | England and Wales | Footer |
 | Conditions to closing | Not stated | — |
 | Exclusivity | Not stated | — |
+| Founder vesting schedule | Not stated | — |
+| Legal fees & expenses | Not stated | — |
 
 ## Part B — Flags for a lawyer's attention
 *Severity: 🔴 Review · 🟡 Note · ⚪ Omission. Described, not adjudicated.*
@@ -29,6 +31,8 @@
 - 🟡 **Post-money cap** — cap is expressed post-money (£6m). Post-money caps fix the investor's ownership floor and push dilution onto founders more than pre-money caps; worth confirming founders understand the dilution mechanics.
 - 🟡 **Discount 20%** — within the normal 10–25% band, at the higher end. Note only.
 - ⚪ **No conversion long-stop / no maturity** — expected for a true SAFE, but means there is no date forcing conversion or repayment. Flagged so the lawyer confirms this is intended (it is, for a SAFE).
+- ⚪ **Founder vesting not stated** — SAFEs often don't address vesting, but if the company has founders without vesting in place, this is a gap. Confirm vesting schedule exists in employment/founders' agreements.
+- ⚪ **Legal fees not stated** — silent on who pays deal costs. Typically company pays capped investor fees (£10k–£15k at SAFE stage). Clarify before signing.
 
 ## Part C — DD checklist coverage
 *Priya's fixed checklist, every item, in order. This is a single instrument, not a data room — most items are N/A, shown anyway.*

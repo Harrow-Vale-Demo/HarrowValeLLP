@@ -13,6 +13,8 @@ If a field is not present in the document, record `Not stated`. Never infer.
 - Conditions to closing / conditions precedent (if any)
 - Exclusivity period (if any)
 - Confidentiality / binding-vs-non-binding note (if stated)
+- Legal fees & expenses: who pays the round's legal costs, and is there a cap on investor legal fees the company must cover? (🟡 flag if no cap stated, or cap is high e.g. >£30k for early stage)
+- Founder vesting schedule (if stated): duration, cliff, acceleration terms (single-trigger / double-trigger). Standard is 4 years with 1-year cliff — flag deviations.
 
 ## SAFE
 - Valuation cap (state pre- or post-money)
