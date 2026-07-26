@@ -1,0 +1,4 @@
+{"instrument":"SAFE","exceptions":[
+  {"key":"post_money_cap","category":"economics","severity":"aggressive","finding":"Valuation cap is POST-money (£6m). Founders absorb all pre-round dilution — confirm this was intended vs a pre-money cap.","baseline":"Pre-money cap","citation":"Terms table: 'Valuation Cap £6,000,000 (post-money)'","confidence":0.93},
+  {"key":"mfn","category":"economics","severity":"watch","finding":"MFN clause lets this investor inherit better terms from later SAFEs — negotiate a cut-off.","baseline":"No MFN / time-limited MFN","citation":"Terms table: 'Most Favoured Nation (MFN): Yes'","confidence":0.9}
+],"missing":[]}

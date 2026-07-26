@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harrow &amp; Vale — Presentation</title>
+<style>
+  :root{color-scheme:light;
+    --navy:#1F3352;--navy2:#2b4a76;--accent:#8A5A2B;--parch:#F7F3EC;--card:#fff;
+    --ink:#28303a;--grey:#5c5c5c;--line:#e3dccf;--agg:#B23A2E;--watch:#B8791F;--ok:#1F6B34;--miss:#9A3324;}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#e7e0d2;color:var(--ink)}
+  .app{height:100vh;display:flex;flex-direction:column}
+  .stage{flex:1;display:flex;align-items:center;justify-content:center;padding:26px;overflow:hidden}
+  .slide{display:none;width:100%;max-width:940px;background:var(--parch);border:1px solid var(--line);border-radius:16px;
+    box-shadow:0 10px 40px rgba(0,0,0,.14);padding:46px 56px;min-height:520px;flex-direction:column;justify-content:center}
+  .slide.active{display:flex;animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+  h1{font-family:Georgia,serif;color:var(--navy);font-size:40px;line-height:1.12;margin:0 0 14px;font-weight:700}
+  h2{font-family:Georgia,serif;color:var(--navy);font-size:30px;line-height:1.15;margin:0 0 16px;font-weight:700}
+  p.lead{font-size:19px;color:var(--grey);line-height:1.5;margin:0}
+  .sub{font-size:15.5px;color:var(--grey);line-height:1.5}
+  code{font-family:ui-monospace,Consolas,monospace;font-size:.86em;background:#ece3d1;padding:1px 6px;border-radius:5px;color:var(--navy);white-space:nowrap}
+  ul.big{list-style:none;padding:0;margin:6px 0 0}
+  ul.big li{font-size:18px;line-height:1.5;padding:12px 0 12px 34px;border-bottom:1px dashed var(--line);position:relative}
+  ul.big li:last-child{border-bottom:0}
+  ul.big li:before{content:"";position:absolute;left:2px;top:19px;width:12px;height:12px;border-radius:3px;background:var(--accent)}
+  ul.big li b{color:var(--navy)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-top:6px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+  .card h3{margin:0 0 5px;font-size:16px;color:var(--navy);font-family:Georgia,serif}
+  .card p{margin:0;font-size:14px;color:var(--grey);line-height:1.45}
+  .card .rm{color:var(--agg);font-weight:600}
+  .flow{display:flex;align-items:stretch;gap:12px;margin-top:12px;flex-wrap:wrap}
+  .step{flex:1;min-width:200px;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:15px 17px}
+  .step .n{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .step h3{margin:5px 0 6px;font-size:18px;color:var(--navy);font-family:Georgia,serif}
+  .step p{margin:0;font-size:14px;color:var(--grey);line-height:1.45}
+  .arrow{align-self:center;color:var(--accent);font-size:22px;font-weight:700}
+  .note{margin-top:14px;font-size:14.5px;color:var(--navy);background:#efe7d7;border-left:4px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;line-height:1.5}
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:20px;color:#fff}
+  .b-agg{background:var(--agg)}.b-watch{background:var(--watch)}.b-miss{background:var(--miss)}.b-ok{background:var(--ok)}
+  .price{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
+  .price .opt{flex:1;min-width:230px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .price .opt.rec{border:2px solid var(--accent)}
+  .price .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .price h3{margin:6px 0;color:var(--navy);font-family:Georgia,serif;font-size:19px}
+  .price .fee{font-size:26px;font-weight:800;color:var(--navy)}
+  .price ul{margin:8px 0 0;padding-left:18px;font-size:13.5px;color:var(--grey);line-height:1.5}
+  .quote{font-family:Georgia,serif;font-style:italic;color:var(--navy);font-size:19px;line-height:1.4;border-left:4px solid var(--accent);padding-left:16px;margin-top:16px}
+  .title-foot{margin-top:24px;font-size:14px;color:var(--grey)}
+  .hint{font-size:12px;color:#8a8272}
+  .controls{display:flex;align-items:center;gap:14px;justify-content:center;padding:12px 20px;background:var(--navy);color:#fff}
+  .controls button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:7px 14px;font-size:14px;cursor:pointer}
+  .controls button:hover{background:rgba(255,255,255,.22)}
+  .dots{display:flex;gap:7px}.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer}.dot.on{background:#fff}
+  .count{font-size:13px;color:#c9d4e6;min-width:54px;text-align:center}
+  .prog{height:4px;background:#d8cfbd}.prog>i{display:block;height:100%;background:var(--accent);transition:width .3s}
+  @media(max-width:640px){.slide{padding:30px 24px}h1{font-size:30px}h2{font-size:24px}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="prog"><i id="prog"></i></div>
+  <div class="stage" id="stage">
+
+    <!-- 1 TITLE -->
+    <section class="slide active">
+      <div class="eyebrow">Harrow &amp; Vale LLP · Solution presentation</div>
+      <h1>A secure, governed pipeline for the firm's Claude skills</h1>
+      <p class="lead">Starting with term-sheet review and due diligence — built so a lawyer trusts it mid-deal, and the partners can sign it off.</p>
+      <div class="title-foot">For Tom Harrow, for sign-off by Priya Vale · Demo: Wednesday 29 July 2026<br><span class="hint">Use → / ← to move through the deck.</span></div>
+    </section>
+
+    <!-- 2 WHAT WE HEARD -->
+    <section class="slide">
+      <div class="eyebrow">What we heard</div>
+      <h2>Three things that had to be true</h2>
+      <ul class="big">
+        <li><b>Priya wants an exception report, not a summary.</b> What's aggressive, what's missing — as actionable points, economics first, then control.</li>
+        <li><b>The checklist is fixed.</b> Priya's due-diligence checklist is used verbatim; the tool never invents its own categories.</li>
+        <li><b>Data handling is the real gate.</b> Before anything is signed off, the partners ask where client data goes. That needs a clear answer.</li>
+      </ul>
+    </section>
+
+    <!-- 3 HOW IT WORKS -->
+    <section class="slide">
+      <div class="eyebrow">How it works — in plain terms</div>
+      <h2>One gate every skill must pass</h2>
+      <div class="flow">
+        <div class="step"><div class="n">1 · Constrain</div><h3>Fixed output</h3><p>The skill must return a strict, typed format — so it can't ramble, freelance, or drop a field.</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">2 · Prove</div><h3>Test it</h3><p>Graded against known-good and known-bad examples across every format. A gate blocks anything that gets worse.</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">3 · Ship</div><h3>Publish it</h3><p>Only a passing skill is versioned and added to the firm's private shelf, ready to install.</p></div>
+      </div>
+      <div class="note">When we tuned the term-sheet skill, measured reliability moved from 0.50 to 1.00 — and nothing ships unless it clears that bar. Same gate for every future skill.</div>
+    </section>
+
+    <!-- 3b SKILL LIFECYCLE -->
+    <section class="slide">
+      <div class="eyebrow">The skill lifecycle · create → prove → share</div>
+      <h2>How a new skill is made and vetted</h2>
+      <div class="grid2">
+        <div class="card"><h3>1 · Author writes three things</h3><p>The instructions (<code>SKILL.md</code>), a strict output contract (the schema), and a handful of golden examples — good ones, and deliberately bad ones.</p></div>
+        <div class="card"><h3>2 · Run the eval</h3><p>One command runs the skill over those examples and scores it — precision and recall — across every term-sheet format.</p></div>
+        <div class="card"><h3>3 · The gate decides</h3><p>Meets the bar with no regression → cleared. Falls short → blocked, with the exact misses shown so they can be fixed.</p></div>
+        <div class="card"><h3>4 · Publish</h3><p>On a pass it's versioned and added to the shelf automatically — the same command does the eval, the version, and the publish.</p></div>
+      </div>
+      <div class="note">No skill reaches a lawyer's desk until it passes — that is exactly what "approved" means here.</div>
+    </section>
+
+    <!-- 4 SECURITY: DETERMINISM / RISK -->
+    <section class="slide">
+      <div class="eyebrow">Security · taking the AI risk out</div>
+      <h2>Why this isn't a black box</h2>
+      <p class="sub">The usual worries — it makes things up, it's inconsistent, you can't see why — are designed out:</p>
+      <div class="grid2">
+        <div class="card"><h3>Fixed output shape</h3><p>Typed fields, not free text. <span class="rm">Removes</span> inconsistent, unpredictable output.</p></div>
+        <div class="card"><h3>No guessed numbers</h3><p>If a figure isn't in the document, it's left blank — never invented. <span class="rm">Removes</span> hallucinated values.</p></div>
+        <div class="card"><h3>Your standard, not its opinion</h3><p>Checks against your BVCA baseline and Priya's checklist. <span class="rm">Removes</span> an AI forming its own view.</p></div>
+        <div class="card"><h3>Locked &amp; versioned</h3><p>The gate blocks drift; a live matter pins a known-good version. <span class="rm">Removes</span> behaviour changing under you.</p></div>
+      </div>
+      <div class="note">You stay the decision-maker: high-risk flags can't be silently approved, and every finding links to the exact source clause — so nothing is taken on trust.</div>
+    </section>
+
+    <!-- 5 SECURITY: DATA -->
+    <section class="slide">
+      <div class="eyebrow">Security · the sign-off answer</div>
+      <h2>Where your client data goes</h2>
+      <ul class="big">
+        <li><b>Not used for training.</b> Under Anthropic's commercial terms, inputs and outputs on your Claude Team plan aren't used to train models by default.</li>
+        <li><b>Documents stay put.</b> Files remain in your Microsoft 365 / SharePoint; a term sheet reaches Claude only when a lawyer runs a review.</li>
+        <li><b>The repo holds code, not client data.</b> Test examples are synthetic; a firm rule keeps client documents out of it entirely.</li>
+        <li><b>Privilege protected.</b> Run privileged material under zero-retention terms — with a short risk-allocation note for Priya.</li>
+      </ul>
+    </section>
+
+    <!-- 6 WHAT IT DOES -->
+    <section class="slide">
+      <div class="eyebrow">What it does for you</div>
+      <h2>Two skills, day one</h2>
+      <div class="grid2">
+        <div class="card"><h3>Term-sheet review — for Priya</h3><p>Reads economics then control, maps to the BVCA baseline, and flags <span class="badge b-agg">aggressive</span> <span class="badge b-watch">watch</span> <span class="badge b-miss">missing</span> — the same across SAFEs, priced rounds, notes and terse seed summaries.</p></div>
+        <div class="card"><h3>Due-diligence mapper — for Tom</h3><p>The "Thursday afternoon dump": drop the folder, get "2 satisfied, 1 partial, 25 missing" against the fixed checklist — with citations and a chase-list.</p></div>
+      </div>
+      <div class="note">Both demoed running on your own data-room samples on 29 July.</div>
+    </section>
+
+    <!-- 7 WHERE THEY LIVE -->
+    <section class="slide">
+      <div class="eyebrow">Exactly where they live</div>
+      <h2>One private home, one catalogue</h2>
+      <ul class="big">
+        <li><b>The source of truth</b> is your private GitHub repository — <code>harrowvale/legal-skills</code>. Private: only the firm can see it or install from it.</li>
+        <li><b>Each skill is a self-contained package</b> — its instructions, its output contract, its reference checklist and its test set, versioned together.</li>
+        <li><b>A catalogue file</b> (<code>marketplace.json</code>) lists the approved skills and their current versions — the firm's single shelf.</li>
+        <li><b>Every published version keeps its eval report</b>, so you can always show which version was used and why it was trusted.</li>
+      </ul>
+    </section>
+
+    <!-- 7b EASY INSTALL -->
+    <section class="slide">
+      <div class="eyebrow">Ease of install · all ten lawyers</div>
+      <h2>Set up once, installed by everyone in minutes</h2>
+      <div class="flow">
+        <div class="step"><div class="n">Once, by Tom</div><h3>Add the shelf</h3><p>An admin adds the marketplace a single time:<br><code>/plugin marketplace add harrowvale/legal-skills</code></p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">Each lawyer</div><h3>Click install</h3><p>Open the <code>/plugin</code> menu and install — inside the Claude Desktop / Claude Code they already use. No git, no copy-paste, no config.</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">Always current</div><h3>Auto-update</h3><p><code>/plugin marketplace update</code> pulls the latest approved version; a live matter can pin a known-good one.</p></div>
+      </div>
+      <div class="note">All ten end up on the same vetted version — the "ten people each reinventing it" problem, gone.</div>
+    </section>
+
+    <!-- 8 DEMO -->
+    <section class="slide">
+      <div class="eyebrow">The demo · Deal Review Console</div>
+      <h2>What you'll see live</h2>
+      <ul class="big">
+        <li>Pick a real sample — the exception report appears, economics then control, with each finding a click from its source clause.</li>
+        <li>Disposition each high-risk flag (accept / negotiate / reject) — only then does sign-off unlock.</li>
+        <li>Run the due-diligence mapper on the document set — satisfied, partial, missing, with a chase-list.</li>
+        <li>Check the incoming Articles against the signed term sheet — a clean, clause-by-clause verdict.</li>
+      </ul>
+    </section>
+
+    <!-- 9 PROPOSAL -->
+    <section class="slide">
+      <div class="eyebrow">Honest, phased, inside your budget</div>
+      <h2>What Phase 1 costs</h2>
+      <div class="price">
+        <div class="opt rec"><div class="tag">Recommended</div><h3>Option A</h3><div class="fee">£4,500</div>
+          <ul><li>Both skills + the eval gate</li><li>The data-handling memo</li><li>Demoed on your samples, 29 July</li><li>~9–10 days</li></ul></div>
+        <div class="opt"><div class="tag">Leaner</div><h3>Option B</h3><div class="fee">£2,800</div>
+          <ul><li>Term-sheet skill + eval gate</li><li>The data memo</li><li>DD mapper deferred</li><li>~6 days</li></ul></div>
+      </div>
+      <p class="sub" style="margin-top:12px">A fixed-fee proof-of-concept, sized to earn Phase 2 by saving real hours. Phase 2 (only once proved): the firm-wide pipeline and further skills.</p>
+    </section>
+
+    <!-- 10 CLOSE -->
+    <section class="slide">
+      <div class="eyebrow">Next steps</div>
+      <h2>Ready on your word</h2>
+      <ul class="big">
+        <li>Pick Option A or B — or tell us to adjust scope.</li>
+        <li>A short call to confirm the BVCA baseline and the checklist edge cases.</li>
+        <li>We demo both skills on your samples at the 29 July check-in.</li>
+      </ul>
+      <div class="quote">"Exactly the level of pragmatism I was hoping for." — Tom Harrow</div>
+    </section>
+
+  </div>
+  <div class="controls">
+    <button id="prev">← Prev</button>
+    <div class="dots" id="dots"></div>
+    <span class="count" id="count"></span>
+    <button id="next">Next →</button>
+    <button id="fs" title="Fullscreen">⛶</button>
+  </div>
+</div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  const dotsWrap=document.getElementById('dots');
+  slides.forEach((_,k)=>{const d=document.createElement('span');d.className='dot';d.onclick=()=>go(k);dotsWrap.appendChild(d);});
+  const dots=[...dotsWrap.children];
+  function go(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+    document.getElementById('count').textContent=(i+1)+' / '+slides.length;
+    document.getElementById('prog').style.width=((i)/(slides.length-1)*100)+'%';
+  }
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('fs').onclick=()=>{ if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}else{document.exitFullscreen&&document.exitFullscreen();} };
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){go(i+1);e.preventDefault();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(i-1);e.preventDefault();}
+    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(slides.length-1);}
+  });
+  let sx=null;
+  const st=document.getElementById('stage');
+  st.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  st.addEventListener('touchend',e=>{ if(sx===null)return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50){go(i+(dx<0?1:-1));} sx=null;});
+  go(0);
+</script>
+</body>
+</html>

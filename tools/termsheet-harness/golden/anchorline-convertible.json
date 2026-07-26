@@ -1,0 +1,11 @@
+{
+  "case": "anchorline-convertible",
+  "instrument": "convertible_loan_note",
+  "expected_exceptions": [
+    {"key": "change_of_control_premium", "category": "control", "severity": "aggressive"},
+    {"key": "interest_compounding", "category": "economics", "severity": "watch"}
+  ],
+  "expected_missing": [
+    {"key": "pro_rata_rights"}
+  ]
+}

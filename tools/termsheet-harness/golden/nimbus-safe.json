@@ -1,0 +1,9 @@
+{
+  "case": "nimbus-safe",
+  "instrument": "SAFE",
+  "expected_exceptions": [
+    {"key": "post_money_cap", "category": "economics", "severity": "aggressive"},
+    {"key": "mfn", "category": "economics", "severity": "watch"}
+  ],
+  "expected_missing": []
+}

@@ -1,0 +1,6 @@
+{
+  "case": "solace-seed",
+  "instrument": "seed_summary",
+  "expected_exceptions": [],
+  "expected_missing": []
+}

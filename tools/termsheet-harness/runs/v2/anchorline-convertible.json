@@ -1,0 +1,6 @@
+{"instrument":"convertible_loan_note","exceptions":[
+  {"key":"change_of_control_premium","category":"control","severity":"aggressive","finding":"1.5x premium on change of control before conversion — materially investor-favourable.","baseline":"1x repayment","citation":"'Change of Control' clause","confidence":0.92},
+  {"key":"interest_compounding","category":"economics","severity":"watch","finding":"8% interest, compounding annually — above the 0–6% simple norm; increases conversion/redemption amount.","baseline":"0–6% simple","citation":"'Interest Rate: 8% per annum, accruing and compounding annually'","confidence":0.88}
+],"missing":[
+  {"key":"pro_rata_rights","why_it_matters":"No pro-rata/participation right on the next round — unusual to omit for a lead note holder.","confidence":0.76}
+]}

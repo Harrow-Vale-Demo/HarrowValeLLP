@@ -1,0 +1,3 @@
+{"instrument":"priced_round","exceptions":[
+  {"key":"protective_provisions","category":"control","severity":"aggressive","finding":"Investor consent rights present.","confidence":0.5}
+],"missing":[]}

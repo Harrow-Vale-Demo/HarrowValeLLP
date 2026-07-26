@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harrow &amp; Vale — Deal Review Console (demo)</title>
+<style>
+  :root{
+    color-scheme:light;
+    --navy:#1F3352; --navy2:#2b4a76; --accent:#8A5A2B; --parch:#F7F3EC; --ink:#2c2c2c;
+    --grey:#5c5c5c; --line:#e3dccf; --agg:#B23A2E; --watch:#B8791F; --info:#3B7A57;
+    --miss:#9A3324; --ok:#1F6B34; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--parch);color:var(--ink);}
+  header{background:var(--navy);color:#fff;padding:16px 26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  header h1{font-family:Georgia,serif;font-size:19px;margin:0;font-weight:700}
+  header .tag{font-size:11px;letter-spacing:.14em;color:#b9c7de;text-transform:uppercase}
+  header .sub{font-size:12px;color:#c9d4e6;margin-left:auto}
+  .tabs{display:flex;gap:2px;padding:0 20px;background:var(--navy2)}
+  .tabs button{background:transparent;border:0;color:#cdd8ea;padding:11px 18px;font-size:13px;cursor:pointer;border-bottom:3px solid transparent}
+  .tabs button.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px}
+  .row{display:flex;gap:20px;align-items:flex-start}
+  @media(max-width:900px){.row{flex-direction:column}}
+  .col-main{flex:1;min-width:0}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .panel h2{font-family:Georgia,serif;color:var(--navy);font-size:16px;margin:0 0 4px}
+  .panel .desc{color:var(--grey);font-size:12.5px;margin:0 0 14px}
+  select{font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);min-width:320px}
+  .kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;font-size:13px}
+  .kv div{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:5px 0;gap:12px}
+  .kv .k{color:var(--grey)} .kv .v{font-weight:600;text-align:right}
+  .sechead{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:16px 0 8px}
+  .exc{border:1px solid var(--line);border-left-width:5px;border-radius:8px;padding:12px 14px;margin-bottom:11px;background:#fffdf9}
+  .exc.aggressive{border-left-color:var(--agg)} .exc.watch{border-left-color:var(--watch)}
+  .exc.info{border-left-color:var(--info)} .exc.missing{border-left-color:var(--miss);background:#fdf5f3}
+  .badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:20px;color:#fff;vertical-align:middle}
+  .badge.aggressive{background:var(--agg)} .badge.watch{background:var(--watch)}
+  .badge.info{background:var(--info)} .badge.missing{background:var(--miss)}
+  .exc .term{font-weight:700;color:var(--navy);font-size:14px;margin-left:8px}
+  .exc .finding{font-size:13.5px;margin:8px 0 6px;line-height:1.5}
+  .exc .meta{font-size:12px;color:var(--grey)}
+  .cite{color:var(--accent);cursor:pointer;text-decoration:underline dotted;font-size:12px}
+  .conf{float:right;font-size:11px;color:var(--grey)}
+  .decision{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+  .decision .req{font-size:11.5px;color:var(--agg);font-weight:700;margin-bottom:6px}
+  .decision.done .req{color:var(--ok)}
+  .dbtn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:5px 12px;font-size:12px;cursor:pointer;margin-right:6px}
+  .dbtn.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .ovr{margin-top:8px;width:100%;font-size:12px;padding:6px 8px;border:1px solid var(--line);border-radius:6px}
+  .col-side{width:340px;flex-shrink:0}
+  @media(max-width:900px){.col-side{width:100%}}
+  .source{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;white-space:pre-wrap;line-height:1.55;max-height:520px;overflow:auto;background:#fbf9f4;border:1px solid var(--line);border-radius:8px;padding:12px}
+  .source mark{background:#ffe08a;color:#000;padding:1px 2px;border-radius:3px}
+  .signoff{background:var(--parch);border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:sticky;top:12px}
+  .signoff h3{margin:0 0 8px;font-size:13px;color:var(--navy)}
+  .prog{height:8px;background:#e7e0d2;border-radius:6px;overflow:hidden;margin:8px 0}
+  .prog > i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+  .signbtn{width:100%;margin-top:10px;padding:10px;border:0;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;background:#c9c2b2;color:#fff}
+  .signbtn.ready{background:var(--ok);cursor:pointer}
+  .note{font-size:11px;color:var(--grey);margin-top:8px}
+  table.dd{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.dd th{background:var(--navy);color:#fff;text-align:left;padding:7px 9px;font-size:11px;letter-spacing:.04em}
+  table.dd td{border-bottom:1px solid var(--line);padding:7px 9px;vertical-align:top}
+  .st{font-weight:700;font-size:11px;text-transform:uppercase}
+  .st.satisfied{color:var(--ok)} .st.partial{color:var(--watch)} .st.missing{color:var(--miss)}
+  .pill{display:inline-block;background:#eee;border-radius:20px;padding:3px 10px;font-size:11px;margin-right:6px}
+  .counts span{font-weight:700}
+  .verdict{font-weight:700;color:var(--ok);font-size:14px}
+  .foot{font-size:11px;color:#8a8272;text-align:center;padding:18px}
+  .disclaimer{background:#fdf5f3;border:1px solid #eccfc8;border-radius:8px;padding:10px 12px;font-size:11.5px;color:#7a3a30;margin-bottom:16px}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="tag">Harrow &amp; Vale LLP</div><h1>Deal Review Console</h1></div>
+  <div class="sub">Prototype · synthetic data · a drafting &amp; audit accelerator, not a decision-maker</div>
+</header>
+<div class="tabs">
+  <button data-tab="ts" class="active">Term-sheet review</button>
+  <button data-tab="dd">Due-diligence checklist</button>
+  <button data-tab="cc">Term-sheet → Articles check</button>
+</div>
+
+<div class="wrap">
+  <!-- TERM SHEET TAB -->
+  <div id="tab-ts">
+    <div class="disclaimer">This tool surfaces and cites; the reviewing lawyer decides. High-risk (<b>aggressive</b>) flags must be dispositioned before the review can be signed off — no silent rubber-stamping.</div>
+    <div style="margin-bottom:16px">
+      <label style="font-size:13px;color:var(--grey);margin-right:8px">Term sheet:</label>
+      <select id="tsSelect"></select>
+    </div>
+    <div class="row">
+      <div class="col-main">
+        <div class="panel">
+          <h2 id="tsTitle"></h2>
+          <p class="desc" id="tsInstr"></p>
+          <div class="sechead">1 · Economics <span style="color:#bbb;font-weight:400;text-transform:none;letter-spacing:0">(Priya reviews these first)</span></div>
+          <div class="kv" id="econ"></div>
+          <div class="sechead">2 · Control</div>
+          <div class="kv" id="ctrl"></div>
+        </div>
+        <div class="panel">
+          <h2>Exception report</h2>
+          <p class="desc">What's non-standard or aggressive vs the BVCA-aligned baseline, and what's missing. Each finding links to its source clause.</p>
+          <div id="excList"></div>
+        </div>
+      </div>
+      <div class="col-side">
+        <div class="signoff">
+          <h3>Trust &amp; verify — sign-off</h3>
+          <div style="font-size:12px;color:var(--grey)">High-risk items dispositioned</div>
+          <div class="prog"><i id="progBar"></i></div>
+          <div style="font-size:12px"><span id="resolvedCount">0</span> of <span id="riskCount">0</span> resolved</div>
+          <button class="signbtn" id="signBtn" disabled>Sign off review</button>
+          <div class="note">Accept / Negotiate / Reject — or write a one-line override — on each aggressive flag to enable sign-off.</div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <h2 style="font-size:14px">Source</h2>
+          <p class="desc" id="srcHint">Click a citation to jump to the clause.</p>
+          <div class="source" id="srcBox"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DD TAB -->
+  <div id="tab-dd" style="display:none">
+    <div class="panel">
+      <h2>Due-diligence checklist mapper — the "Thursday afternoon dump"</h2>
+      <p class="desc">Documents mapped against Priya's fixed checklist (used verbatim). Sample: the GreenGrid data-room set.</p>
+      <div class="counts" style="margin-bottom:12px">
+        <span class="pill" style="background:#dff0e4">✔ Satisfied: <span id="cSat"></span></span>
+        <span class="pill" style="background:#fbeccf">~ Partial: <span id="cPart"></span></span>
+        <span class="pill" style="background:#f7dcd6">✗ Missing: <span id="cMiss"></span></span>
+        <span class="pill">of <span id="cTot"></span></span>
+      </div>
+      <table class="dd"><thead><tr><th style="width:22%">Section</th><th style="width:34%">Item</th><th style="width:12%">Status</th><th>Evidence / chase</th></tr></thead>
+      <tbody id="ddBody"></tbody></table>
+    </div>
+  </div>
+
+  <!-- CONSISTENCY TAB -->
+  <div id="tab-cc" style="display:none">
+    <div class="panel">
+      <h2>Term-sheet → Articles consistency</h2>
+      <p class="desc">Once definitives arrive, does the drafting reflect the signed term sheet? Sample: GreenGrid Series A term sheet vs its Articles of Association.</p>
+      <table class="dd"><thead><tr><th style="width:26%">Term</th><th style="width:32%">Signed term sheet</th><th style="width:32%">Incoming Articles</th><th>—</th></tr></thead>
+      <tbody id="ccBody"></tbody></table>
+      <p style="margin-top:14px" class="verdict" id="ccVerdict"></p>
+    </div>
+  </div>
+</div>
+<div class="foot">Harrow &amp; Vale LLP · Deal Review Console (prototype) · Synthetic Signal Hackathon 1 · all data synthetic</div>
+
+<script>
+const DATA = {
+  termsheets: [
+    {
+      id:"nimbus", label:"Nimbus Robotics Ltd — SAFE", instrument:"SAFE · Cordwainer Angels LLP · 14 Mar 2026",
+      econ:{"Purchase amount":"£750,000","Valuation cap":"£6,000,000 (post-money)","Discount":"20%","Interest":"None (SAFE)","Pro-rata rights":"Yes","MFN":"Yes"},
+      ctrl:{"Board / control":"n/a pre-conversion","Conversion trigger":"Equity financing ≥ £1,000,000"},
+      exceptions:[
+        {term:"Post-money valuation cap",cat:"aggressive",finding:"Cap is POST-money (£6m), so founders absorb all pre-round dilution. Confirm this was intended rather than a pre-money cap.",baseline:"Pre-money cap",quote:"Valuation Cap | £6,000,000 (post-money)",conf:0.93},
+        {term:"MFN clause",cat:"watch",finding:"MFN lets this investor inherit better terms granted to later SAFE investors. Negotiate a cut-off date.",baseline:"No MFN / time-limited MFN",quote:"Most Favoured Nation (MFN) | Yes",conf:0.90}
+      ],
+      missing:[],
+      source:`SAFE — NIMBUS ROBOTICS LTD\nInvestor: Cordwainer Angels LLP    Date: 14 March 2026\n\nTerm                | Detail\nPurchase Amount     | £750,000\nValuation Cap       | £6,000,000 (post-money)\nDiscount Rate       | 20%\nInterest            | None (SAFE — not a debt instrument)\nMaturity Date       | None\nMost Favoured Nation (MFN) | Yes — Investor receives the benefit of any more favourable terms granted to a subsequent SAFE investor prior to conversion\nPro Rata Rights     | Yes, in the Company's next Equity Financing\nConversion          | Automatically converts upon an Equity Financing of at least £1,000,000, at the lower of the Valuation Cap price or the Discount Rate price`
+    },
+    {
+      id:"greengrid", label:"GreenGrid Analytics Ltd — Series A (priced round)", instrument:"Priced round · Northbridge Ventures LLP · 2 May 2026",
+      econ:{"Amount raised":"£3,200,000","Pre-money valuation":"£12,000,000","Price per share":"£1.50","Liquidation preference":"1x non-participating","Anti-dilution":"Broad-based weighted avg","Option pool":"None created"},
+      ctrl:{"Board":"2 founder / 1 Series A","Protective provisions":"Standard consent list","Information rights":"≥2% FD","Exclusivity":"45 days"},
+      exceptions:[
+        {term:"No option pool",cat:"watch",finding:"No option pool created in this round — future hires will dilute post-round. Consider a pre-money pool.",baseline:"Pre-money option pool typical",quote:"No option pool has been created as part of this round.",conf:0.82}
+      ],
+      missing:[{item:"Pro-rata rights",why:"No pro-rata/participation right stated; unusual to omit for a lead investor.",conf:0.80}],
+      source:`TERM SHEET — SERIES A (GreenGrid Analytics Ltd)\nLead Investor: Northbridge Ventures LLP    Date: 2 May 2026\n\nAmount Raised: £3,200,000\nPre-Money Valuation: £12,000,000\nPost-Money Valuation: £15,200,000\nPrice Per Share: £1.50\nNew Shares: 2,133,333 Series A Preferred (post-round FD 10,133,333; investor 21.05%)\n\n2. Liquidation Preference: 1x non-participating.\n3. Anti-Dilution: Broad-based weighted average.\n4. Board: three directors — two founders, one Series A.\n5. Protective Provisions: consent for adverse Articles amendment, sale, senior/pari-passu class, debt > £250,000.\n6. Information Rights: holders ≥2% FD get quarterly accounts + annual budget.\n8. Exclusivity: 45 days.\n\n(Cap-table note) No option pool has been created as part of this round.`
+    },
+    {
+      id:"anchorline", label:"Anchorline Biotech Ltd — Convertible Loan Note", instrument:"Convertible loan note · Fenwick Life Sciences Fund II LP · 19 Jun 2026",
+      econ:{"Principal":"£500,000","Interest":"8% p.a., compounding","Conversion discount":"15%","Valuation cap":"£8,000,000 (pre-money)","Maturity":"24 months","Security":"None (unsecured)"},
+      ctrl:{"Change of control":"Noteholder: 1.5x premium OR convert","Qualifying financing":"≥ £2,000,000","Events of default":"Non-payment / insolvency / breach"},
+      exceptions:[
+        {term:"1.5x change-of-control premium",cat:"aggressive",finding:"On a change of control before conversion the noteholder can take a 1.5x premium — materially investor-favourable.",baseline:"1x repayment",quote:"repayment of the Principal Amount plus accrued interest and a 1.5x premium",conf:0.92},
+        {term:"8% compounding interest",cat:"watch",finding:"8% p.a. compounding annually is above the 0–6% simple norm and inflates the conversion/redemption amount.",baseline:"0–6% simple",quote:"Interest Rate: 8% per annum, accruing and compounding annually",conf:0.88}
+      ],
+      missing:[{item:"Pro-rata rights",why:"No pro-rata/participation right for the note holder on the next round.",conf:0.76}],
+      source:`ANCHORLINE BIOTECH LTD — CONVERTIBLE LOAN NOTE\nNoteholder: Fenwick Life Sciences Fund II LP    Date: 19 June 2026\n\nPrincipal Amount: £500,000\nInterest Rate: 8% per annum, accruing and compounding annually, payable on conversion, redemption, or maturity.\nMaturity Date: 24 months from issue.\nConversion Discount: 15% to the price per share in a Qualifying Financing.\nValuation Cap: £8,000,000 (pre-money).\nQualifying Financing: equity financing raising ≥ £2,000,000.\nChange of Control: the Noteholder may elect to receive either (a) repayment of the Principal Amount plus accrued interest and a 1.5x premium, or (b) conversion into Ordinary Shares at the Valuation Cap price.\nSecurity: None — unsecured, ranks behind secured creditors.`
+    },
+    {
+      id:"solace", label:"Solace Data Ltd — Seed (terse summary format)", instrument:"Seed preferred · Ridgeline Seed Partners LP · 3 Jul 2026",
+      econ:{"Amount":"£450,000","Pre-money valuation":"£4,000,000","Liquidation preference":"1x non-participating","Anti-dilution":"Broad-based weighted avg","Pro-rata rights":"Yes"},
+      ctrl:{"Board":"1 investor observer (no seat)","Exclusivity":"30 days","Conditions":"Clean disclosure; IP diligence (14 days); no MAC"},
+      exceptions:[],
+      missing:[],
+      source:`SOLACE DATA LTD — SEED ROUND TERM SHEET (SUMMARY)\nInvestor: Ridgeline Seed Partners LP    Date: 3 July 2026\n\n- Instrument: Series Seed Preferred Shares\n- Amount: £450,000\n- Pre-money valuation: £4,000,000 (investor 10.11%)\n- Liquidation preference: 1x, non-participating\n- Board: 1 investor observer seat (no board seat at seed)\n- Pro-rata rights: yes, for next priced round\n- Anti-dilution: broad-based weighted average\n- Exclusivity: 30 days\n- Conditions precedent: clean disclosure letter; confirmatory legal + IP diligence (14-day window); no MAC.\n\nNote: clean/standard, founder-friendly. Format is a condensed bullet layout — a robustness test for the skill.`
+    }
+  ],
+  dd:{ satisfied:2, partial:1, missing:25, total:28, rows:[
+    ["Corporate Structure","Certificate of incorporation","missing",""],
+    ["Corporate Structure","Articles of Association (current, as amended)","partial","articles-of-association-greengrid.md — extract only (Arts. 3,7,8,9); full instrument in DMS"],
+    ["Corporate Structure","Register of members / cap table","satisfied","cap-table-greengrid.md — post-Series-A-close"],
+    ["Corporate Structure","Register of directors and secretaries","missing",""],
+    ["Corporate Structure","Group structure chart (if applicable)","missing",""],
+    ["Share Capital & Instruments","Full capitalisation table, fully diluted","satisfied","cap-table-greengrid.md — reconciled: 10,133,333 FD shares"],
+    ["Share Capital & Instruments","All SAFEs, convertibles, option grants","missing",""],
+    ["Share Capital & Instruments","Share option scheme rules and grant letters","missing",""],
+    ["Share Capital & Instruments","Any side letters affecting share rights","missing",""],
+    ["Material Contracts","Customer contracts above £50,000 p.a.","missing",""],
+    ["Material Contracts","Supplier/vendor agreements (exclusivity/min-spend)","missing",""],
+    ["Material Contracts","Lease agreements","missing",""],
+    ["Material Contracts","Loan agreements and other debt instruments","missing",""],
+    ["Intellectual Property","IP assignment agreements (founders & contractors)","missing",""],
+    ["Intellectual Property","Registered trademarks/patents","missing",""],
+    ["Intellectual Property","Open-source licence usage summary","missing",""],
+    ["Employment","Employment agreements for all employees","missing",""],
+    ["Employment","Contractor/consultancy agreements","missing",""],
+    ["Employment","Employment tribunal claims or disputes","missing",""],
+    ["Litigation & Compliance","Outstanding or threatened litigation","missing",""],
+    ["Litigation & Compliance","Regulatory correspondence or investigations","missing",""],
+    ["Litigation & Compliance","Data protection / GDPR summary (incl. DPIA)","missing",""],
+    ["Financials & Tax","Last two years' accounts","missing",""],
+    ["Financials & Tax","Tax filings and HMRC correspondence","missing",""],
+    ["Financials & Tax","R&D tax credit claims","missing",""],
+    ["Insurance","Directors' & officers' liability insurance","missing",""],
+    ["Insurance","Professional indemnity insurance","missing",""],
+    ["Related-Party Transactions","Transactions with directors/major shareholders","missing",""]
+  ]},
+  cc:{ verdict:"CLEAN — the Articles reconcile with the signed term sheet, clause by clause.", rows:[
+    ["Liquidation preference","1x non-participating","1x non-participating (Art. 7)"],
+    ["Board composition","2 Ordinary / 1 Series A","2 Ordinary / 1 Series A (Art. 8)"],
+    ["Protective provisions","adverse amend; sale; senior class; debt >£250k","identical list, threshold >£250k (Art. 9)"],
+    ["Series A shares","2,133,333","consistent with cap table 2,133,333 (21.05%)"],
+    ["Preference multiple","1x","1x — no >1x drift introduced"]
+  ]}
+};
+
+let state = {tsId:"nimbus", decisions:{}};
+
+function el(t,c,h){const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function currentTS(){return DATA.termsheets.find(t=>t.id===state.tsId);}
+
+function renderKV(node,obj){node.innerHTML="";for(const k in obj){const d=el('div');d.appendChild(el('span','k',esc(k)));d.appendChild(el('span','v',esc(obj[k])));node.appendChild(d);} }
+
+function showSource(quote){
+  const ts=currentTS();
+  let html=esc(ts.source);
+  if(quote){const q=esc(quote); const i=html.indexOf(q); if(i>=0){html=html.slice(0,i)+'<mark>'+q+'</mark>'+html.slice(i+q.length);} }
+  const box=document.getElementById('srcBox'); box.innerHTML=html;
+  const m=box.querySelector('mark'); if(m){m.scrollIntoView({block:'center'});}
+  document.getElementById('srcHint').textContent = quote? 'Highlighted the cited clause below.':'Click a citation to jump to the clause.';
+}
+
+function riskItems(){return currentTS().exceptions.filter(e=>e.cat==='aggressive');}
+
+function updateSignoff(){
+  const risks=riskItems(); const total=risks.length;
+  let resolved=0; risks.forEach((r,i)=>{ if(state.decisions[state.tsId+'#'+i]) resolved++; });
+  document.getElementById('riskCount').textContent=total;
+  document.getElementById('resolvedCount').textContent=resolved;
+  document.getElementById('progBar').style.width=(total? (resolved/total*100):100)+'%';
+  const btn=document.getElementById('signBtn');
+  const ready = resolved===total;
+  btn.disabled=!ready; btn.classList.toggle('ready',ready);
+  btn.textContent = ready ? (total? 'Sign off review ✓ ('+total+' high-risk cleared)':'Sign off review ✓ (no high-risk flags)') : 'Sign off review — '+(total-resolved)+' high-risk item(s) pending';
+}
+
+function renderExceptions(){
+  const ts=currentTS(); const wrap=document.getElementById('excList'); wrap.innerHTML="";
+  let riskIdx=0;
+  if(ts.exceptions.length===0 && ts.missing.length===0){
+    wrap.appendChild(el('div','exc info','<span class="badge info">Clean</span><span class="term">No exceptions</span><div class="finding">Terms are standard/founder-friendly against the BVCA baseline. Nothing to escalate.</div>'));
+  }
+  ts.exceptions.forEach((e)=>{
+    const card=el('div','exc '+e.cat);
+    card.appendChild(el('div',null,'<span class="badge '+e.cat+'">'+e.cat+'</span><span class="term">'+esc(e.term)+'</span><span class="conf">confidence '+e.conf.toFixed(2)+'</span>'));
+    card.appendChild(el('div','finding',esc(e.finding)));
+    const meta=el('div','meta','Baseline: '+esc(e.baseline)+' · ');
+    const cite=el('span','cite','source: “'+esc(e.quote.slice(0,42))+(e.quote.length>42?'…':'')+'”');
+    cite.onclick=()=>showSource(e.quote); meta.appendChild(cite);
+    card.appendChild(meta);
+    if(e.cat==='aggressive'){
+      const idx=riskIdx++; const key=state.tsId+'#'+idx;
+      const dec=el('div','decision'+(state.decisions[key]?' done':''));
+      dec.appendChild(el('div','req', state.decisions[key]? '✓ Dispositioned: '+esc(state.decisions[key]) : 'Decision required before sign-off:'));
+      ['Accept','Negotiate','Reject'].forEach(opt=>{
+        const b=el('button','dbtn'+(state.decisions[key]===opt?' sel':''),opt);
+        b.onclick=()=>{state.decisions[key]=opt; renderExceptions(); updateSignoff();};
+        dec.appendChild(b);
+      });
+      const ov=el('input','ovr'); ov.placeholder='…or type a one-line override reason';
+      ov.onchange=()=>{ if(ov.value.trim()){state.decisions[key]='Override: '+ov.value.trim(); renderExceptions(); updateSignoff();} };
+      dec.appendChild(ov);
+      card.appendChild(dec);
+    }
+    wrap.appendChild(card);
+  });
+  ts.missing.forEach(m=>{
+    const card=el('div','exc missing');
+    card.appendChild(el('div',null,'<span class="badge missing">Missing</span><span class="term">'+esc(m.item)+'</span><span class="conf">confidence '+m.conf.toFixed(2)+'</span>'));
+    card.appendChild(el('div','finding',esc(m.why)));
+    wrap.appendChild(card);
+  });
+}
+
+function renderTS(){
+  const ts=currentTS();
+  document.getElementById('tsTitle').textContent=ts.label;
+  document.getElementById('tsInstr').textContent=ts.instrument;
+  renderKV(document.getElementById('econ'),ts.econ);
+  renderKV(document.getElementById('ctrl'),ts.ctrl);
+  renderExceptions();
+  updateSignoff();
+  showSource(null);
+}
+
+function renderDD(){
+  document.getElementById('cSat').textContent=DATA.dd.satisfied;
+  document.getElementById('cPart').textContent=DATA.dd.partial;
+  document.getElementById('cMiss').textContent=DATA.dd.missing;
+  document.getElementById('cTot').textContent=DATA.dd.total;
+  const b=document.getElementById('ddBody'); b.innerHTML="";
+  DATA.dd.rows.forEach(r=>{
+    const tr=el('tr');
+    tr.appendChild(el('td',null,esc(r[0])));
+    tr.appendChild(el('td',null,esc(r[1])));
+    tr.appendChild(el('td',null,'<span class="st '+r[2]+'">'+(r[2]==='satisfied'?'✔ satisfied':r[2]==='partial'?'~ partial':'✗ missing')+'</span>'));
+    tr.appendChild(el('td',null, r[3]?esc(r[3]):'<span style="color:#b23a2e">— chase</span>'));
+    b.appendChild(tr);
+  });
+}
+function renderCC(){
+  const b=document.getElementById('ccBody'); b.innerHTML="";
+  DATA.cc.rows.forEach(r=>{
+    const tr=el('tr');
+    tr.appendChild(el('td',null,'<b>'+esc(r[0])+'</b>'));
+    tr.appendChild(el('td',null,esc(r[1])));
+    tr.appendChild(el('td',null,esc(r[2])));
+    tr.appendChild(el('td',null,'<span class="st satisfied">✔ match</span>'));
+    b.appendChild(tr);
+  });
+  document.getElementById('ccVerdict').textContent='Verdict: '+DATA.cc.verdict;
+}
+
+// init
+const sel=document.getElementById('tsSelect');
+DATA.termsheets.forEach(t=>{const o=el('option');o.value=t.id;o.textContent=t.label;sel.appendChild(o);});
+sel.onchange=()=>{state.tsId=sel.value; renderTS();};
+document.querySelectorAll('.tabs button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    ['ts','dd','cc'].forEach(t=>document.getElementById('tab-'+t).style.display=(t===btn.dataset.tab?'block':'none'));
+  };
+});
+document.getElementById('signBtn').onclick=function(){ if(!this.disabled){ this.textContent='Review signed off ✓ — logged with citations & dispositions'; this.style.background='#145523'; } };
+renderTS(); renderDD(); renderCC();
+</script>
+</body>
+</html>

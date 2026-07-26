@@ -1,0 +1,5 @@
+{"instrument":"priced_round","exceptions":[
+  {"key":"option_pool_absent","category":"economics","severity":"watch","finding":"No option pool created in this round — future hires will dilute post-round; consider a pre-money pool.","baseline":"Pre-money option pool typical","citation":"Cap table note: 'No option pool has been created as part of this round.'","confidence":0.82}
+],"missing":[
+  {"key":"pro_rata_rights","why_it_matters":"Lead investors normally get pro-rata; silence weakens their follow-on and is unusual to omit.","confidence":0.8}
+]}

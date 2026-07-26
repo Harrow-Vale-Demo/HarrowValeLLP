@@ -1,0 +1,10 @@
+{
+  "case": "greengrid-series-a",
+  "instrument": "priced_round",
+  "expected_exceptions": [
+    {"key": "option_pool_absent", "category": "economics", "severity": "watch"}
+  ],
+  "expected_missing": [
+    {"key": "pro_rata_rights"}
+  ]
+}
