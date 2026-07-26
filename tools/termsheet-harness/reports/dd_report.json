@@ -1,0 +1,176 @@
+{
+  "satisfied": 2,
+  "partial": 1,
+  "missing": 25,
+  "total": 28,
+  "rows": [
+    {
+      "section": "Corporate Structure",
+      "item": "Certificate of incorporation",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Corporate Structure",
+      "item": "Articles of Association (current, as amended)",
+      "status": "partial",
+      "citation": "articles-of-association-greengrid.md \u2014 Extract only \u2014 Arts. 3,7,8,9; full instrument in DMS"
+    },
+    {
+      "section": "Corporate Structure",
+      "item": "Register of members / cap table",
+      "status": "satisfied",
+      "citation": "cap-table-greengrid.md \u2014 Cap table, post-Series-A-close"
+    },
+    {
+      "section": "Corporate Structure",
+      "item": "Register of directors and secretaries",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Corporate Structure",
+      "item": "Group structure chart (if applicable)",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Share Capital & Instruments",
+      "item": "Full capitalisation table, fully diluted",
+      "status": "satisfied",
+      "citation": "cap-table-greengrid.md \u2014 Reconciled to term sheet: 10,133,333 FD shares"
+    },
+    {
+      "section": "Share Capital & Instruments",
+      "item": "All outstanding SAFEs, convertible instruments, and option grants",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Share Capital & Instruments",
+      "item": "Share option scheme rules and grant letters",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Share Capital & Instruments",
+      "item": "Any side letters affecting share rights",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Material Contracts",
+      "item": "Customer contracts above \u00a350,000 annual value",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Material Contracts",
+      "item": "Supplier/vendor agreements with exclusivity or minimum-spend terms",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Material Contracts",
+      "item": "Lease agreements",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Material Contracts",
+      "item": "Loan agreements and other debt instruments",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Intellectual Property",
+      "item": "IP assignment agreements from founders and contractors",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Intellectual Property",
+      "item": "Registered trademarks/patents (if any)",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Intellectual Property",
+      "item": "Open-source licence usage summary",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Employment",
+      "item": "Employment agreements for all employees",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Employment",
+      "item": "Contractor/consultancy agreements",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Employment",
+      "item": "Any employment tribunal claims or disputes",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Litigation & Compliance",
+      "item": "Outstanding or threatened litigation",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Litigation & Compliance",
+      "item": "Regulatory correspondence or investigations",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Litigation & Compliance",
+      "item": "Data protection / GDPR compliance summary (including any DPIA)",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Financials & Tax",
+      "item": "Last two years' audited (or management) accounts",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Financials & Tax",
+      "item": "Tax filings and any HMRC correspondence",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Financials & Tax",
+      "item": "R&D tax credit claims (if any)",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Insurance",
+      "item": "Directors' & officers' liability insurance",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Insurance",
+      "item": "Professional indemnity insurance (if applicable)",
+      "status": "missing",
+      "citation": ""
+    },
+    {
+      "section": "Related-Party Transactions",
+      "item": "Any transactions between the company and its directors/major shareholders",
+      "status": "missing",
+      "citation": ""
+    }
+  ]
+}

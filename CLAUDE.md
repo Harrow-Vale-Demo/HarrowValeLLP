@@ -8,6 +8,11 @@ This is a hackathon project for Harrow & Vale LLP, a boutique VC/M&A law firm. T
 
 ## Repository Structure
 
+- README.md - Project map, run commands, source priority, and presentation entrypoints
+- demo/ - Standalone interactive review demo
+- presentation/ - Standalone browser presentation
+- deliverables/ - Client-facing written outputs and proposal source
+- 	ools/termsheet-harness/ - Executable contract/golden evaluation and publish gate
 - `plugins/term-sheet-review-plugin/` - The packaged skill as a shareable plugin
   - `skills/term-sheet-review/SKILL.md` - Main skill definition and procedure
   - `skills/term-sheet-review/reference/` - Reference materials (checklist, standard terms, templates)

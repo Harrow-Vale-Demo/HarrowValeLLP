@@ -1,0 +1,149 @@
+{
+  "generated": "2026-07-26T15:13:55.495855Z",
+  "threshold": 0.9,
+  "versions": {
+    "v1": {
+      "aggregate": {
+        "instrument_accuracy": 0.75,
+        "exception_f1": 0.292,
+        "missing_f1": 0.5,
+        "severity_accuracy": 1.0,
+        "overall_reliability": 0.496
+      },
+      "cases": {
+        "anchorline-convertible": {
+          "instrument_ok": true,
+          "exception_prf": [
+            1.0,
+            0.5,
+            0.667
+          ],
+          "missing_prf": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "severity_accuracy": 1.0
+        },
+        "greengrid-series-a": {
+          "instrument_ok": true,
+          "exception_prf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "missing_prf": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "severity_accuracy": 1.0
+        },
+        "nimbus-safe": {
+          "instrument_ok": true,
+          "exception_prf": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "missing_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "severity_accuracy": 1.0
+        },
+        "solace-seed": {
+          "instrument_ok": false,
+          "exception_prf": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "missing_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "severity_accuracy": 1.0
+        }
+      }
+    },
+    "v2": {
+      "aggregate": {
+        "instrument_accuracy": 1.0,
+        "exception_f1": 1.0,
+        "missing_f1": 1.0,
+        "severity_accuracy": 1.0,
+        "overall_reliability": 1.0
+      },
+      "cases": {
+        "anchorline-convertible": {
+          "instrument_ok": true,
+          "exception_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "missing_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "severity_accuracy": 1.0
+        },
+        "greengrid-series-a": {
+          "instrument_ok": true,
+          "exception_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "missing_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "severity_accuracy": 1.0
+        },
+        "nimbus-safe": {
+          "instrument_ok": true,
+          "exception_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "missing_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "severity_accuracy": 1.0
+        },
+        "solace-seed": {
+          "instrument_ok": true,
+          "exception_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "missing_prf": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "severity_accuracy": 1.0
+        }
+      }
+    }
+  },
+  "gate": {
+    "latest": "v2",
+    "latest_score": 1.0,
+    "prev": "v1",
+    "prev_score": 0.496,
+    "no_regression": true,
+    "meets_threshold": true,
+    "passed": true
+  }
+}

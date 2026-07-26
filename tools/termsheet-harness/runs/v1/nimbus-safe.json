@@ -1,0 +1,4 @@
+{"instrument":"SAFE","exceptions":[
+  {"key":"post_money_cap","category":"economics","severity":"aggressive","finding":"Valuation cap is post-money (£6m) — dilution falls on founders.","confidence":0.86},
+  {"key":"discount_rate","category":"economics","severity":"watch","finding":"20% discount.","confidence":0.4}
+],"missing":[]}

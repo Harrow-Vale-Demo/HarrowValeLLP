@@ -1,0 +1,3 @@
+{"instrument":"convertible_loan_note","exceptions":[
+  {"key":"change_of_control_premium","category":"control","severity":"aggressive","finding":"1.5x premium on change of control.","confidence":0.8}
+],"missing":[]}

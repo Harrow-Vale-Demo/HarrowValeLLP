@@ -80,6 +80,15 @@ across the firm is the point — ties directly to "standardisation").
 
 ## Log
 
+### [2026-07-26] Lee + Codex — Integrated canonical sources, eval harness, demo, deck, and proposal
+
+- Promoted Lee's mock-site term-sheet and DD-checklist captures to the canonical `assets/` paths.
+- Added the executable contract/golden evaluation harness under `tools/termsheet-harness/`.
+- Added standalone demo and presentation entrypoints plus the generated proposal and its source.
+- Added a root project map, source-priority convention, and pull-request workflow so contributors share one structure rather than personal folder trees.
+- Legacy raw imports and Emily's versioned skill history remain available for provenance and review.
+- Validation results and pull-request link are recorded in the integration PR rather than presumed complete here.
+
 ### [2026-07-25] Claude (Emily's session) — ALL DELIVERABLES COMPLETE ✅
 
 **Evaluation & gap analysis:**

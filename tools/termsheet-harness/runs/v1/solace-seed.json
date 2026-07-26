@@ -1,0 +1,3 @@
+{"instrument":"priced_round","exceptions":[
+  {"key":"observer_seat","category":"control","severity":"watch","finding":"Investor has an observer seat.","confidence":0.45}
+],"missing":[]}

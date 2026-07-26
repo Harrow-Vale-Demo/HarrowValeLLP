@@ -1,2 +1,17 @@
-# scratch
+# Dependencies
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Scratch and generated operating-system files
 *.tmp
+desktop.ini
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
