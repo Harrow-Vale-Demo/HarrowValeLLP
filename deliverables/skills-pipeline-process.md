@@ -32,7 +32,7 @@ harrow-vale-approved-skills/
 │               ├── reference/    # Supporting files
 │               ├── templates/    # Output templates
 │               └── examples/     # Worked examples
-├── CHANGELOG.md                  # Version history
+├── releases/term-sheet-review/  # Frozen versions + CHANGELOG.md
 └── README.md                     # Installation instructions
 ```
 
@@ -67,12 +67,12 @@ harrow-vale-approved-skills/
    - Does it meet practice standards?
    - Is the output format appropriate?
    - Any confidentiality concerns?
-6. **Repository Admin** merges to `main` and tags a release
+6. **Repository Admin** merges to `master` and tags a release
 
 ### 3.2 Skill Updates
 
 1. **Author creates update** in a feature branch (`update/skill-name-v1.1`)
-2. **Author documents changes** in `CHANGELOG.md`
+2. **Author documents changes** in `releases/term-sheet-review/CHANGELOG.md`
 3. **Same review process** as new skills
 4. **Version bump** in `plugin.json` (see versioning below)
 5. **Release notification** sent to all users
@@ -98,7 +98,7 @@ Skills use **Semantic Versioning** (MAJOR.MINOR.PATCH):
 | **PATCH** (1.0.1) | Bug fixes, typo corrections, clarifications |
 
 **Version is recorded in:**
-- `plugins/[skill]/. claude-plugin/plugin.json` → `"version": "1.0.0"`
+- `plugins/[skill]/.claude-plugin/plugin.json` → `"version": "1.0.0"`
 - `.claude-plugin/marketplace.json` → `"version": "1.0.0"`
 - Git tag → `v1.0.0`
 
@@ -106,7 +106,7 @@ Skills use **Semantic Versioning** (MAJOR.MINOR.PATCH):
 
 ## 5. Changelog
 
-All changes are documented in `CHANGELOG.md` at the repository root:
+Approved version changes are documented in `releases/term-sheet-review/CHANGELOG.md`:
 
 ```markdown
 # Changelog
@@ -191,7 +191,7 @@ For compliance and audit purposes:
 |--------------|-----|-------------|
 | **Read** | All 10 lawyers | View skills, install, use |
 | **Write** | Authors (associates) | Create branches, open PRs |
-| **Merge** | Repository Admin (Tom) | Merge to main, tag releases |
+| **Merge** | Repository Admin (Tom) | Merge to master, tag releases |
 | **Admin** | Tom Harrow + Priya Vale | Manage access, settings |
 
 ---

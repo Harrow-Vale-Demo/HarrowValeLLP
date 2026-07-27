@@ -8,14 +8,15 @@ All client, deal, contact, passphrase, and data-room material in this repository
 
 | Path | Purpose |
 |---|---|
+| `plugins/term-sheet-review-plugin/` | Current installable Claude plugin used for the skill demonstration. |
+| `releases/term-sheet-review/` | Frozen version history and approval evidence, including v1.0.0 and v1.1.0. |
+| `tools/termsheet-harness/` | Executable contract, golden fixtures, regression evaluator, DD mapper, and publish gate. |
+| `assets/source/` | Canonical mock term sheets, DD checklist, and GreenGrid data-room documents. |
+| `assets/legacy-raw-import/` | Original legacy import retained only for provenance. |
+| `deliverables/` | Client proposal, case study, security briefing, rollout guidance, and next steps. |
 | `demo/harrowvale-review-demo.html` | Standalone browser demo for the presentation. |
 | `presentation/harrowvale-presentation.html` | Standalone presentation deck. |
-| `deliverables/` | Client proposal, case study, security briefing, rollout guidance, and next steps. |
-| `plugins/term-sheet-review-plugin/` | Installable Claude plugin used for the skill demonstration. |
-| `harrow-vale-skills/` | Versioned skill releases and approval history, including v1.1.0. |
-| `tools/termsheet-harness/` | Executable contract, golden fixtures, regression evaluator, DD mapper, and publish gate. |
-| `assets/` | Canonical mock term sheets, DD checklist, and GreenGrid data-room documents. |
-| `docs/discovery/` | Engagement notes and the hackathon discovery log. |
+| `docs/` | Discovery evidence, engagement briefs, governance notes, and the migration record. |
 | `LEDGER.md` | Short handoff log for the team and its coding agents. |
 
 ## Run the evidence
@@ -39,14 +40,22 @@ Open these files directly in a browser:
 
 The final proposal is at `deliverables/proposal/Harrow-Vale-Proposal.pdf`; its editable Word version and JavaScript generator are stored beside it.
 
-## Source priority
+## Source-of-truth rules
 
-The Markdown files under `assets/term-sheets/` and `assets/dd-checklist/` are the canonical mock source set for evaluation. They were captured from the sanctioned mock data room and take precedence over older normalized copies when wording differs. `DataRoomInfo/` is retained as a legacy raw import for traceability.
+- `plugins/term-sheet-review-plugin/` is the current installable product.
+- `releases/term-sheet-review/` is immutable release history; existing version folders should not be edited in place.
+- `tools/termsheet-harness/` owns executable evaluation and promotion machinery.
+- `assets/source/` contains the preferred captured source documents used as canonical inputs.
+- Harness goldens and versioned skill references stay beside the code or release that consumes them.
+- `assets/legacy-raw-import/` is retained for traceability but is not canonical.
+- Client-facing outputs belong in `deliverables/`; internal working knowledge belongs in `docs/`.
 
-See `assets/README.md` for the exact source/fixture convention.
+See `assets/README.md`, `releases/README.md`, and `docs/README.md` for the component conventions.
 
 ## Team workflow
 
-`master` is the shared integration branch. Work happens on short-lived `feature/`, `fix/`, or `agent/` branches and enters `master` through pull requests. Organize files by project purpose rather than by contributor; after a pull request is merged, delete its branch.
+`master` is the shared integration branch. Work happens on short-lived `feature/`, `fix/`, `docs/`, or `refactor/` branches and enters `master` through pull requests. Organize files by project purpose rather than by contributor; after a pull request is merged, delete its branch.
 
 Use the ledger for quick handoffs and GitHub issues for work that needs an owner, discussion, or acceptance criteria. See `CONTRIBUTING.md`.
+
+The absolute clone location may differ between contributors. Keep active Git checkouts outside cloud-synchronised folders such as Google Drive, because generated metadata inside `.git` can corrupt Git refs.

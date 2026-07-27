@@ -4,14 +4,18 @@ All documents in this directory belong to the fictional Harrow & Vale hackathon 
 
 ## Canonical inputs
 
-- `term-sheets/` contains the four preferred term-sheet captures used as source material.
-- `dd-checklist/harrow-vale-dd-checklist.md` is the preferred captured checklist.
-- `data-room-set/greengrid-captable-and-articles.md` is the preferred combined GreenGrid corporate source.
+- `source/term-sheets/` contains the four preferred term-sheet captures.
+- `source/dd-checklist/harrow-vale-dd-checklist.md` is the preferred captured checklist.
+- `source/data-room/greengrid-captable-and-articles.md` is the preferred combined GreenGrid corporate source.
 
 When wording conflicts with an older normalized or annotated copy, these files take priority for extraction and evaluation.
 
-## Supporting fixtures
+## Supporting source documents
 
-The remaining GreenGrid files split the mock data room into individual document fixtures for checklist mapping and citation demonstrations. `DataRoomInfo/` at the repository root is a legacy raw import retained for provenance.
+The remaining files in `source/data-room/` split the GreenGrid mock data room into individual document fixtures for checklist mapping and citation demonstrations.
 
-Versioned skill releases bundle their own frozen reference copies so an approved release remains reproducible. Update those copies only through the skill approval/versioning process.
+## Legacy provenance
+
+`legacy-raw-import/` preserves the original numbered import. It is retained for provenance and should not be treated as the working source set.
+
+Harness goldens and versioned skill references are intentionally frozen beside the code or release that consumes them. Update those copies only through their evaluation/versioning process.

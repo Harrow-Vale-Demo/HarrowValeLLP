@@ -47,12 +47,12 @@
 
 ## Assets on disk
 
-- `assets/dd-checklist/harrow-vale-dd-checklist.md` — ⭐ Priya's fixed 9-section / 30-item checklist.
-- `assets/term-sheets/` — 4 sheets, deliberately different formats:
+- `assets/source/dd-checklist/harrow-vale-dd-checklist.md` — ⭐ Priya's fixed 9-section / 30-item checklist.
+- `assets/source/term-sheets/` — 4 sheets, deliberately different formats:
   SAFE (Nimbus), Series A priced (GreenGrid), convertible note (Anchorline), seed bullets (Solace).
-- `assets/data-room-set/` — GreenGrid cap table, articles, lease, MSA (support a full DD demo).
-- `assets/DATA-ROOM-NOTES.md` — detailed analysis of all of the above + design implications.
-- `DataRoomInfo/` — original untouched files (1–8 + checklist).
+- `assets/source/data-room/` — GreenGrid cap table, articles, lease, MSA (support a full DD demo).
+- `docs/discovery/data-room-notes.md` — detailed analysis of all of the above + design implications.
+- `assets/legacy-raw-import/` — original untouched files (1–8 + checklist).
 
 ## Discovery — client priorities (from Emily's call notes)
 
@@ -72,13 +72,21 @@ across the firm is the point — ties directly to "standardisation").
 
 ## Notes / assets
 
-- `Scenario-1-Harrow-Vale-Guide.md` — the official engagement pack (source of truth).
-- `notes` — contains a phone number (+447915900076); left untouched.
+- `docs/engagement/scenario-guide.md` — the official engagement pack (source of truth).
+- `docs/discovery/client-call-notes.md` — contains a phone number (+447915900076); left untouched.
 - Support: Hackathon Helper at lab.syntheticsignal.io/hackathon; Drew (drew.perry@negativezero.com).
 
 ---
 
 ## Log
+
+### [2026-07-27] Lee + Codex — Implemented issue #2 repository layout refactor
+
+- Moved approved version history to `releases/`, canonical inputs to `assets/source/`, and legacy imports to `assets/legacy-raw-import/`.
+- Classified remaining discovery, engagement, and governance material under `docs/`.
+- Kept the active plugin, evaluation harness, deliverables, demo, and presentation in their component-owned paths.
+- Updated retired path references and recorded the migration map in `docs/governance/repository-layout-migration.md`.
+- Validation evidence and the review link are recorded in the refactor pull request.
 
 ### [2026-07-26] Lee + Codex — Integrated canonical sources, eval harness, demo, deck, and proposal
 
@@ -94,7 +102,7 @@ across the firm is the point — ties directly to "standardisation").
 **Evaluation & gap analysis:**
 - Read Tom Harrow's conversation screenshots (9 required extraction fields)
 - Found v1.0.0 missing 2 fields: founder vesting schedule + legal fees
-- Created `evaluation.md` documenting gaps and action plan
+- Created `docs/governance/prototype-evaluation.md` documenting gaps and action plan
 
 **Core skill updates (v1.1.0):**
 - Added founder vesting: duration, cliff, acceleration (single/double-trigger)
@@ -139,7 +147,7 @@ across the firm is the point — ties directly to "standardisation").
   Tom Harrow (Ops/Knowledge), Marcus Ade (Sr Assoc M&A), Elena Cho (Assoc VC).
 - Data room (/data-room/) returns **401 Unauthorized — credentials required**. Needs Emily's
   NZ sign-in; Claude cannot enter credentials. **Emily to sign in and pull the 3 sample term
-  sheets + DD checklist**, or export them into this repo (e.g. under `assets/term-sheets/`).
+  sheets + DD checklist**, or export them into this repo (e.g. under `assets/source/term-sheets/`).
 
 ### [2026-07-22] Claude (Emily's session) — Workspace initialized
 - Read the engagement pack; confirmed with Emily this is a sanctioned discovery/proposal exercise (not adversarial).

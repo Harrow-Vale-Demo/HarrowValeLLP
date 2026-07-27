@@ -1,13 +1,13 @@
 # Data Room — Contents & Analysis Notes
 
-*Source: Harrow & Vale data room, added by Emily. Originals in `DataRoomInfo/`, working
-copies in `assets/`. All documents are synthetic/mock (fictional companies).*
+*Source: Harrow & Vale data room, added by Emily. Originals in `assets/legacy-raw-import/`, working
+copies in `assets/source/`. All documents are synthetic/mock (fictional companies).*
 
 ---
 
 ## ⭐ The Due Diligence Checklist (the anchor of the whole build)
 
-**File:** [`assets/dd-checklist/harrow-vale-dd-checklist.md`](dd-checklist/harrow-vale-dd-checklist.md)
+**File:** [`assets/source/dd-checklist/harrow-vale-dd-checklist.md`](../../assets/source/dd-checklist/harrow-vale-dd-checklist.md)
 
 Priya Vale's **fixed, standardised** DD checklist — applied to *every* funding-round/M&A
 matter **regardless of instrument type**. The doc itself states the constraint we heard on
@@ -45,14 +45,14 @@ have **4** term sheets — even better for test-driven development (2–3 to bui
 rest to validate generalisation).
 
 ### 1. SAFE — Nimbus Robotics Ltd
-**File:** [`term-sheets/safe-nimbus-robotics.md`](term-sheets/safe-nimbus-robotics.md) · Investor: Cordwainer Angels · 14 Mar 2026
+**File:** [`assets/source/term-sheets/safe-nimbus-robotics.md`](../../assets/source/term-sheets/safe-nimbus-robotics.md) · Investor: Cordwainer Angels · 14 Mar 2026
 - Purchase amount £750k; **valuation cap £6m post-money**; **discount 20%**; no interest, no maturity (it's a SAFE).
 - **MFN clause = yes** (unusual/notable — worth flagging). Pro-rata = yes.
 - Converts on Equity Financing ≥ £1m, at lower of cap price or discount price.
 - Format: prose + a terms table.
 
 ### 2. Priced round (Series A) — GreenGrid Analytics Ltd
-**File:** [`term-sheets/series-a-greengrid-analytics.md`](term-sheets/series-a-greengrid-analytics.md) · Lead: Northbridge Ventures · 2 May 2026
+**File:** [`assets/source/term-sheets/series-a-greengrid-analytics.md`](../../assets/source/term-sheets/series-a-greengrid-analytics.md) · Lead: Northbridge Ventures · 2 May 2026
 - £3.2m at **£12m pre / £15.2m post**; £1.50/share; 2,133,333 new shares; investor **21.05%**.
 - **1x non-participating** liquidation preference; broad-based weighted-average anti-dilution.
 - Board: 3 seats (2 founders / 1 Series A). Protective provisions (4 consent items).
@@ -60,7 +60,7 @@ rest to validate generalisation).
 - Format: numbered clauses + terms table. **Figures reconcile with the GreenGrid cap table (file 5).**
 
 ### 3. Convertible loan note — Anchorline Biotech Ltd
-**File:** [`term-sheets/convertible-note-anchorline-biotech.md`](term-sheets/convertible-note-anchorline-biotech.md) · Noteholder: Fenwick Life Sciences · 19 Jun 2026
+**File:** [`assets/source/term-sheets/convertible-note-anchorline-biotech.md`](../../assets/source/term-sheets/convertible-note-anchorline-biotech.md) · Noteholder: Fenwick Life Sciences · 19 Jun 2026
 - £500k principal; **8% interest** (compounding annually, paid on conversion/redemption/maturity).
 - **24-month maturity**; **15% conversion discount**; **£8m pre-money cap**.
 - Qualifying financing ≥ £2m. Change-of-control: repay + **1.5x premium** OR convert at cap.
@@ -68,7 +68,7 @@ rest to validate generalisation).
 - Format: bolded label + prose per term. It IS a debt instrument (interest + maturity) — contrast with the SAFE.
 
 ### 4. Seed round (terse bullets) — Solace Data Ltd
-**File:** [`term-sheets/seed-solace-data.md`](term-sheets/seed-solace-data.md) · Investor: Ridgeline Seed Partners · 3 Jul 2026
+**File:** [`assets/source/term-sheets/seed-solace-data.md`](../../assets/source/term-sheets/seed-solace-data.md) · Investor: Ridgeline Seed Partners · 3 Jul 2026
 - £450k at £4m pre / £4.45m post; investor **10.11%**; 1x non-participating.
 - **Observer seat only** (no board seat at seed). Pro-rata = yes; broad-based WA anti-dilution.
 - 30-day exclusivity; CPs incl. clean disclosure letter, 14-day IP diligence, no MAC.
@@ -87,10 +87,10 @@ company with a full set: term sheet + cap table + articles + contracts).
 
 | File | Maps to checklist |
 |---|---|
-| [`data-room-set/cap-table-greengrid.md`](data-room-set/cap-table-greengrid.md) | §1 Register of members / §2 fully-diluted cap table. Founders 2×39.47%, Northbridge 21.05%. **No option pool** created this round (notable). Figures reconcile with the Series A term sheet. |
-| [`data-room-set/articles-greengrid.md`](data-room-set/articles-greengrid.md) | §1 Articles (as amended). Company no. 14829371. Liquidation pref (Art 7), board (Art 8), protective provisions (Art 9) — **consistent with the term sheet**. |
-| [`data-room-set/lease-greengrid.md`](data-room-set/lease-greengrid.md) | §3 Material Contracts → leases. Reading office, 5yr term, break at m36, £68k/yr. |
-| [`data-room-set/msa-greengrid-halloway.md`](data-room-set/msa-greengrid-halloway.md) | §3 Material Contracts → customer contracts >£50k. Halloway Utilities, £182k ACV. UK data residency + DPA (relevant to §6 GDPR). |
+| [`assets/source/data-room/cap-table-greengrid.md`](../../assets/source/data-room/cap-table-greengrid.md) | §1 Register of members / §2 fully-diluted cap table. Founders 2×39.47%, Northbridge 21.05%. **No option pool** created this round (notable). Figures reconcile with the Series A term sheet. |
+| [`assets/source/data-room/articles-greengrid.md`](../../assets/source/data-room/articles-greengrid.md) | §1 Articles (as amended). Company no. 14829371. Liquidation pref (Art 7), board (Art 8), protective provisions (Art 9) — **consistent with the term sheet**. |
+| [`assets/source/data-room/lease-greengrid.md`](../../assets/source/data-room/lease-greengrid.md) | §3 Material Contracts → leases. Reading office, 5yr term, break at m36, £68k/yr. |
+| [`assets/source/data-room/msa-greengrid-halloway.md`](../../assets/source/data-room/msa-greengrid-halloway.md) | §3 Material Contracts → customer contracts >£50k. Halloway Utilities, £182k ACV. UK data residency + DPA (relevant to §6 GDPR). |
 
 **GreenGrid coverage gaps (illustrative for a DD demo):** present = cap table, articles, 2
 material contracts. Missing vs. the 30-item checklist = cert of incorporation, register of
