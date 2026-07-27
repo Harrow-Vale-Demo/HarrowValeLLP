@@ -1,0 +1,35 @@
+# Line-ending policy for Harrow & Vale LLP
+#
+# The repository stores LF internally. Each checkout renders the
+# platform's native convention, so Windows working copies keep CRLF
+# while the committed history stays stable. Without this, every file
+# edited on Windows appears wholly modified and real changes are lost
+# in the noise.
+
+* text=auto
+
+# Text formats used in this repository
+*.md         text
+*.json       text
+*.py         text
+*.html       text
+*.js         text
+*.txt        text
+*.yml        text
+*.yaml       text
+.gitignore   text
+.gitattributes text
+
+# Legacy import: extensionless HTML exports, treated as text
+assets/legacy-raw-import/*  text
+
+# Binary formats - never line-ending converted
+*.png        binary
+*.jpg        binary
+*.jpeg       binary
+*.gif        binary
+*.pdf        binary
+*.docx       binary
+*.xlsx       binary
+*.pptx       binary
+*.zip        binary

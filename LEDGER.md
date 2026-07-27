@@ -80,6 +80,21 @@ across the firm is the point — ties directly to "standardisation").
 
 ## Log
 
+### [2026-07-28 00:40] Lee + Claude — Added `.gitattributes` to stop phantom whole-file diffs
+
+- Symptom: all 107 tracked files showed as modified on a clean Windows checkout, with a
+  symmetric 6,965-insertion / 6,965-deletion diffstat. `git diff --ignore-all-space` was empty.
+- Cause: history stores LF, Windows working copies hold CRLF, and the repo had no
+  `.gitattributes` and no `core.autocrlf` to reconcile the two on comparison.
+- Fix: added `.gitattributes` with `* text=auto`, explicit text formats, `assets/legacy-raw-import/*`
+  as text, and binary declarations for PNG/PDF/DOCX/XLSX/PPTX/ZIP.
+- No renormalization commit was needed — `HEAD` already stored LF, so the policy alone
+  cleared it. Working-tree files keep CRLF; history is untouched. Status went 107 → 0.
+- Also confirmed `master` in sync with `origin/master` (0 ahead, 0 behind), no untracked
+  files, no stashes, and `feature/term-extraction-v1.1.0` fully merged.
+- Note for others: `refactor/repository-layout` still exists locally one commit past origin's
+  copy. It is the PR #3 merge commit and is fully merged — safe to delete.
+
 ### [2026-07-27] Lee + Codex — Implemented issue #2 repository layout refactor
 
 - Moved approved version history to `releases/`, canonical inputs to `assets/source/`, and legacy imports to `assets/legacy-raw-import/`.
