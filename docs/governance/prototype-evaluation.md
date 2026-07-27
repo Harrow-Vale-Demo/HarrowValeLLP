@@ -1,6 +1,6 @@
 # Prototype Evaluation — Against Project Requirements
 
-This document evaluates the `term-sheet-review` skill prototype against the requirements from Tom Harrow's conversation (captured in `summary`).
+This document evaluates the `term-sheet-review` skill prototype against the requirements from Tom Harrow's conversation (captured in `docs/discovery/engagement-summary.md`).
 
 **Last updated:** After completing all action items
 

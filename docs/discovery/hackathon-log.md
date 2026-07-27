@@ -126,7 +126,7 @@ _Note: I don't enter passwords into login fields myself (standing safety rule, e
 
 ---
 
-## PROTOTYPE BUILT (folder: harrowvale-termsheet-harness/) — verified running
+## PROTOTYPE BUILT (folder: tools/termsheet-harness/) — verified running
 **Reframing (per Aiio): the real deliverable is a single governed "legal skills" pipeline** — every skill a lawyer builds is contract-bound (strict JSON schema) and deterministically eval-gated before it's approved, versioned, and shipped firm-wide. The harness IS that gate. This unifies the core goal (two working skills) and the stretch goal (approved-skills pipeline + governance).
 
 Contents:
