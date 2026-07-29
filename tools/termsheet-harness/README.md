@@ -17,9 +17,7 @@ every skill must pass (contract → adversarial eval → versioned publish).
 | `reference/dd-checklist.md` | Priya's fixed DD checklist, used verbatim. |
 | `golden/*.json` | Golden labels for all four term-sheet formats. |
 | `runs/v1`, `runs/v2` | Recorded skill outputs (first pass vs eval-driven iteration). |
-| `src/run_harness.py` | The eval harness + regression gate. |
-| `src/publish.py` | The promotion step: gate PASS -> version bump -> marketplace insertion (blocks on fail). |
-| `.claude-plugin/marketplace.json` | The private marketplace catalogue the firm installs from. |
+| `src/run_harness.py` | The eval harness + regression gate for this skill. |
 | `CHANGELOG.md` | Per-skill, per-version history (only gate-passing versions). |
 | `src/evaluator.py` | Precision/recall/F1 grader (penalises misses AND over-flagging). |
 | `src/dd_mapper.py` | DD-checklist mapper demo. |
@@ -30,8 +28,14 @@ every skill must pass (contract → adversarial eval → versioned publish).
 ```bash
 python3 src/run_harness.py      # eval gate across all 4 term-sheet formats
 python3 src/dd_mapper.py        # DD checklist: satisfied / partial / missing + citations
-python3 src/publish.py term-sheet-review --bump minor            # gate -> version -> marketplace
-python3 src/publish.py term-sheet-review --simulate-regression   # proves a bad build is blocked
+```
+
+Promotion is not run from here. The firm-wide gate and the only sanctioned
+publisher live in `tools/skill-gate/`; this directory supplies the golden labels
+and recorded runs that the gate reads for `term-sheet-review`:
+
+```bash
+python3 ../skill-gate/gate.py term-sheet-review
 ```
 
 ## Result (this prototype)

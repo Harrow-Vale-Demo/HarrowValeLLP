@@ -153,7 +153,7 @@
       <div class="eyebrow">Exactly where they live</div>
       <h2>One private home, one catalogue</h2>
       <ul class="big">
-        <li><b>The source of truth</b> is your private GitHub repository — <code>harrowvale/legal-skills</code>. Private: only the firm can see it or install from it.</li>
+        <li><b>The source of truth</b> is your own GitHub repository, private to the firm — only Harrow &amp; Vale can see it or install from it.</li>
         <li><b>Each skill is a self-contained package</b> — its instructions, its output contract, its reference checklist and its test set, versioned together.</li>
         <li><b>A catalogue file</b> (<code>marketplace.json</code>) lists the approved skills and their current versions — the firm's single shelf.</li>
         <li><b>Every published version keeps its eval report</b>, so you can always show which version was used and why it was trusted.</li>
@@ -163,15 +163,15 @@
     <!-- 7b EASY INSTALL -->
     <section class="slide">
       <div class="eyebrow">Ease of install · all ten lawyers</div>
-      <h2>Set up once, installed by everyone in minutes</h2>
+      <h2>Set up once by Tom. Nothing to do for everyone else.</h2>
       <div class="flow">
-        <div class="step"><div class="n">Once, by Tom</div><h3>Add the shelf</h3><p>An admin adds the marketplace a single time:<br><code>/plugin marketplace add harrowvale/legal-skills</code></p></div>
+        <div class="step"><div class="n">Once, by Tom</div><h3>Set the policy</h3><p>One firm policy names the shelf and the approved skills — pushed the same way as any other IT setting, through your admin console, Intune or Group Policy.</p></div>
         <div class="arrow">→</div>
-        <div class="step"><div class="n">Each lawyer</div><h3>Click install</h3><p>Open the <code>/plugin</code> menu and install — inside the Claude Desktop / Claude Code they already use. No git, no copy-paste, no config.</p></div>
+        <div class="step"><div class="n">Each lawyer</div><h3>Does nothing</h3><p>The skill is simply there, inside the Claude they already use. No GitHub account, no repository, no config. <code>claude plugin list</code> shows what they have.</p></div>
         <div class="arrow">→</div>
-        <div class="step"><div class="n">Always current</div><h3>Auto-update</h3><p><code>/plugin marketplace update</code> pulls the latest approved version; a live matter can pin a known-good one.</p></div>
+        <div class="step"><div class="n">Always current</div><h3>Updates arrive</h3><p>A newly approved version reaches every machine shortly after a session starts. A live matter can pin a known-good version so a review never shifts mid-deal.</p></div>
       </div>
-      <div class="note">All ten end up on the same vetted version — the "ten people each reinventing it" problem, gone.</div>
+      <div class="note">All ten end up on the same vetted version — the "ten people each reinventing it" problem, gone. And because it is policy rather than a checkout, a lawyer cannot quietly switch to their own fork.</div>
     </section>
 
     <!-- 8 DEMO -->

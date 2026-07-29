@@ -12,8 +12,11 @@ This is a hackathon project for Harrow & Vale LLP, a boutique VC/M&A law firm. T
   - `skills/term-sheet-review/SKILL.md` - Main skill definition and procedure
   - `skills/term-sheet-review/reference/` - Checklist and standard-term references
   - `skills/term-sheet-review/examples/` - Worked examples for all four formats
+- `plugins/cool-new-skill/` - Instrument-triage skill; worked example for the pipeline demo
 - `releases/term-sheet-review/` - Frozen semantic-version snapshots and approval evidence
-- `tools/termsheet-harness/` - Executable contract/golden evaluation and publish gate
+- `tools/skill-gate/` - The firm-wide approval gate (`gate.py`), the only sanctioned publisher
+  (`publish.py`), and the published-version consistency check (`check_published.py`)
+- `tools/termsheet-harness/` - Term-sheet evaluator, golden labels, recorded runs, DD mapper
 - `assets/source/` - Canonical mock source documents
   - `term-sheets/` - SAFE, Series A, convertible note, and seed samples
   - `data-room/` - GreenGrid supporting documents
@@ -30,9 +33,13 @@ Do not edit an existing release snapshot in place. Change the active plugin, val
 
 ## Skill Usage
 
+Plugin skills are namespaced by plugin name, so once installed from the
+marketplace the invocations are:
+
 ```
-/term-sheet-review <path-to-term-sheet>
-/term-sheet-review <path-to-term-sheet> --dd-room <path-to-folder>
+/term-sheet-review:term-sheet-review <path-to-term-sheet>
+/term-sheet-review:term-sheet-review <path-to-term-sheet> --dd-room <path-to-folder>
+/cool-new-skill:cool-new-skill <path-to-document>
 ```
 
 ## Key Design Constraints (Priya's Rules)

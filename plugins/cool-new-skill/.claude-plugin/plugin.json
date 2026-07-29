@@ -1,0 +1,11 @@
+{
+  "name": "cool-new-skill",
+  "displayName": "HarrowVale Cool New Skill",
+  "description": "Instrument triage: says in one line whether a document is a SAFE, a priced round, a convertible loan note, or a terse seed summary — and reports which approved version produced the answer.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Harrow & Vale LLP",
+    "email": "tom.harrow@harrowvale.example"
+  },
+  "repository": "https://github.com/f7-rage-gremlin/HarrowValeLLP"
+}

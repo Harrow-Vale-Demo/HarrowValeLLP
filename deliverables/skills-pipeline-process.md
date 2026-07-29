@@ -1,208 +1,287 @@
 # Approved Skills Pipeline
-## Harrow & Vale LLP — Governance & Versioning Process
+## Harrow & Vale LLP — Governance, Versioning & Distribution
 
 ---
 
 ## Overview
 
-This document describes the approval, versioning, and distribution process for Claude skills used by Harrow & Vale LLP. The goal is to ensure:
+This document describes how a Claude skill gets from an idea to all ten lawyers' machines, and what stops a bad one getting there. It exists to answer four questions:
 
-1. **Consistency** — All 10 lawyers use the same vetted skills
-2. **Quality** — Skills are tested and approved before deployment
-3. **Auditability** — Changes are versioned and traceable
-4. **Security** — Skills are stored in a private, access-controlled repository
+1. **Consistency** — do all ten lawyers use the same version?
+2. **Quality** — has this version been tested, and can we see the result?
+3. **Auditability** — six months on, can we show why we trusted it?
+4. **Security** — who can change what reaches the firm?
+
+The reusable asset is not any individual skill. It is the gate every skill passes through.
 
 ---
 
-## 1. Repository Structure
-
-Skills are stored in a private GitHub repository:
+## 1. The shape of it
 
 ```
-harrow-vale-approved-skills/
-├── .claude-plugin/
-│   └── marketplace.json          # Plugin registry
+  Author a skill              Prove it                    Ship it
+ ┌───────────────┐  golden   ┌──────────────┐  version   ┌────────────────────┐
+ │ SKILL.md +    │──────────▶│ gate.py      │───────────▶│ marketplace +      │
+ │ golden labels │  labels   │ threshold    │  on PASS   │ firm policy        │
+ └───────────────┘           │ no-regression│   only     │ → ten lawyers      │
+                             └──────────────┘            └────────────────────┘
+                                    │ on FAIL
+                                    └──▶ nothing is written
+```
+
+### Repository structure
+
+```
+HarrowValeLLP/
+├── .claude-plugin/marketplace.json     # the shelf: HarrowVale Legal Skills
+├── .claude/
+│   ├── settings.json                   # marketplace + skills for repo contributors
+│   └── skills/publish-hv-skill/        # the publishing workflow, as a skill
+├── .github/workflows/skill-gate.yml    # CI: the enforcement
 ├── plugins/
-│   └── term-sheet-review-plugin/
-│       ├── .claude-plugin/
-│       │   └── plugin.json       # Plugin manifest (name, version, author)
-│       └── skills/
-│           └── term-sheet-review/
-│               ├── SKILL.md      # Skill definition
-│               ├── reference/    # Supporting files
-│               ├── templates/    # Output templates
-│               └── examples/     # Worked examples
-├── releases/term-sheet-review/  # Frozen versions + CHANGELOG.md
-└── README.md                     # Installation instructions
+│   ├── term-sheet-review-plugin/       # one directory per skill
+│   └── cool-new-skill/
+├── tools/
+│   ├── skill-gate/                     # gate.py, publish.py, check_published.py
+│   ├── termsheet-harness/              # golden labels + evaluator for term-sheet-review
+│   └── org-policy/                     # the managed policy pushed to lawyers
+└── releases/<skill>/
+    ├── CHANGELOG.md
+    └── v<version>/gate-report.json     # the evidence, per version
 ```
 
 ---
 
-## 2. Roles & Responsibilities
+## 2. Roles
 
 | Role | Person | Responsibility |
-|------|--------|----------------|
-| **Skill Author** | Any associate | Develops and tests new skills or updates |
-| **Technical Reviewer** | Marcus Ade (or designated associate) | Reviews code/prompt quality, tests against samples |
-| **Approving Partner** | Priya Vale | Final sign-off on any skill entering production |
-| **Repository Admin** | Tom Harrow | Manages access, merges approved changes, tags releases |
+|---|---|---|
+| **Skill author** | any associate | Writes the skill, the golden labels, and the recorded run |
+| **Technical reviewer** | Marcus Ade | Reviews the skill and, critically, whether the golden labels are the right test |
+| **Approving partner** | Priya Vale | Owns the standard — the DD checklist and the golden labels are hers |
+| **Publisher / repository admin** | Tom Harrow | Runs the gate, publishes, manages the firm policy |
+
+The important line: **Priya owns the labels, and the skill moves to meet them — never the reverse.** Retuning a golden label so a skill passes is the one change that would hollow out the whole pipeline, so it is called out explicitly in review.
 
 ---
 
-## 3. Approval Process
+## 3. What a skill must ship with
 
-### 3.1 New Skill Development
+A skill is not "done" when it produces good output. It is done when it can be *graded*:
 
-1. **Author creates skill** in a feature branch (`feature/skill-name`)
-2. **Author tests** against at least 3 representative documents
-3. **Author opens Pull Request** with:
-   - Description of what the skill does
-   - Test results (screenshots or output files)
-   - Any dependencies or requirements
-4. **Technical Reviewer** reviews within 2 working days:
-   - Does it follow firm conventions?
-   - Does it handle edge cases?
-   - Are outputs consistent?
-5. **Approving Partner** reviews within 3 working days:
-   - Does it meet practice standards?
-   - Is the output format appropriate?
-   - Any confidentiality concerns?
-6. **Repository Admin** merges to `master` and tags a release
+| Artefact | Where | Why |
+|---|---|---|
+| `SKILL.md` | `plugins/<skill>/skills/<skill>/` | the skill itself |
+| Golden labels | `tools/skill-gate/fixtures/<skill>/golden.json` | the known-correct answers |
+| A recorded run | `tools/skill-gate/fixtures/<skill>/runs/<version>.json` | what the skill actually produced |
+| A registered metric | `tools/skill-gate/gate.py` | how the two are compared |
 
-### 3.2 Skill Updates
+A skill with no registered gate cannot be published. That is enforced in code, not convention: `publish.py` refuses.
 
-1. **Author creates update** in a feature branch (`update/skill-name-v1.1`)
-2. **Author documents changes** in `releases/term-sheet-review/CHANGELOG.md`
-3. **Same review process** as new skills
-4. **Version bump** in `plugin.json` (see versioning below)
-5. **Release notification** sent to all users
-
-### 3.3 Emergency Fixes
-
-For critical bugs or security issues:
-1. **Author fixes** in `hotfix/skill-name-issue`
-2. **Technical Reviewer** expedites review (same day)
-3. **Approving Partner** notified but can approve async
-4. **Immediate release** with patch version bump
+> **Current limitation, stated plainly.** Recorded runs are captured fixtures, not live model calls at gate time. This buys deterministic, zero-cost CI. The seam to make it live is a single function — `run_generator()` in `tools/termsheet-harness/src/generator_adapter.py` — pointed at `claude -p`. Until that is switched on, the gate proves *a recorded output* meets the standard, not that today's model call does.
 
 ---
 
-## 4. Versioning
+## 4. Approval process
 
-Skills use **Semantic Versioning** (MAJOR.MINOR.PATCH):
+### 4.1 A new skill or a new version
 
-| Version Change | When |
-|----------------|------|
-| **MAJOR** (2.0.0) | Breaking changes to output format or behaviour |
-| **MINOR** (1.1.0) | New features, additional extractions, non-breaking |
-| **PATCH** (1.0.1) | Bug fixes, typo corrections, clarifications |
+1. **Author** works on a branch (`feature/<skill>-<change>`)
+2. **Author** writes or extends the golden labels, and records a run named for the version they intend to ship
+3. **Author** runs the gate:
+   ```bash
+   python tools/skill-gate/gate.py <skill>
+   ```
+   Or, inside a Claude Code session in the repository, uses the wrapper skill:
+   ```bash
+   /publish-hv-skill <skill>
+   ```
+4. **On FAIL** — nothing is published. The author fixes the skill, not the test.
+5. **On PASS** — publish:
+   ```bash
+   python tools/skill-gate/publish.py <skill>
+   ```
+6. **Author** opens a pull request. CI re-runs the gate independently.
+7. **Technical reviewer** within 2 working days: is the skill sound, and are the labels the right test?
+8. **Approving partner** within 3 working days: does this meet practice standards?
+9. **Publisher** merges to `master` and tags the release.
 
-**Version is recorded in:**
-- `plugins/[skill]/.claude-plugin/plugin.json` → `"version": "1.0.0"`
-- `.claude-plugin/marketplace.json` → `"version": "1.0.0"`
-- Git tag → `v1.0.0`
+### 4.2 Emergency fixes
+
+For a skill producing materially wrong output on live matters:
+
+1. Author fixes on `hotfix/<skill>-<issue>`
+2. The gate still runs. There is no bypass, and none should be added — a hotfix that regresses something else is not a fix.
+3. Technical reviewer expedites, same day
+4. Approving partner notified, may approve asynchronously
+5. Patch version published
+
+If a skill must be stopped immediately, the fast path is to disable it by policy rather than to rush an ungated version.
+
+### 4.3 What is not allowed
+
+- Publishing on a gate FAIL, for any reason
+- Editing a stored `gate-report.json`, or hand-editing a version number
+- Adjusting golden labels so a skill passes
+- Pushing directly to `master`
+
+The first three are refused by `check_published.py`. The fourth is prevented by branch protection.
 
 ---
 
-## 5. Changelog
+## 5. Versioning
 
-Approved version changes are documented in `releases/term-sheet-review/CHANGELOG.md`:
+Semantic versioning: MAJOR.MINOR.PATCH.
 
-```markdown
-# Changelog
+| Change | When |
+|---|---|
+| **MAJOR** | Breaking change to output format or behaviour |
+| **MINOR** | New extraction fields or coverage, non-breaking |
+| **PATCH** | Bug fixes, wording, clarifications |
 
-## [1.1.0] - 2026-08-01
-### Added
-- Founder vesting schedule extraction
-- Legal fees & expenses extraction
+**The version published is the version graded.** The author names the recorded run for the version they intend to ship; the gate grades that run; `publish.py` writes that same version everywhere. There is no separate bump step that can be got wrong.
 
-### Changed
-- Updated standard-terms baseline for new fields
+A version lives in five places, all written by `publish.py` in one action:
 
-## [1.0.0] - 2026-07-22
-### Added
-- Initial release of term-sheet-review skill
-- Support for SAFE, priced round, convertible note
-- DD-room coverage report with --dd-room flag
+| Location | Purpose |
+|---|---|
+| `plugins/<skill>/.claude-plugin/plugin.json` | **the pin users update against** |
+| `.claude-plugin/marketplace.json` | the shelf listing |
+| `SKILL.md` version marker | so the skill reports its own version in output |
+| `releases/<skill>/CHANGELOG.md` | the human record |
+| `releases/<skill>/v<version>/gate-report.json` | the evidence |
+
+Two mechanics worth knowing:
+
+- **`plugin.json` wins.** If the version is set in both `plugin.json` and the marketplace entry, `plugin.json` is authoritative at install time. A mismatch means the shelf advertises a version nobody receives.
+- **The version string is the update trigger.** Lawyers receive a new version only when that string changes. This is also why a hand-edited version is dangerous: it disseminates without evidence, which is exactly what `check_published.py` refuses.
+
+Release folders under `releases/` are immutable. `publish.py` will not overwrite one.
+
+---
+
+## 6. Enforcement
+
+Four layers. Only the last two are enforcement rather than good practice:
+
+| Layer | Stops | Bypassable by |
+|---|---|---|
+| `publish.py` as the only sanctioned publisher | honest mistakes | editing a version by hand |
+| `check_published.py` | hand-edited versions | not running it |
+| **CI on every pull request** | both of the above | pushing straight to `master` |
+| **Branch protection on `master`** | that too | nobody |
+
+The marketplace serves whatever is on `master`. So the question is never "did the author run the gate?" — it is **"can anything reach `master` without the gate passing?"** With `skill-gate` as a required status check and direct pushes disallowed, the answer is no, and the author's discipline stops being part of the security model.
+
+CI's blocking check is deliberately narrow: *is every version on the shelf backed by a passing gate result?* It is **not** "does every recorded run pass" — an author mid-iteration has a failing run by definition, and that must not block everyone else.
+
+For the strongest form, point the marketplace at a `release` branch that only CI can move:
+
+```json
+"source": { "source": "github", "repo": "<org>/<repo>", "ref": "release" }
 ```
 
+A direct push to `master` then reaches nobody.
+
 ---
 
-## 6. Installation & Updates
+## 7. Distribution
 
-### First-Time Installation
+The firm's shelf is a marketplace named **`harrowvale-legal-skills`**, catalogued in `.claude-plugin/marketplace.json` at the repository root.
 
-Lawyers install the skill from the private repository:
+### Reaching the ten lawyers
 
-1. Open Claude Code
-2. Run: `/install-plugin https://github.com/harrow-vale/approved-skills`
-3. Authenticate with GitHub (SSO if enabled)
-4. Skill appears in available commands
+Skills are pushed by **managed settings** — organisation policy that sits above user, project, and local settings and cannot be overridden by the user. The firm decides which skills its lawyers use; a lawyer cannot quietly switch to their own fork mid-deal.
 
-### Receiving Updates
-
-When a new version is released:
-
-1. **Notification** sent via email/Slack by Repository Admin
-2. Lawyer runs: `/update-plugins`
-3. New version is active immediately
-
-### Checking Current Version
-
-Run: `/skill-info term-sheet-review`
-
-Output:
-```
-term-sheet-review v1.1.0
-Last updated: 2026-08-01
-Author: Emily Donovan
-Status: Approved (Priya Vale, 2026-07-29)
+```json
+{
+  "extraKnownMarketplaces": {
+    "harrowvale-legal-skills": {
+      "source": { "source": "github", "repo": "<org>/<repo>" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "term-sheet-review@harrowvale-legal-skills": true
+  }
+}
 ```
 
----
+The same JSON deploys through any standard channel: the claude.ai admin console, Intune or Group Policy, Jamf or Kandji on macOS, or a file on disk. See `tools/org-policy/` for the policy and an apply script.
 
-## 7. Retirement & Deprecation
+`autoUpdate` is what makes a new version — and a newly published skill — actually arrive. Third-party marketplaces default to auto-update off; without this flag a lawyer's catalogue never refreshes and a new skill stays invisible to them.
 
-If a skill is retired:
+### What a lawyer does
 
-1. **Deprecation notice** added to skill (60-day warning)
-2. **Skill remains functional** during deprecation period
-3. **Removal** after 60 days, with final notification
-4. **Archived** in `archive/` folder for reference
+Nothing, to receive a skill. To check what they have: `claude plugin list`. To pull an update immediately rather than waiting: `/plugin marketplace update harrowvale-legal-skills`, then `/reload-plugins`.
 
----
+Updates are checked shortly after a session starts, and the running session keeps the versions it launched with — so a review never shifts under a lawyer mid-document.
 
-## 8. Audit & Compliance
+### Adding a skill firm-wide
 
-For compliance and audit purposes:
-
-- All changes are tracked in Git history
-- Pull Requests record reviewer approvals
-- Release tags mark production versions
-- Repository access is logged by GitHub
-
-**Retention:** All versions retained indefinitely in Git history.
+A skill on the shelf is available; a skill named in the policy is *deployed*. Adding one firm-wide is a one-line policy change. That line is deliberate: it is the written record of a human decision that the firm's lawyers should have this skill.
 
 ---
 
-## 9. Access Control
+## 8. Pinning for live matters
 
-| Access Level | Who | Permissions |
-|--------------|-----|-------------|
-| **Read** | All 10 lawyers | View skills, install, use |
-| **Write** | Authors (associates) | Create branches, open PRs |
-| **Merge** | Repository Admin (Tom) | Merge to master, tag releases |
-| **Admin** | Tom Harrow + Priya Vale | Manage access, settings |
+A matter that must not shift can pin a known-good version. Because plugin sources accept an exact commit SHA, a review run today can be reproduced exactly months later — which is what makes the audit answer defensible rather than approximate.
 
 ---
 
-## 10. Support
+## 9. Retirement
 
-**Questions about skills:** Ask the author or technical reviewer
-**Access issues:** Contact Tom Harrow
-**Feature requests:** Open a GitHub Issue tagged `enhancement`
-**Bug reports:** Open a GitHub Issue tagged `bug`
+1. **Deprecation notice** added to the skill (60-day warning)
+2. **Skill remains functional** during the period
+3. **Removed** from the policy, then from the shelf, with final notification
+4. **History retained** — `releases/` and Git history are never pruned, so a review produced by a retired skill can still be explained
 
 ---
 
-*Document version: 1.0 · Last updated: July 2026 · Owner: Tom Harrow*
+## 10. Audit and compliance
+
+For any approved version the firm can produce:
+
+| Question | Answer lives in |
+|---|---|
+| What did this version do? | `releases/<skill>/v<version>/` and the Git tag |
+| Was it tested, and how did it score? | `releases/<skill>/v<version>/gate-report.json` |
+| Against what standard? | `tools/skill-gate/fixtures/<skill>/golden.json` — Priya's labels |
+| Who approved it? | the pull request, and `releases/<skill>/CHANGELOG.md` |
+| Which version produced a given review? | the version marker in the skill's own output |
+| Who could have changed it? | branch protection and repository access logs |
+
+**Retention:** all versions retained indefinitely in Git history.
+
+---
+
+## 11. Access control
+
+| Level | Who | Permissions |
+|---|---|---|
+| **Policy-managed** | all ten lawyers | receive and use approved skills; no repository access needed |
+| **Read** | associates | view the repository |
+| **Write** | authors | branches and pull requests |
+| **Merge** | Tom | merge to `master`, tag releases |
+| **Admin** | Tom, Priya | repository settings, branch protection, firm policy |
+
+Most lawyers need no repository access at all, which is the point: the distribution channel is policy, not a code checkout.
+
+---
+
+## 12. Current state versus production
+
+Honest accounting of what is built and what is a deployment decision:
+
+| Item | Now | For production |
+|---|---|---|
+| Gate, publisher, consistency check | working | as-is |
+| CI workflow | written | make `gate` a required status check |
+| Branch protection | not enabled | enable on `master` |
+| Repository visibility | public, for demonstration | private, firm read access — policy JSON unchanged |
+| Recorded runs | captured fixtures | switch `run_generator()` to live calls |
+| `strictKnownMarketplaces` | not set | set, to restrict lawyers to the firm's shelf |
+
+---
+
+*Document version 2.0 · July 2026 · Owner: Tom Harrow*

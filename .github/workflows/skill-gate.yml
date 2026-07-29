@@ -1,0 +1,54 @@
+name: skill-gate
+
+# Enforcement, not convention.
+#
+# Make the `gate` job a required status check in branch protection for `master`
+# and an author physically cannot put an ungraded skill on the shelf: the merge
+# button stays disabled until it is green, and merges are the only thing that
+# move the ref the marketplace serves from.
+#
+# The blocking question is deliberately narrow: is every version ON THE SHELF
+# backed by a passing gate result? An author iterating on an unpublished skill
+# has a failing run by definition, and that must not turn the repository red.
+# check_published.py enforces the shelf; the score report below is information.
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The blocking check. Asserts, for every skill on the shelf, that the
+      # published version has passing gate evidence, that plugin.json and the
+      # marketplace entry agree, and that the skill text reports the version it
+      # actually ships as. This is what stops a hand-edited version bump.
+      - name: Every published version must be backed by the gate
+        run: python tools/skill-gate/check_published.py
+
+      # Informational: current score for every registered skill, published or
+      # not. Does not fail the build.
+      - name: Score report (all registered skills)
+        continue-on-error: true
+        run: python tools/skill-gate/gate.py --all
+
+      - name: Term-sheet regression harness
+        working-directory: tools/termsheet-harness
+        run: python src/run_harness.py
+
+      - name: Upload gate reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-reports
+          path: tools/termsheet-harness/reports/
+          if-no-files-found: ignore

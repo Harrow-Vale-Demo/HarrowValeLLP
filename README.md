@@ -8,7 +8,10 @@ All client, deal, contact, passphrase, and data-room material in this repository
 
 | Path | Purpose |
 |---|---|
+| `.claude-plugin/marketplace.json` | HarrowVale Legal Skills — the firm's shelf of approved skills. |
 | `plugins/term-sheet-review-plugin/` | Current installable Claude plugin used for the skill demonstration. |
+| `plugins/cool-new-skill/` | Instrument-triage skill; the worked example for the pipeline demo. |
+| `tools/skill-gate/` | The single approval gate (`gate.py`) and the only sanctioned publisher (`publish.py`). |
 | `releases/term-sheet-review/` | Frozen version history and approval evidence, including v1.0.0 and v1.1.0. |
 | `tools/termsheet-harness/` | Executable contract, golden fixtures, regression evaluator, DD mapper, and publish gate. |
 | `assets/source/` | Canonical mock term sheets, DD checklist, and GreenGrid data-room documents. |
@@ -21,15 +24,26 @@ All client, deal, contact, passphrase, and data-room material in this repository
 
 ## Run the evidence
 
-From `tools/termsheet-harness/`:
+The approval gate and the publisher live in `tools/skill-gate/`. From the repository root:
+
+```powershell
+python tools/skill-gate/gate.py --all
+python tools/skill-gate/publish.py cool-new-skill --dry-run
+python tools/skill-gate/publish.py cool-new-skill --candidate 1.0.0
+```
+
+The first scores every registered skill against its golden labels and applies the threshold and no-regression rules. The second shows exactly what a promotion would change, writing nothing. The third grades a known-bad recorded run and is refused — proving a failing skill cannot reach the shelf.
+
+The term-sheet evaluator and the DD mapper still run from `tools/termsheet-harness/`:
 
 ```powershell
 python src/run_harness.py
 python src/dd_mapper.py
-python src/publish.py term-sheet-review --simulate-regression
 ```
 
-The first command evaluates all four instrument formats. The second produces the DD coverage/chase report. The third demonstrates that a regressing skill is blocked from promotion.
+The first evaluates all four instrument formats. The second produces the DD coverage/chase report.
+
+`docs/governance/pipeline-rehearsal.md` walks the whole install-and-update loop end to end on one machine.
 
 ## Present the prototype
 
