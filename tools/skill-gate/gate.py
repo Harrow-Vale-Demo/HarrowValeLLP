@@ -46,6 +46,7 @@ sys.path.insert(0, os.path.join(TERMSHEET_BASE, "src"))
 SKILLS = {
     "term-sheet-review": {"scorer": "termsheet", "base": TERMSHEET_BASE},
     "cool-new-skill": {"scorer": "triage", "base": os.path.join(FIXTURES, "cool-new-skill")},
+    "leestestskill": {"scorer": "triage", "base": os.path.join(FIXTURES, "leestestskill")},
 }
 
 
@@ -69,15 +70,21 @@ def score_termsheet(base: str):
 
 
 def score_triage(base: str):
-    """Fraction of cases where the skill named the correct instrument."""
+    """Fraction of cases where the skill put the document in the right category.
+
+    Reusable across any single-label classifier. The golden file names the field
+    being compared via "field" (default "instrument"), so a new skill of this
+    shape needs fixtures and one line in SKILLS -- no new scorer.
+    """
     golden = json.load(open(os.path.join(base, "golden.json"), encoding="utf-8"))
-    expected = {c["case"]: c["instrument"] for c in golden["cases"]}
+    field = golden.get("field", "instrument")
+    expected = {c["case"]: c[field] for c in golden["cases"]}
     scores = {}
     for path in sorted(glob.glob(os.path.join(base, "runs", "*.json"))):
         run = json.load(open(path, encoding="utf-8"))
         cases = run["cases"]
         correct = sum(1 for case, want in expected.items()
-                      if cases.get(case, {}).get("instrument") == want)
+                      if cases.get(case, {}).get(field) == want)
         version = os.path.splitext(os.path.basename(path))[0]
         scores[version] = round(correct / len(expected), 3)
     return scores, golden.get("metric", "accuracy")
