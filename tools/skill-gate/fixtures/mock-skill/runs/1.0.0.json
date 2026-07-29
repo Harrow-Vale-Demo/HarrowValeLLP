@@ -1,0 +1,23 @@
+{
+  "skill_version": "1.0.0",
+  "recorded": "2026-07-29",
+  "note": "Recorded run for the skill-gate smoke test. All four cases classified correctly by design, so the gate should PASS at 1.000 (threshold 0.90, no prior version to regress against).",
+  "cases": {
+    "nimbus-safe": {
+      "instrument": "safe",
+      "signal": "future equity, no interest, no maturity date"
+    },
+    "greengrid-series-a": {
+      "instrument": "priced_round",
+      "signal": "price per share and pre-money valuation stated"
+    },
+    "anchorline-convertible": {
+      "instrument": "convertible_note",
+      "signal": "interest rate and maturity/redemption date"
+    },
+    "solace-seed": {
+      "instrument": "seed_summary",
+      "signal": "terse bullet-format seed terms"
+    }
+  }
+}
