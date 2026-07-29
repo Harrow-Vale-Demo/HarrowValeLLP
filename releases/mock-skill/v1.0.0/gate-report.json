@@ -1,0 +1,14 @@
+{
+  "skill": "mock-skill",
+  "metric": "triage_accuracy",
+  "candidate": "1.0.0",
+  "candidate_score": 1.0,
+  "previous": null,
+  "previous_score": null,
+  "threshold": 0.9,
+  "meets_threshold": true,
+  "no_regression": true,
+  "gate": "PASS",
+  "passed": true,
+  "published": "2026-07-29"
+}

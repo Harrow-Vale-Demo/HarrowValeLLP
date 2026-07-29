@@ -1,0 +1,28 @@
+{
+  "skill": "mock-skill",
+  "metric": "triage_accuracy",
+  "threshold": 0.9,
+  "note": "Golden labels for the skill-gate smoke test. Not real DD material review; reuses the same four canonical term sheets as cool-new-skill's fixture purely as convenient, already-classified sample input.",
+  "cases": [
+    {
+      "case": "nimbus-safe",
+      "document": "assets/source/term-sheets/safe-nimbus-robotics.md",
+      "instrument": "safe"
+    },
+    {
+      "case": "greengrid-series-a",
+      "document": "assets/source/term-sheets/series-a-greengrid-analytics.md",
+      "instrument": "priced_round"
+    },
+    {
+      "case": "anchorline-convertible",
+      "document": "assets/source/term-sheets/convertible-note-anchorline-biotech.md",
+      "instrument": "convertible_note"
+    },
+    {
+      "case": "solace-seed",
+      "document": "assets/source/term-sheets/seed-solace-data.md",
+      "instrument": "seed_summary"
+    }
+  ]
+}

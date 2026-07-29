@@ -47,6 +47,7 @@ SKILLS = {
     "term-sheet-review": {"scorer": "termsheet", "base": os.path.join(FIXTURES, "term-sheet-review")},
     "cool-new-skill": {"scorer": "triage", "base": os.path.join(FIXTURES, "cool-new-skill")},
     "leestestskill": {"scorer": "triage", "base": os.path.join(FIXTURES, "leestestskill")},
+    "mock-skill": {"scorer": "triage", "base": os.path.join(FIXTURES, "mock-skill")},
 }
 
 
