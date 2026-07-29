@@ -1,0 +1,15 @@
+{
+  "extraKnownMarketplaces": {
+    "harrowvale-legal-skills": {
+      "source": {
+        "source": "github",
+        "repo": "f7-rage-gremlin/HarrowValeLLP"
+      },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "term-sheet-review@harrowvale-legal-skills": true,
+    "leestestskill@harrowvale-legal-skills": true
+  }
+}

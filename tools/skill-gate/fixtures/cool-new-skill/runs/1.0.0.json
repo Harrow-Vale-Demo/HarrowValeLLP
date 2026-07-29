@@ -1,0 +1,27 @@
+{
+  "skill_version": "1.0.0",
+  "recorded": "2026-07-28",
+  "note": "Captured output of cool-new-skill v1.0.0. Its decision table has no rule for terse seed summaries, so solace-seed is misrouted as a priced round.",
+  "cases": {
+    "nimbus-safe": {
+      "instrument": "safe",
+      "evidence": "right to future equity",
+      "confidence": "high"
+    },
+    "greengrid-series-a": {
+      "instrument": "priced_round",
+      "evidence": "price per share of £1.50; pre-money valuation",
+      "confidence": "high"
+    },
+    "anchorline-convertible": {
+      "instrument": "convertible_note",
+      "evidence": "interest rate of 8% per annum; maturity date",
+      "confidence": "high"
+    },
+    "solace-seed": {
+      "instrument": "priced_round",
+      "evidence": "pre-money valuation stated in bullet list",
+      "confidence": "low"
+    }
+  }
+}

@@ -33,12 +33,19 @@ it is **one approval gate** that any skill must pass.
    `.claude-plugin/marketplace.json` (the firm's single shelf of approved skills).
    Each skill is a plugin bundling its `SKILL.md`, JSON contract, reference
    baseline/checklist and golden dataset, carrying a semantic version + changelog.
-   Lawyers add the marketplace once (`/plugin marketplace add harrowvale/legal-skills`),
-   install from the `/plugin` menu, and pull updates with `/plugin marketplace update`.
-   A live matter can pin a known-good version so a review never shifts mid-deal.
-   This whole promotion is one command (`src/publish.py`): it runs the gate, and only
-   on PASS does it bump the semantic version, update the changelog, and insert/refresh
-   the plugin entry in `.claude-plugin/marketplace.json`. A failing gate publishes nothing.
+   Lawyers add the marketplace once (`/plugin marketplace add f7-rage-gremlin/HarrowValeLLP`),
+   install with `/plugin install <skill>@harrowvale-legal-skills`, and pull updates with
+   `/plugin marketplace update harrowvale-legal-skills`. The repository's own
+   `.claude/settings.json` declares the marketplace and the enabled skills, so a
+   colleague who trusts the project folder is prompted to install it rather than
+   being told to. A live matter can pin a known-good version so a review never
+   shifts mid-deal.
+
+   This whole promotion is one command (`tools/skill-gate/publish.py`): it runs the
+   gate, and only on PASS does it write the graded version into `plugin.json`, the
+   marketplace entry, the skill text, the changelog, and a stored gate report. The
+   version it publishes *is* the version the gate graded — there is no separate bump
+   step that can be got wrong. A failing gate writes nothing at all.
 
 ## Governance (who vets, how v2 rolls out)
 - **Author:** any lawyer/associate. Writes SKILL.md + contract + golden cases.

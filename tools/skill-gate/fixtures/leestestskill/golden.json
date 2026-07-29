@@ -1,0 +1,34 @@
+{
+  "skill": "leestestskill",
+  "metric": "doc_triage_accuracy",
+  "field": "doc_type",
+  "threshold": 0.9,
+  "note": "Golden labels for document triage. Priya owns these labels. The last case is the hard one: the firm's own DD checklist lists the document types it asks for, so a keyword-driven skill mistakes it for one of them. It is process material, not a deal document.",
+  "cases": [
+    {
+      "case": "nimbus-safe",
+      "document": "assets/source/term-sheets/safe-nimbus-robotics.md",
+      "doc_type": "term_sheet"
+    },
+    {
+      "case": "greengrid-series-a",
+      "document": "assets/source/term-sheets/series-a-greengrid-analytics.md",
+      "doc_type": "term_sheet"
+    },
+    {
+      "case": "greengrid-captable",
+      "document": "assets/source/data-room/cap-table-greengrid.md",
+      "doc_type": "data_room_doc"
+    },
+    {
+      "case": "halloway-msa",
+      "document": "assets/source/data-room/msa-greengrid-halloway.md",
+      "doc_type": "data_room_doc"
+    },
+    {
+      "case": "hv-dd-checklist",
+      "document": "assets/source/dd-checklist/harrow-vale-dd-checklist.md",
+      "doc_type": "other"
+    }
+  ]
+}

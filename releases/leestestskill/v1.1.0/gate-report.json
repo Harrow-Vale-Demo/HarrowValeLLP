@@ -1,0 +1,14 @@
+{
+  "skill": "leestestskill",
+  "metric": "doc_triage_accuracy",
+  "candidate": "1.1.0",
+  "candidate_score": 1.0,
+  "previous": "1.0.0",
+  "previous_score": 0.8,
+  "threshold": 0.9,
+  "meets_threshold": true,
+  "no_regression": true,
+  "gate": "PASS",
+  "passed": true,
+  "published": "2026-07-29"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "leestestskill",
+  "displayName": "Lee's Test Skill",
+  "description": "Document triage: says whether a file is a term sheet, a data-room document, or neither, with the wording that decided it.",
+  "version": "1.1.0",
+  "author": {
+    "name": "Harrow & Vale LLP",
+    "email": "tom.harrow@harrowvale.example"
+  },
+  "repository": "https://github.com/f7-rage-gremlin/HarrowValeLLP"
+}

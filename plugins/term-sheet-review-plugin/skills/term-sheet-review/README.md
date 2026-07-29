@@ -17,9 +17,15 @@ due-diligence checklist.
 3. Never fabricate — absent terms are `Not stated`, not guessed.
 
 ## Usage
+
+Ask in plain English — Claude selects the skill from what you need:
+
+> Review this term sheet against our DD checklist: `NimbusRobotics-SAFE.pdf`
+
+Or invoke it explicitly. Plugin skills are namespaced `plugin:skill`:
 ```
-/term-sheet-review <path-to-term-sheet>
-/term-sheet-review <path-to-term-sheet> --dd-room <path-to-folder>
+/term-sheet-review:term-sheet-review <path-to-term-sheet>
+/term-sheet-review:term-sheet-review <path-to-term-sheet> --dd-room <path-to-folder>
 ```
 
 ## Files

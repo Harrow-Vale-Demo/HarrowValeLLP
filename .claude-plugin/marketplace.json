@@ -1,18 +1,28 @@
 {
-  "name": "nz-skills-marketplace",
+  "name": "harrowvale-legal-skills",
   "owner": {
-    "name": "Negative Zero",
-    "email": "emily.donovan@negativezero.com"
+    "name": "Harrow & Vale LLP",
+    "email": "tom.harrow@harrowvale.example"
   },
-  "description": "Internal Negative Zero skills marketplace.",
+  "description": "HarrowVale Legal Skills \u2014 the firm's shelf of approved legal skills. Every version listed here passed the firm's evaluation gate before it was published.",
   "plugins": [
     {
-      "name": "term-sheet-review-plugin",
+      "name": "term-sheet-review",
       "source": "./plugins/term-sheet-review-plugin",
-      "description": "Review venture term sheets across formats against a fixed DD checklist.",
-      "version": "1.0.0",
+      "description": "Review venture term sheets across formats (SAFE, priced round, convertible loan note, seed summary) against Priya's fixed DD checklist.",
+      "version": "1.1.0",
       "author": {
         "name": "Emily Donovan"
+      }
+    },
+    {
+      "name": "leestestskill",
+      "source": "./plugins/leestestskill",
+      "description": "Document triage: says whether a file is a term sheet, a data-room document, or neither, with the wording that decided it.",
+      "version": "1.1.0",
+      "author": {
+        "name": "Harrow & Vale LLP",
+        "email": "tom.harrow@harrowvale.example"
       }
     }
   ]

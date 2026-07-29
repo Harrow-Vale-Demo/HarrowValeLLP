@@ -1,0 +1,32 @@
+{
+  "skill_version": "1.1.0",
+  "recorded": "2026-07-28",
+  "note": "Captured output of leestestskill v1.1.0, after adding the process-material precedence rule ahead of the keyword tests. The DD checklist is now correctly triaged as process material rather than as one of the documents it asks for.",
+  "cases": {
+    "nimbus-safe": {
+      "doc_type": "term_sheet",
+      "evidence": "SAFE (Simple Agreement for Future Equity); Company and Investor named",
+      "confidence": "high"
+    },
+    "greengrid-series-a": {
+      "doc_type": "term_sheet",
+      "evidence": "Series A term sheet; price per share and pre-money valuation stated",
+      "confidence": "high"
+    },
+    "greengrid-captable": {
+      "doc_type": "data_room_doc",
+      "evidence": "Capitalisation Table for a named company",
+      "confidence": "high"
+    },
+    "halloway-msa": {
+      "doc_type": "data_room_doc",
+      "evidence": "Master Services Agreement Summary between two named parties",
+      "confidence": "high"
+    },
+    "hv-dd-checklist": {
+      "doc_type": "other",
+      "evidence": "\"Standard Due Diligence Checklist ... applied to every funding-round/M&A matter\" - specifies documents rather than being one",
+      "confidence": "high"
+    }
+  }
+}

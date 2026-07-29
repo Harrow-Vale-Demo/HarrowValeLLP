@@ -1,183 +1,240 @@
-# Term-Sheet Review Skill — Installation Guide
+# Term-Sheet Review Skill — User Guide
 ## For Harrow & Vale Lawyers
 
 ---
 
-## What This Skill Does
+## What this skill does
 
 The **term-sheet review** skill reads a venture term sheet and produces a structured first-pass review:
 
-- **Extracts** key economic terms (valuation, liquidation preference, board composition, etc.)
+- **Extracts** the key economic terms (valuation or cap, discount, liquidation preference, board and consent rights, pro-rata, founder vesting, legal fees)
 - **Flags** deviations from market standard, unusual clauses, and omissions
-- **Maps** documents against Priya's fixed DD checklist (when run with `--dd-room`)
+- **Checks** the document set against Priya's fixed due-diligence checklist — all 28 items, every time
+- **Reconciles** figures across documents when you point it at a data room
 
-The output is a consistent, plain-English memo you verify before use. The skill follows the same structure every time, regardless of whether the term sheet is a SAFE, priced round, or convertible note.
-
----
-
-## Before You Start
-
-You'll need:
-- [ ] Claude Code installed on your machine
-- [ ] Access to the firm's private GitHub repository (ask Tom if you don't have it)
-- [ ] Your NZ/firm credentials for authentication
+The output is a consistent, plain-English memo that you verify before use. The structure is the same every time, whether the document is a SAFE, a priced round, a convertible loan note, or a terse seed summary.
 
 ---
 
-## Step 1: Install the Skill
+## Getting the skill
 
-Open Claude Code and run:
+### If the firm has set it up for you — nothing to do
 
-```
-/install-plugin https://github.com/harrow-vale/approved-skills
+Approved skills are pushed to your machine by firm policy. You do not need a GitHub account, a copy of any repository, or an install step. Open Claude Code and the skill is there.
+
+To confirm:
+
+```bash
+claude plugin list
 ```
 
-You'll be prompted to authenticate with GitHub. Use your firm credentials.
+You should see `term-sheet-review` with a version number. If you do, skip to **Using the skill**.
 
-Once installed, you'll see confirmation:
+### If you are setting it up yourself
+
+Add the firm's skills marketplace once:
+
+```bash
+/plugin marketplace add f7-rage-gremlin/HarrowValeLLP
 ```
-Installed: term-sheet-review v1.1.0
+
+Install the skill:
+
+```bash
+/plugin install term-sheet-review@harrowvale-legal-skills
 ```
+
+Activate it in the current session:
+
+```bash
+/reload-plugins
+```
+
+`/plugin` on its own opens a browser where you can see everything on the firm's shelf.
+
+> If Claude tells you `/plugin` is not available in your environment, use the plugin browser in the Claude desktop app instead, or ask Tom to push the skill to you by policy.
 
 ---
 
-## Step 2: Using the Skill
+## Using the skill
 
-### Basic Review (Single Term Sheet)
+The simplest way is to ask for it in plain English. Claude selects the right skill from what you are asking for:
 
-```
-/term-sheet-review path/to/term-sheet.md
-```
+> Review this term sheet against our DD checklist: `NimbusRobotics-SAFE.pdf`
 
-Or, if the file is on SharePoint/your desktop:
-```
-/term-sheet-review "C:\Users\YourName\Documents\NimbusRobotics-SAFE.pdf"
-```
+To invoke it explicitly, skills are named `plugin:skill`:
 
-The skill will output:
-- **Part A** — Key economic terms (table with values and source references)
-- **Part B** — Flags for your attention (🔴 Review / 🟡 Note / ⚪ Omission)
-- **Part C** — DD checklist coverage (all 28 items, with status)
-- **Part D** — Summary for the lawyer (3-5 sentences, action-oriented)
-
-### Full DD Coverage (With Data Room)
-
-If you have a folder of DD documents (cap table, articles, contracts, etc.):
-
-```
-/term-sheet-review path/to/term-sheet.md --dd-room path/to/data-room-folder/
+```bash
+/term-sheet-review:term-sheet-review path/to/term-sheet.md
 ```
 
-This additionally:
-- Maps each checklist item to the document that satisfies it
-- Flags missing documents
-- Cross-checks figures between documents (e.g., term sheet vs cap table)
+Paths with spaces need quotes:
+
+```bash
+/term-sheet-review:term-sheet-review "C:\Users\YourName\Documents\NimbusRobotics-SAFE.pdf"
+```
+
+### With a data room
+
+If you have a folder of DD documents — cap table, articles, contracts, leases:
+
+```bash
+/term-sheet-review:term-sheet-review path/to/term-sheet.md --dd-room path/to/data-room/
+```
+
+This additionally maps each checklist item to the document that satisfies it, flags missing documents, and cross-checks figures between the term sheet and the cap table.
 
 ---
 
-## Step 3: Understanding the Output
+## Reading the output
 
-### Severity Flags
+The memo always has four parts:
+
+| Part | Contents |
+|---|---|
+| **A** | Key economic terms — a table of values, each with its source in the document |
+| **B** | Flags for your attention |
+| **C** | DD checklist coverage — all 28 items, each with a status |
+| **D** | Summary — 3 to 5 sentences, action-oriented |
+
+### Severity flags
 
 | Flag | Meaning |
-|------|---------|
-| 🔴 **Review** | Materially off-market or investor-favourable beyond standard. Look at this first. |
-| 🟡 **Note** | Present and worth a glance, but not alarming. |
-| ⚪ **Omission** | A term you'd normally expect that is absent. |
+|---|---|
+| 🔴 **Review** | Materially off-market or investor-favourable beyond standard. Look here first. |
+| 🟡 **Note** | Present and worth a glance, not alarming. |
+| ⚪ **Omission** | A term you would normally expect, absent from the document. |
 
-### What "Not stated" Means
-
-If a term shows `Not stated`, it means the document doesn't include that information. The skill **never guesses** — if it's not in the document, it tells you it's missing.
-
-### Checklist Statuses
+### Checklist statuses
 
 | Status | Meaning |
-|--------|---------|
-| **PRESENT** | Document found that satisfies this item |
+|---|---|
+| **PRESENT** | A document was found that satisfies this item |
 | **MISSING** | No document provided for this item |
-| **N/A** | Item doesn't apply (e.g., no group structure for a single company) |
+| **N/A** | The item does not apply — with the reason stated |
+
+Every one of the 28 items appears with a status. None are ever silently dropped. When you run the skill against a single term sheet rather than a full data room, most items will read `N/A (not a DD document set)` — that is correct, not a failure.
+
+### What "Not stated" means
+
+If a term shows `Not stated`, the document does not contain it. The skill never guesses, never infers from comparable deals, and never fills a gap with a typical figure. An honest gap is the intended behaviour.
 
 ---
 
-## Step 4: Verifying the Output
+## Before you sign off
 
-**Remember:** This is a first-pass review. You must:
+This is a first-pass review, not advice. You must:
 
-1. **Check the extracted terms** against the source document
+1. **Check the extracted terms** against the source document — Part A gives you the clause reference for each
 2. **Read the flagged items** and apply your judgement
-3. **Add your own observations** before sending to the client/partner
+3. **Add your own observations**
 4. **Sign off** as the reviewing solicitor
 
-The skill saves you the grunt work of extraction. The legal analysis is yours.
+The skill saves you the extraction. The legal analysis is yours.
 
 ---
 
-## Step 5: Updating the Skill
+## When a new version arrives
 
-When a new version is released, you'll receive a notification. To update:
+New versions are published only after passing the firm's evaluation gate, and reach you automatically — usually within a few minutes of a session starting. If a version arrives mid-session, Claude will prompt you to run:
 
+```bash
+/reload-plugins
 ```
-/update-plugins
+
+To pull an update immediately rather than waiting:
+
+```bash
+/plugin marketplace update harrowvale-legal-skills
 ```
 
-To check your current version:
+To see which version you are on:
 
+```bash
+claude plugin list
 ```
-/skill-info term-sheet-review
+
+**Why the version matters.** If you are asked six months from now why a review said what it said, the version is the answer. Every approved version has a stored evaluation report in the firm's repository, so the firm can always show the evidence behind the skill you used.
+
+---
+
+## Other approved skills
+
+The firm's shelf carries more than this one skill, and it grows. Anything approved appears the same way, with no action from you. To see everything available:
+
+```bash
+/plugin
 ```
 
 ---
 
 ## Troubleshooting
 
-### "Skill not found"
+### "Skill not found" or the skill does not appear
 
-Run `/install-plugin` again. You may have been logged out of GitHub.
+Run `/reload-plugins`. If that does not fix it, check it is installed with `claude plugin list`. If it is missing entirely, contact Tom — it is a policy issue, not something you can fix locally.
 
-### "Permission denied"
+### The version looks out of date
 
-Contact Tom Harrow to check your repository access.
+```bash
+/plugin marketplace update harrowvale-legal-skills
+```
+
+then `/reload-plugins`.
 
 ### "File not found"
 
-- Check the file path is correct
-- Use quotes around paths with spaces: `"C:\My Documents\file.md"`
-- The skill can read `.md`, `.txt`, and `.pdf` files
+- Check the path
+- Quote paths containing spaces: `"C:\My Documents\file.md"`
+- The skill reads `.md`, `.txt`, and `.pdf`
 
-### Output looks wrong
+### The output looks wrong
 
-- Check you're running the latest version (`/update-plugins`)
-- If the term sheet is in an unusual format, the skill may struggle — raise with the technical team
+Check your version first (`claude plugin list`). If you are current and the output is still wrong, this matters — raise it with Marcus. A wrong output is a gap in the firm's test set, and the fix is to add your document as a test case so no future version can regress on it.
+
+### Diagnosing configuration
+
+```bash
+claude doctor
+```
+
+Lists every setting in effect and where it came from. Useful to send to Tom if something is off.
 
 ---
 
-## Getting Help
+## Getting help
 
 | Issue | Contact |
-|-------|---------|
-| How to use the skill | This guide, or ask a colleague |
-| Skill not working | Marcus Ade (technical reviewer) |
-| Access issues | Tom Harrow |
-| Feature requests | Open a GitHub Issue |
+|---|---|
+| How to use the skill | This guide, or a colleague |
+| Output looks wrong | Marcus Ade (technical reviewer) |
+| Skill missing or not updating | Tom Harrow |
+| Feature requests | Open a GitHub issue tagged `enhancement` |
 
 ---
 
-## Quick Reference
+## Quick reference
 
-```
-# Basic review
-/term-sheet-review path/to/file.md
+```bash
+# Which version am I on?
+claude plugin list
 
-# With DD room
-/term-sheet-review path/to/file.md --dd-room path/to/folder/
+# Review a term sheet
+/term-sheet-review:term-sheet-review path/to/file.md
 
-# Check version
-/skill-info term-sheet-review
+# Review with a data room
+/term-sheet-review:term-sheet-review path/to/file.md --dd-room path/to/folder/
 
-# Update
-/update-plugins
+# Pull updates now
+/plugin marketplace update harrowvale-legal-skills
+
+# Apply them to this session
+/reload-plugins
+
+# Browse the firm's approved skills
+/plugin
 ```
 
 ---
 
-*Guide version 1.0 · July 2026 · Questions? Ask Tom or Marcus.*
+*Guide version 2.0 · July 2026 · Questions? Ask Tom or Marcus.*
