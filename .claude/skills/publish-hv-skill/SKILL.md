@@ -73,7 +73,7 @@ incompatible output change.
 
 Be honest about what this file is: in this prototype it is a recorded fixture,
 not a live model call. If the user wants the run generated for real, the seam is
-`tools/termsheet-harness/src/generator_adapter.py` — point `run_generator()` at
+`tools/skill-gate/generator_adapter.py` — point `run_generator()` at
 `claude -p "Use the <skill> skill on {path}"` and re-record. Do not present a
 hand-written fixture as a live result.
 

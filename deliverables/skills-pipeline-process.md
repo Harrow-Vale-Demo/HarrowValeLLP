@@ -43,7 +43,9 @@ HarrowValeLLP/
 │   └── cool-new-skill/
 ├── tools/
 │   ├── skill-gate/                     # gate.py, publish.py, check_published.py
-│   ├── termsheet-harness/              # golden labels + evaluator for term-sheet-review
+│   │   ├── fixtures/<skill>/           # golden labels + recorded runs, one dir per skill
+│   │   └── scorers/                    # the graders the gate applies
+│   ├── termsheet-harness/              # term-sheet contract, references, DD mapper, reports
 │   └── org-policy/                     # the managed policy pushed to lawyers
 └── releases/<skill>/
     ├── CHANGELOG.md
@@ -78,7 +80,7 @@ A skill is not "done" when it produces good output. It is done when it can be *g
 
 A skill with no registered gate cannot be published. That is enforced in code, not convention: `publish.py` refuses.
 
-> **Current limitation, stated plainly.** Recorded runs are captured fixtures, not live model calls at gate time. This buys deterministic, zero-cost CI. The seam to make it live is a single function — `run_generator()` in `tools/termsheet-harness/src/generator_adapter.py` — pointed at `claude -p`. Until that is switched on, the gate proves *a recorded output* meets the standard, not that today's model call does.
+> **Current limitation, stated plainly.** Recorded runs are captured fixtures, not live model calls at gate time. This buys deterministic, zero-cost CI. The seam to make it live is a single function — `run_generator()` in `tools/skill-gate/generator_adapter.py` — pointed at `claude -p`. Until that is switched on, the gate proves *a recorded output* meets the standard, not that today's model call does.
 
 ---
 

@@ -13,10 +13,17 @@ import json, sys, os, datetime
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
-sys.path.insert(0, os.path.dirname(__file__))
-import evaluator  # noqa: E402
 
-BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HERE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(HERE)                              # tools/termsheet-harness
+GATE = os.path.join(os.path.dirname(BASE), "skill-gate")   # tools/skill-gate
+FIXTURES = os.path.join(GATE, "fixtures", "term-sheet-review")
+
+# The gate owns the scorer and the fixtures; this script only formats a report
+# from them. Reports stay here, beside the other term-sheet prototype output.
+sys.path.insert(0, os.path.join(GATE, "scorers"))
+import termsheet  # noqa: E402
+
 THRESHOLD = 0.90
 VERSIONS = ["v1", "v2"]  # chronological
 
@@ -31,7 +38,7 @@ def main():
     lines, report = [], {"generated": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
                          "threshold": THRESHOLD, "versions": {}}
     for v in VERSIONS:
-        results, agg = evaluator.run_version(v, BASE)
+        results, agg = termsheet.run_version(v, FIXTURES)
         report["versions"][v] = {"aggregate": agg,
                                  "cases": {r.case: {"instrument_ok": r.instrument_ok,
                                                     "exception_prf": r.exc,

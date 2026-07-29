@@ -11,9 +11,9 @@ All client, deal, contact, passphrase, and data-room material in this repository
 | `.claude-plugin/marketplace.json` | HarrowVale Legal Skills — the firm's shelf of approved skills. |
 | `plugins/term-sheet-review-plugin/` | Current installable Claude plugin used for the skill demonstration. |
 | `plugins/cool-new-skill/` | Instrument-triage skill; the worked example for the pipeline demo. |
-| `tools/skill-gate/` | The single approval gate (`gate.py`) and the only sanctioned publisher (`publish.py`). |
+| `tools/skill-gate/` | The single approval gate (`gate.py`), the only sanctioned publisher (`publish.py`), and every skill's fixtures and scorers. |
 | `releases/term-sheet-review/` | Frozen version history and approval evidence, including v1.0.0 and v1.1.0. |
-| `tools/termsheet-harness/` | Executable contract, golden fixtures, regression evaluator, DD mapper, and publish gate. |
+| `tools/termsheet-harness/` | Term-sheet contract, reference baselines, source docs, DD mapper, and generated reports. |
 | `assets/source/` | Canonical mock term sheets, DD checklist, and GreenGrid data-room documents. |
 | `assets/legacy-raw-import/` | Original legacy import retained only for provenance. |
 | `deliverables/` | Client proposal, case study, security briefing, rollout guidance, and next steps. |
@@ -34,7 +34,7 @@ python tools/skill-gate/publish.py cool-new-skill --candidate 1.0.0
 
 The first scores every registered skill against its golden labels and applies the threshold and no-regression rules. The second shows exactly what a promotion would change, writing nothing. The third grades a known-bad recorded run and is refused — proving a failing skill cannot reach the shelf.
 
-The term-sheet evaluator and the DD mapper still run from `tools/termsheet-harness/`:
+The term-sheet eval report and the DD mapper run from `tools/termsheet-harness/`. They report; the gate decides:
 
 ```powershell
 python src/run_harness.py
@@ -58,7 +58,8 @@ The final proposal is at `deliverables/proposal/Harrow-Vale-Proposal.pdf`; its e
 
 - `plugins/term-sheet-review-plugin/` is the current installable product.
 - `releases/term-sheet-review/` is immutable release history; existing version folders should not be edited in place.
-- `tools/termsheet-harness/` owns executable evaluation and promotion machinery.
+- `tools/skill-gate/` owns scoring and promotion: `fixtures/<skill>/` holds every skill's golden labels and recorded runs, `scorers/` holds the graders.
+- `tools/termsheet-harness/` owns the term-sheet contract, reference baselines, and generated reports.
 - `assets/source/` contains the preferred captured source documents used as canonical inputs.
 - Harness goldens and versioned skill references stay beside the code or release that consumes them.
 - `assets/legacy-raw-import/` is retained for traceability but is not canonical.

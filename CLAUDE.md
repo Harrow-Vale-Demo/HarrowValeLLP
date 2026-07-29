@@ -14,9 +14,10 @@ This is a hackathon project for Harrow & Vale LLP, a boutique VC/M&A law firm. T
   - `skills/term-sheet-review/examples/` - Worked examples for all four formats
 - `plugins/cool-new-skill/` - Instrument-triage skill; worked example for the pipeline demo
 - `releases/term-sheet-review/` - Frozen semantic-version snapshots and approval evidence
-- `tools/skill-gate/` - The firm-wide approval gate (`gate.py`), the only sanctioned publisher
+- `tools/skill-gate/` - The firm-wide approval gate (`gate.py`), every skill's fixtures under
+  `fixtures/<skill>/` and graders under `scorers/`, the only sanctioned publisher
   (`publish.py`), and the published-version consistency check (`check_published.py`)
-- `tools/termsheet-harness/` - Term-sheet evaluator, golden labels, recorded runs, DD mapper
+- `tools/termsheet-harness/` - Term-sheet contract, reference baselines, DD mapper, generated reports
 - `assets/source/` - Canonical mock source documents
   - `term-sheets/` - SAFE, Series A, convertible note, and seed samples
   - `data-room/` - GreenGrid supporting documents

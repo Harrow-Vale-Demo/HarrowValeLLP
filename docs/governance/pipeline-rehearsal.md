@@ -144,7 +144,7 @@ saved under the version you intend to ship. Create
 
 > **Be straight about this on stage.** In this prototype the runs are recorded
 > fixtures, not live model calls — the same honest limitation already documented
-> in `tools/termsheet-harness/src/generator_adapter.py`. It buys deterministic,
+> in `tools/skill-gate/generator_adapter.py`. It buys deterministic,
 > free CI. The seam to go live is one function: point `run_generator()` at
 > `claude -p "Use the cool-new-skill skill on {path}"` and re-record. Say
 > "recorded runs today, one function away from live" rather than implying the
