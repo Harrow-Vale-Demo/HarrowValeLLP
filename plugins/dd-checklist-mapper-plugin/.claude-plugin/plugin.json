@@ -1,0 +1,9 @@
+{
+  "name": "dd-checklist-mapper-plugin",
+  "description": "Adds the dd-checklist skill: maps a folder of due-diligence documents against Harrow & Vale's fixed DD checklist and reports satisfied/partial/missing per item, with citations.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Emily Donovan",
+    "email": "emily.donovan@negativezero.com"
+  }
+}

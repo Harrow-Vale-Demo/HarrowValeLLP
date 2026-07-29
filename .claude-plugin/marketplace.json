@@ -14,6 +14,15 @@
       "author": {
         "name": "Emily Donovan"
       }
+    },
+    {
+      "name": "dd-checklist-mapper-plugin",
+      "source": "./plugins/dd-checklist-mapper-plugin",
+      "description": "Map a folder of due-diligence documents against Harrow & Vale's fixed DD checklist; satisfied/partial/missing with citations.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Emily Donovan"
+      }
     }
   ]
 }
