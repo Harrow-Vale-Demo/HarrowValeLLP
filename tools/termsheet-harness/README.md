@@ -1,44 +1,59 @@
-# Harrow & Vale — Legal Skills Pipeline (prototype)
+# Term-Sheet Prototype — Reference Material and Reports
 
-A contract-first, eval-gated pipeline for building and distributing Claude skills
-across a 10-lawyer boutique. Prototype for Synthetic Signal Hackathon 1.
+The original term-sheet-review prototype. It is **not** the gate: the firm-wide
+approval gate and the only sanctioned publisher live in
+[`tools/skill-gate/`](../skill-gate/). Read
+[`PIPELINE.md`](PIPELINE.md) for the governance model.
 
-**Read `PIPELINE.md` first** — it explains the one idea: a single governed gate
-every skill must pass (contract → adversarial eval → versioned publish).
+What remains here is the term-sheet skill's *source and reference* material, plus
+two demos that are not part of the publish path. Its golden labels, recorded runs
+and scorer moved to the gate so that every skill's fixtures sit in one place —
+see [`tools/skill-gate/fixtures/term-sheet-review/`](../skill-gate/fixtures/term-sheet-review/).
 
 ## What's here
+
 | Path | What it is |
 |---|---|
-| `PIPELINE.md` | The approved-skills pipeline & governance model (the core deliverable). |
-| `SKILL.md` | Skill #1: `term-sheet-review` — Priya's Exception Report. |
-| `SKILL-dd-checklist.md` | Skill #2: `dd-checklist` — Tom's "Thursday dump" mapper. |
-| `contract/term_sheet_review.schema.json` | The strict output contract (the "deterministic constraint"). |
+| `PIPELINE.md` | The approved-skills pipeline & governance model. |
+| `SKILL.md` | The original `term-sheet-review` draft. The shipped skill is `plugins/term-sheet-review-plugin/`. |
+| `SKILL-dd-checklist.md` | The original `dd-checklist` draft. Never packaged as a plugin. |
+| `contract/term_sheet_review.schema.json` | The strict output contract for term-sheet review. |
 | `reference/bvca_baseline.md` | The standard the skill maps against (never reinvented). |
-| `reference/dd-checklist.md` | Priya's fixed DD checklist, used verbatim. |
-| `golden/*.json` | Golden labels for all four term-sheet formats. |
-| `runs/v1`, `runs/v2` | Recorded skill outputs (first pass vs eval-driven iteration). |
-| `src/run_harness.py` | The eval harness + regression gate for this skill. |
-| `CHANGELOG.md` | Per-skill, per-version history (only gate-passing versions). |
-| `src/evaluator.py` | Precision/recall/F1 grader (penalises misses AND over-flagging). |
+| `reference/dd-checklist.md` | Priya's fixed DD checklist, used verbatim by `dd_mapper.py`. |
+| `data/*.md` | Copies of the four sample term sheets, kept beside the contract. |
+| `src/run_harness.py` | Formats the term-sheet eval report from the gate's fixtures. |
 | `src/dd_mapper.py` | DD-checklist mapper demo. |
-| `src/generator_adapter.py` | The seam where the live skill/model plugs in. |
+| `src/consistency_check.py` | Term sheet vs Articles drift check (roadmap demo). |
 | `reports/` | Generated eval + DD reports. |
+| `CHANGELOG.md` | Early per-version history. Approved releases now live in `releases/`. |
+
+## Moved to the gate
+
+| Was | Now |
+|---|---|
+| `golden/*.json` | `tools/skill-gate/fixtures/term-sheet-review/golden/` |
+| `runs/v1`, `runs/v2` | `tools/skill-gate/fixtures/term-sheet-review/runs/` |
+| `src/evaluator.py` | `tools/skill-gate/scorers/termsheet.py` |
+| `src/generator_adapter.py` | `tools/skill-gate/generator_adapter.py` |
 
 ## Run it
+
 ```bash
-python3 src/run_harness.py      # eval gate across all 4 term-sheet formats
+python3 src/run_harness.py      # eval report across all 4 term-sheet formats
 python3 src/dd_mapper.py        # DD checklist: satisfied / partial / missing + citations
+python3 src/consistency_check.py
 ```
 
-Promotion is not run from here. The firm-wide gate and the only sanctioned
-publisher live in `tools/skill-gate/`; this directory supplies the golden labels
-and recorded runs that the gate reads for `term-sheet-review`:
+`run_harness.py` reads the gate's fixtures and writes `reports/`. It reports; it
+does not decide. Scoring and promotion are the gate's:
 
 ```bash
 python3 ../skill-gate/gate.py term-sheet-review
+python3 ../skill-gate/publish.py term-sheet-review
 ```
 
 ## Result (this prototype)
+
 - Term-sheet skill: v1 overall reliability **0.496** → eval-driven v2 **1.000**,
   regression gate **PASS**. Consistent extraction across SAFE, priced round,
   convertible note, and terse seed formats.
@@ -46,6 +61,8 @@ python3 ../skill-gate/gate.py term-sheet-review
   with document + location citations and a chase list.
 
 ## Wiring the live model
-`src/generator_adapter.py` documents two wirings (Claude Code headless or the
-Messages API with a schema-constrained response). Fixtures in `runs/` are recorded
-real outputs so CI can gate every prompt change deterministically.
+
+[`../skill-gate/generator_adapter.py`](../skill-gate/generator_adapter.py)
+documents two wirings — Claude Code headless, or the Messages API with a
+schema-constrained response. The fixtures the gate reads are recorded outputs, so
+CI can gate every prompt change deterministically and for free.

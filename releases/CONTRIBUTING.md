@@ -11,7 +11,7 @@ The `releases/` tree is the auditable history of approved skill versions. Existi
 ## How a change ships
 
 1. Change the active skill under `plugins/<plugin-name>/` on a feature branch.
-2. Re-run the representative evaluation set and the executable harness under `tools/termsheet-harness/`.
+2. Re-run the approval gate under `tools/skill-gate/` (`gate.py <skill>`) and the term-sheet eval report under `tools/termsheet-harness/`.
 3. Open a pull request containing the proposed behavior, evidence, and any new regression case.
 4. After approval, create a new semantic-version directory under `releases/<skill-name>/`; do not alter an older version.
 5. Update `releases/<skill-name>/CHANGELOG.md` and the active plugin/marketplace version when that version is actually promoted.

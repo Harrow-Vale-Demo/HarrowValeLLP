@@ -33,18 +33,18 @@ import sys
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-TERMSHEET_BASE = os.path.join(REPO, "tools", "termsheet-harness")
-FIXTURES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures")
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(HERE))
+FIXTURES = os.path.join(HERE, "fixtures")
 THRESHOLD = 0.90
 
-sys.path.insert(0, os.path.join(TERMSHEET_BASE, "src"))
+sys.path.insert(0, os.path.join(HERE, "scorers"))
 
-# Registry of every skill the gate knows how to score. A new skill is added
-# here alongside its fixtures; until it appears, it has no gate and therefore
-# cannot be published.
+# Registry of every skill the gate knows how to score. Every skill's fixtures
+# live at fixtures/<skill>/, so a new one is a line here plus that directory.
+# Until it appears, a skill has no gate and therefore cannot be published.
 SKILLS = {
-    "term-sheet-review": {"scorer": "termsheet", "base": TERMSHEET_BASE},
+    "term-sheet-review": {"scorer": "termsheet", "base": os.path.join(FIXTURES, "term-sheet-review")},
     "cool-new-skill": {"scorer": "triage", "base": os.path.join(FIXTURES, "cool-new-skill")},
     "leestestskill": {"scorer": "triage", "base": os.path.join(FIXTURES, "leestestskill")},
 }
@@ -59,12 +59,12 @@ def semver(v: str):
 # --------------------------------------------------------------------------
 
 def score_termsheet(base: str):
-    """Delegates to the existing term-sheet evaluator (precision/recall/F1)."""
-    import evaluator
+    """Precision/recall/F1 over exceptions and omissions (scorers/termsheet.py)."""
+    import termsheet
     scores = {}
     for path in sorted(glob.glob(os.path.join(base, "runs", "v*"))):
         version = os.path.basename(path)
-        _, agg = evaluator.run_version(version, base)
+        _, agg = termsheet.run_version(version, base)
         scores[version] = agg["overall_reliability"]
     return scores, "overall_reliability"
 
