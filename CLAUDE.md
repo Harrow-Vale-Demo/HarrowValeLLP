@@ -164,13 +164,36 @@ Do not edit an existing release snapshot in place. Change the active plugin, val
 
 ## Skill Usage
 
-Plugin skills are namespaced by plugin name, so once installed from the marketplace the invocations are:
+*Verified against Claude Code 2.1.140, 2026-07-30.*
+
+Plugin skills are namespaced by plugin name. Once installed from the
+marketplace, either invocation route works and both hit the same `SKILL.md`:
+
+**As a namespaced slash command** — deterministic, useful in a demo:
 
 ```
 /term-sheet-review:term-sheet-review <path-to-term-sheet>
 /term-sheet-review:term-sheet-review <path-to-term-sheet> --dd-room <path-to-folder>
 /cool-new-skill:cool-new-skill <path-to-document>
 ```
+
+**In plain language** — Claude reads each skill's `description` frontmatter and
+picks the right skill from what you ask for:
+
+```
+Review assets/source/term-sheets/safe-nimbus-robotics.md against our DD checklist
+Review the GreenGrid Series A, with the data room at assets/source/data-room/
+Triage assets/source/dd-checklist/harrow-vale-dd-checklist.md
+```
+
+To confirm a plugin is installed, open the `/plugin` panel and read which section
+it sits in — **Installed** means on this machine, **Discover** means on the shelf
+but not installed. Do not verify by asking an agent to "list installed plugins":
+reading `.claude-plugin/marketplace.json` returns the *shelf*, which looks
+identical on a machine with nothing installed.
+
+If a skill is installed but does not trigger, the running session is still holding
+the plugins it launched with. Run `/reload-plugins`, or restart.
 
 ## Key Design Constraints (Priya's Rules)
 

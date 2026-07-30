@@ -138,15 +138,19 @@ So budget for **one confirmation per person, once**, the first time. Test it:
 powershell -File tools/org-policy/install-org-policy.ps1
 ```
 
-Restart Claude Code, then:
+Restart Claude Code, then open the `/plugin` panel and find
+`harrowvale-legal-skills`.
 
-```bash
-claude plugin list
-```
+If its plugins appear under **Installed**, link 5 is automatic. If they appear
+under **Discover**, install once — and know that a genuinely new skill will need
+the same one-time confirmation.
 
-If `term-sheet-review` is listed, link 5 is automatic. If it reports the plugin
-as not installed and offers a `claude plugin install` command, run it once — and
-know that a genuinely new skill will need the same one-time confirmation.
+Do not check this by asking an agent to list installed plugins. The plugin CLI
+subcommands vary by Claude Code version (`claude plugin list` is not available in
+all of them), and an agent that cannot run it will happily read
+`.claude-plugin/marketplace.json` instead and report the **shelf** as though it
+were the install state — which looks identical on a machine with nothing
+installed. The `/plugin` panel is the only check that distinguishes the two.
 
 Either way the demo is safe, because **the impressive beat does not depend on
 link 5**. Get everyone installed during setup; then the *update* — the version
@@ -174,12 +178,9 @@ Lists every loaded setting, which scope it came from, and any validation errors 
 so you can point at the screen and show the policy is in force rather than
 asserting it.
 
-```bash
-claude plugin list
-```
-
-Lists installed plugins with their versions. This is the check that makes an
-update visible: run it before and after a publish and the version moves.
+Then open the `/plugin` panel, which lists installed plugins with their versions.
+This is the check that makes an update visible: look before and after a publish
+and the version moves.
 
 For a belt-and-braces check that does not depend on any tooling, run the skill
 itself — `cool-new-skill` signs every answer `Triaged by: cool-new-skill v<x.y.z>`.

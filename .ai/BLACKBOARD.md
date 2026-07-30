@@ -61,6 +61,7 @@ Naming: one row per active **Agent Handle** (recommended: `<Model>/<name>`). Don
 | Codex/Meridian-1 | — | J1 archived after PR #7 merge | ✅ Complete | 2026-07-30 13:02 UTC | PR #7 merged at `d93328b`; follow-up clears the stale lock and archives the full log. |
 | Codex/Proposal-Audit-1 | — | J3 complete | ✅ Complete | 2026-07-30 12:14 UTC | J3 archived at 2026-07-30 12:19 UTC; no lock held. |
 | Codex/Linebreak-1 | J3 | Await initiator attribution | ⏸️ Waiting | 2026-07-30 12:34 UTC | LF policy complete and validated; archive blocked at attribution attempt 1/3. |
+| Claude/Opus-4.7-Nimbus | — | Backfilling packaging-check branch record | ✅ Complete | 2026-07-30 16:37 UTC | Initiated by: Emily. Retroactive; work happened pre-adoption on branch `feature/gate-packaging-check`; no BLACKBOARD lock held during execution. Substantial work recorded in Recent History; close-out (open PR, LEDGER entry, delete HANDOVER) is single-agent sequential and stays outside BLACKBOARD per the "simple Q&A does not require a job" rule. |
 
 ---
 
@@ -283,6 +284,7 @@ Job file: `.ai/jobs/backburner/B12 - (unassigned).md`
 ---
 
 # RECENT HISTORY (completed milestones worth remembering)
+- 2026-07-30 16:37 UTC — `feature/gate-packaging-check` branch closed by Claude/Opus-4.7-Nimbus; initiated by: Emily: added a packaging check to `tools/skill-gate/gate.py` (asserts every file `SKILL.md` references exists in the shipped tree, closing the silent Rule-1-breach path the Desktop upload demonstrated), undid the "no slash command" drift across five files (HANDOVER Job 3), fixed the publisher skill's post-publish version-check advice (HANDOVER Job 2), merged `origin/master`. Gate PASS on all four skills post-merge; `check_published.py` green. No BLACKBOARD lock held during work — retroactive record. Branch pushed at `f96503a`; PR pending. Log: (personal `PROGRESS.md`; commits `99274c0`, `6d4ff4d`, `df64f1a`, `0db5727`, `f96503a`).
 - 2026-07-30 15:27 UTC — J2 completed by Codex/Vellum; initiated by: Lee: designed and iterated the Harrow & Vale identity, approved the dark subtly cyber v3, saved it under `assets/brand/`, and staged only the selected asset. Log: `.ai/jobs/done/2026-07-30_1527UTC_J2 - Create wide Harrow & Vale logo concept.md`
 - 2026-07-30 13:02 UTC — J1 completed by Codex/Meridian-1; initiated by: Lee: implemented the three-attempt attribution protocol, backfilled linked records, published all workspace changes, and merged PR #7 with the GitHub gate passing. Log: `.ai/jobs/done/2026-07-30_1302UTC_J1 - Require three initiator-identification attempts and publish workspace.md`
 - 2026-07-30 12:19 UTC — J3 completed by Codex/Proposal-Audit-1; initiated by: Lee: separated data residency, repository security and open decisions; excluded pricing; added provisional presenter ownership; validation passed. Log: `.ai/jobs/done/2026-07-30_1219UTC_J3 - Refine presentation structure and presenter plan.md`

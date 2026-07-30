@@ -127,7 +127,11 @@ with:
 /reload-plugins
 ```
 
-They can confirm which version they are on with `claude plugin list`.
+They can confirm which version they are on by opening the `/plugin` panel and
+reading the version beside the plugin under **Installed**. Do not tell them to
+verify by reading `.claude-plugin/marketplace.json` — that file is the shelf
+and prints identically on a machine with nothing installed, so it never
+distinguishes "on this machine" from "on the firm's list of approved skills".
 
 ## What you must not do
 
