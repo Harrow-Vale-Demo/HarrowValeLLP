@@ -10,6 +10,7 @@
   },
   "enabledPlugins": {
     "term-sheet-review@harrowvale-legal-skills": true,
-    "leestestskill@harrowvale-legal-skills": true
+    "leestestskill@harrowvale-legal-skills": true,
+    "mock-skill@harrowvale-legal-skills": true, 
   }
 }
