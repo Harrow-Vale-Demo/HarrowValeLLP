@@ -16,6 +16,7 @@ Entry format (recommended):
 ---
 
 ## Entries
+- 2026-07-30 13:02 UTC — J1 — Require three initiator-identification attempts and publish workspace — initiated by: Lee — log: `.ai/jobs/done/2026-07-30_1302UTC_J1 - Require three initiator-identification attempts and publish workspace.md` — validation: PASS, PR #7 merged at d93328b and GitHub skill-gate succeeded
 - 2026-07-30 12:19 UTC — J3 — Refine presentation structure and presenter plan — initiated by: Lee — log: `.ai/jobs/done/2026-07-30_1219UTC_J3 - Refine presentation structure and presenter plan.md` — validation: PASS, 12-slide structure, separate data/repository/open-question slides, no pricing
 - 2026-07-30 12:08 UTC — J1 — Remove personal style and add human initiator provenance — initiated by: Lee — log: `.ai/jobs/done/2026-07-30_1208UTC_J1 - Remove personal style and add human initiator provenance.md` — validation: PASS, no personal style language and complete active/back-burner/archive provenance coverage
 - 2026-07-30 12:00 UTC — J2 — Add presentation slide and demo cues — initiated by: Lee — log: `.ai/jobs/done/2026-07-30_1200UTC_J2 - Add presentation slide and demo cues.md` — validation: PASS, slides 1–11, all source paths, gate pass/block and dry-run
