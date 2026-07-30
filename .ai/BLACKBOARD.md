@@ -29,7 +29,7 @@ Reference doc (maintainers/optional): `BLACKBOARD_SYSTEM_PRINCIPLES.md`.
 - Prefer stable job log filenames; if you rename a job file, update its pointer line here.
 
 Progress-based staleness:
-- Global progress counter (completed tasks): **15**
+- Global progress counter (completed tasks): **18**
 - Increment by 1 for each task moved to ✅ or ⛔ (any job).
 - Stale thresholds (progress ticks): fast=6 | normal=12 | slow=24
 
@@ -57,7 +57,7 @@ Quick reference:
 Naming: one row per active **Agent Handle** (recommended: `<Model>/<name>`). Don’t reuse plain `Codex` or `Claude` when running multiple sessions.
 | Agent Handle | Job | Task | Status | Since (UTC) | Notes |
 |---|---|---|---|---|---|
-| Codex/Vellum | J2 | Review refined Harrow & Vale logo | ⏸️ Waiting | 2026-07-30 12:23 UTC | Lead concept saved; awaiting user reaction. |
+| Codex/Vellum | — | J2 complete: approved v3 saved to repository | ✅ Complete | 2026-07-30 15:27 UTC | v3 staged; J2 archived; no lock held. |
 | Codex/Meridian-1 | — | J1 archived after PR #7 merge | ✅ Complete | 2026-07-30 13:02 UTC | PR #7 merged at `d93328b`; follow-up clears the stale lock and archives the full log. |
 | Codex/Proposal-Audit-1 | — | J3 complete | ✅ Complete | 2026-07-30 12:14 UTC | J3 archived at 2026-07-30 12:19 UTC; no lock held. |
 | Codex/Linebreak-1 | J3 | Await initiator attribution | ⏸️ Waiting | 2026-07-30 12:34 UTC | LF policy complete and validated; archive blocked at attribution attempt 1/3. |
@@ -78,15 +78,15 @@ Key files/paths: —
 Collision: —
 Job file: `.ai/jobs/active/J1 - (unassigned).md`
 
-## J2 — Create wide Harrow & Vale logo concept
-Description: Design a polished, modern legal-firm logo using a restrained Vale/vail visual pun and a very subtle Harrow reference.
-Initiated by (human): Lee
-Status: 🟡 Warm
+## J2 — (unassigned)
+Description: —
+Initiated by (human): —
+Status: —
 Lock: 🔓
 Pace: normal
-Last progress tick: 7
-Key files/paths: `assets/brand/harrow-vale-wide-logo-concept-v1.png`, `.ai/BLACKBOARD.md`, `.ai/jobs/active/J2 - (unassigned).md`
-Collision: None found; active J1 and J3 do not touch brand assets.
+Last progress tick: —
+Key files/paths: —
+Collision: —
 Job file: `.ai/jobs/active/J2 - (unassigned).md`
 ## J3 — Standardize repository text files on LF
 Description: Enforce LF for repository text and editors, retaining CRLF only for Windows command scripts.
@@ -283,6 +283,7 @@ Job file: `.ai/jobs/backburner/B12 - (unassigned).md`
 ---
 
 # RECENT HISTORY (completed milestones worth remembering)
+- 2026-07-30 15:27 UTC — J2 completed by Codex/Vellum; initiated by: Lee: designed and iterated the Harrow & Vale identity, approved the dark subtly cyber v3, saved it under `assets/brand/`, and staged only the selected asset. Log: `.ai/jobs/done/2026-07-30_1527UTC_J2 - Create wide Harrow & Vale logo concept.md`
 - 2026-07-30 13:02 UTC — J1 completed by Codex/Meridian-1; initiated by: Lee: implemented the three-attempt attribution protocol, backfilled linked records, published all workspace changes, and merged PR #7 with the GitHub gate passing. Log: `.ai/jobs/done/2026-07-30_1302UTC_J1 - Require three initiator-identification attempts and publish workspace.md`
 - 2026-07-30 12:19 UTC — J3 completed by Codex/Proposal-Audit-1; initiated by: Lee: separated data residency, repository security and open decisions; excluded pricing; added provisional presenter ownership; validation passed. Log: `.ai/jobs/done/2026-07-30_1219UTC_J3 - Refine presentation structure and presenter plan.md`
 - 2026-07-30 12:08 UTC — J1 completed by Codex/Meridian-1; initiated by: Lee: removed personal conversational preferences and added durable human-initiator provenance across active, parked, and archived job records; validation passed. Log: `.ai/jobs/done/2026-07-30_1208UTC_J1 - Remove personal style and add human initiator provenance.md`
