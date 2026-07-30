@@ -1,0 +1,23 @@
+{
+  "skill_version": "1.1.0",
+  "recorded": "2026-07-30",
+  "note": "Steady-state version bump for demo purposes — no behavior change from 1.0.0. Demonstrates that a release holding the metric steady still passes the gate (no-regression is the test, not improvement).",
+  "cases": {
+    "nimbus-safe": {
+      "instrument": "safe",
+      "signal": "future equity, no interest, no maturity date"
+    },
+    "greengrid-series-a": {
+      "instrument": "priced_round",
+      "signal": "price per share and pre-money valuation stated"
+    },
+    "anchorline-convertible": {
+      "instrument": "convertible_note",
+      "signal": "interest rate and maturity/redemption date"
+    },
+    "solace-seed": {
+      "instrument": "seed_summary",
+      "signal": "terse bullet-format seed terms"
+    }
+  }
+}
