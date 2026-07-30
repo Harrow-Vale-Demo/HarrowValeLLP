@@ -1,12 +1,15 @@
 # Line-ending policy for Harrow & Vale LLP
 #
-# The repository stores LF internally. Each checkout renders the
-# platform's native convention, so Windows working copies keep CRLF
-# while the committed history stays stable. Without this, every file
-# edited on Windows appears wholly modified and real changes are lost
-# in the noise.
+# Text files use LF in both the repository and working tree on every
+# platform. This keeps editors, formatters, and coding agents aligned.
+# Windows command scripts remain CRLF for compatibility with legacy
+# Windows tooling.
 
-* text=auto
+* text=auto eol=lf
+
+# Windows command scripts
+*.bat        text eol=crlf
+*.cmd        text eol=crlf
 
 # Text formats used in this repository
 *.md         text
