@@ -63,23 +63,23 @@ Naming: one row per active **Agent Handle** (recommended: `<Model>/<name>`). Don
 | Codex/Meridian-1 | — | J1 archived after PR #7 merge | ✅ Complete | 2026-07-30 13:02 UTC | PR #7 merged at `d93328b`; follow-up clears the stale lock and archives the full log. |
 | Codex/Proposal-Audit-1 | — | J3 complete | ✅ Complete | 2026-07-30 12:14 UTC | J3 archived at 2026-07-30 12:19 UTC; no lock held. |
 | Codex/Linebreak-1 | J3 | Await initiator attribution | ⏸️ Waiting | 2026-07-30 12:34 UTC | LF policy complete and validated; archive blocked at attribution attempt 1/3. |
-| Claude/Opus-4.7-Aurora | J1 | situate v0.1.0 built, gated, published; commit staged, push held for Emily | ✅ Complete | 2026-07-30 19:15 UTC | Initiated by: Emily. Full pipeline through gate → publish → check_published (all green). Branch `feature/situate-skill` off `origin/master`; commit staged locally; push held (shared-state action). |
+| Claude/Opus-4.7-Aurora | — | J1 archived (situate v0.1.0 published + branch pushed at `6872ca8`) | ✅ Complete | 2026-07-30 19:25 UTC | Initiated by: Emily. Full pipeline through gate → publish → check_published (all green). Branch `feature/situate-skill` pushed to origin; PR URL surfaced. J1 archived to `.ai/jobs/done/2026-07-30_1915UTC_J1 - Build situate skill.md`. |
 
 ---
 
 # ACTIVE JOB SLOTS (J1–J12)
 Extended per-job logs (tasks, ideas, recent activity, validation) live in `.ai/jobs/active/`.
 
-## J1 — Build `situate` skill through the gate → publish pipeline
-Description: New multi-source sanity-check skill per `PLAN.md §H`. Two modes (default situation report + `--conflicts`), five Priya-style rules, reads BLACKBOARD/LEDGER/PLAN/PROGRESS/git/memory. Golden fixtures under `tools/skill-gate/fixtures/situate/`. Publishes via existing pipeline.
-Initiated by (human): Emily
-Status: ✅ Complete (pending push)
-Lock: 🔒 Claude/Opus-4.7-Aurora since 2026-07-30 18:30 UTC — released after push
+## J1 — (unassigned)
+Description: —
+Initiated by (human): —
+Status: —
+Lock: 🔓
 Pace: normal
-Last progress tick: 33
-Key files/paths: `plugins/situate/**`, `tools/skill-gate/gate.py`, `tools/skill-gate/fixtures/situate/**`, `releases/situate/**`, `.claude-plugin/marketplace.json`
-Collision: None found. Other skills untouched; gate registration additive.
-Job file: `.ai/jobs/active/J1 - Build situate skill.md`
+Last progress tick: —
+Key files/paths: —
+Collision: —
+Job file: `.ai/jobs/active/J1 - (unassigned).md`
 
 ## J2 — (unassigned)
 Description: —
@@ -286,6 +286,7 @@ Job file: `.ai/jobs/backburner/B12 - (unassigned).md`
 ---
 
 # RECENT HISTORY (completed milestones worth remembering)
+- 2026-07-30 19:15 UTC — J1 completed by Claude/Opus-4.7-Aurora; initiated by: Emily: built the `situate` multi-source sanity-check skill v0.1.0 (PLAN §H) end-to-end — SKILL.md + 3 reference files + 2 examples + gate registration + fixtures + publish. Gate PASS at `tree_state_accuracy=1.000`; `check_published.py` green on all 4 shelf entries; branch `feature/situate-skill` pushed at `6872ca8`. Scorer descoped for v0.1.0 (reused `triage` with `field: tree_state`); bespoke report-correctness scorer deferred to v0.2.0. Log: `.ai/jobs/done/2026-07-30_1915UTC_J1 - Build situate skill.md`
 - 2026-07-30 15:27 UTC — J2 completed by Codex/Vellum; initiated by: Lee: designed and iterated the Harrow & Vale identity, approved the dark subtly cyber v3, saved it under `assets/brand/`, and staged only the selected asset. Log: `.ai/jobs/done/2026-07-30_1527UTC_J2 - Create wide Harrow & Vale logo concept.md`
 - 2026-07-30 13:02 UTC — J1 completed by Codex/Meridian-1; initiated by: Lee: implemented the three-attempt attribution protocol, backfilled linked records, published all workspace changes, and merged PR #7 with the GitHub gate passing. Log: `.ai/jobs/done/2026-07-30_1302UTC_J1 - Require three initiator-identification attempts and publish workspace.md`
 - 2026-07-30 12:19 UTC — J3 completed by Codex/Proposal-Audit-1; initiated by: Lee: separated data residency, repository security and open decisions; excluded pricing; added provisional presenter ownership; validation passed. Log: `.ai/jobs/done/2026-07-30_1219UTC_J3 - Refine presentation structure and presenter plan.md`
