@@ -48,6 +48,7 @@ SKILLS = {
     "cool-new-skill": {"scorer": "triage", "base": os.path.join(FIXTURES, "cool-new-skill")},
     "leestestskill": {"scorer": "triage", "base": os.path.join(FIXTURES, "leestestskill")},
     "mock-skill": {"scorer": "triage", "base": os.path.join(FIXTURES, "mock-skill")},
+    "situate": {"scorer": "triage", "base": os.path.join(FIXTURES, "situate")},
 }
 
 

@@ -1,0 +1,19 @@
+{
+  "skill": "situate",
+  "metric": "tree_state_accuracy",
+  "field": "tree_state",
+  "threshold": 0.9,
+  "note": "Golden labels for situate v0.1.0. The skill produces a full structured report; the gate initially scores it only on whether the top-level tree_state classification (clean vs drifted) is correct. Full report correctness (source coverage + divergence detection) is a v0.2.0 upgrade requiring a new scorer.",
+  "cases": [
+    {
+      "case": "clean-tree",
+      "document": "plugins/situate/skills/situate/examples/example-clean-tree.md",
+      "tree_state": "clean"
+    },
+    {
+      "case": "drifted-tree",
+      "document": "plugins/situate/skills/situate/examples/example-drifted-tree.md",
+      "tree_state": "drifted"
+    }
+  ]
+}

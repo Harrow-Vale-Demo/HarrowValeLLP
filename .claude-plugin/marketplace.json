@@ -34,6 +34,16 @@
         "name": "Harrow & Vale LLP",
         "email": "tom.harrow@harrowvale.example"
       }
+    },
+    {
+      "name": "situate",
+      "source": "./plugins/situate",
+      "description": "Adds the situate skill: a multi-source sanity-check that reads every coordination file, git state, and memory index to answer 'where is this project right now?' Reports divergences between sources rather than papering over them.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Emily Donovan",
+        "email": "emily.donovan@negativezero.com"
+      }
     }
   ]
 }

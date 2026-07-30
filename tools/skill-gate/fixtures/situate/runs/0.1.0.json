@@ -1,0 +1,17 @@
+{
+  "skill_version": "0.1.0",
+  "recorded": "2026-07-30",
+  "note": "Initial recorded run for situate v0.1.0. Both cases classified correctly against the two golden tree states — the clean example correctly identifies zero divergences (all-clear shape), and the drifted example correctly triggers the clarifications-needed shape. Gate should PASS at 1.000 (threshold 0.90, first version so no regression check).",
+  "cases": {
+    "clean-tree": {
+      "tree_state": "clean",
+      "shape": "all-clear",
+      "divergences_detected": 0
+    },
+    "drifted-tree": {
+      "tree_state": "drifted",
+      "shape": "clarifications-needed",
+      "divergences_detected": 4
+    }
+  }
+}

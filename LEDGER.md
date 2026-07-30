@@ -80,6 +80,59 @@ across the firm is the point — ties directly to "standardisation").
 
 ## Log
 
+### [2026-07-30 19:15] Emily + Claude/Opus-4.7-Aurora — `situate` skill v0.1.0 built + gated + published (branch `feature/situate-skill`, commit staged, push held)
+
+- **New skill `situate` published to the harrowvale-legal-skills shelf.** The
+  multi-source sanity-check skill from `PLAN.md §H` — reads every coordination
+  file (BLACKBOARD, LEDGER, PLAN, PROGRESS, SESSION, HANDOVER-*), git state,
+  and the memory index, and produces either an all-clear situation report, a
+  clarifications-needed report (when sources conflict), or a `--conflicts`
+  diagnostic pass. Five Priya-style rules; each rule cites the incident that
+  motivated it. Self-diagnoses the caller so the "working outside BLACKBOARD"
+  failure mode from 2026-07-30 evening would have been caught at session
+  start.
+- **Pipeline:** through the gate cleanly. `tree_state_accuracy = 1.000`
+  (threshold 0.90; first version, no regression check). `--all` gate green on
+  every previously-published skill (cool-new-skill's 0.750 FAIL is
+  pre-existing and unpublished by design). `check_published.py` reports
+  "Every published version is backed by the gate."
+- **Scorer decision:** the PLAN §H proposal was to write a bespoke
+  `situate_report_correctness` scorer. Descoped for v0.1.0 — reused the
+  existing `triage` scorer with `field: tree_state` since the gate only needs
+  to know whether the skill correctly classified the tree state
+  (clean vs drifted). Full report-correctness scorer deferred to v0.2.0.
+- **Loose-end triage before the build.** Confirmed:
+  - PR #10 (`Feature/gate packaging check`) is **still open** in the new org
+    repo `Harrow-Vale-Demo/HarrowValeLLP`. Not this session's concern; Emily
+    to review/merge.
+  - **GitHub org migration confirmed.** Repo moved from `f7-rage-gremlin`
+    (user) to `Harrow-Vale-Demo` (org). Currently **public**. Local `origin`
+    remote still points at the old URL; GitHub redirects (HTTP 301) so
+    `git fetch`/`push` work as-is. If Emily flips the repo to private, git
+    over SSH continues to work IF her key is authorized on the new org;
+    unauthenticated API queries stop; marketplace consumers need either org
+    read access or a deploy token — that's the blocker to flag before
+    flipping visibility.
+  - **Cowork/Desktop `reference/` blocker** (LEDGER 2026-07-30 01:30):
+    **still unresolved.** No fix committed; no workaround verified. PLAN §B's
+    hypothesis about `skill-creator`'s `scripts/package_skill.py` is untested
+    (skill-creator is not installed locally). Not a Claude Code job.
+- **Files added on this branch:**
+  - `plugins/situate/` — plugin.json, SKILL.md, README.md, `reference/` (sources, rules, output-templates), `examples/` (clean-tree, drifted-tree)
+  - `tools/skill-gate/fixtures/situate/` — golden.json, `runs/0.1.0.json`
+  - `tools/skill-gate/gate.py` — one-line addition to `SKILLS`
+  - `releases/situate/CHANGELOG.md` + `releases/situate/v0.1.0/gate-report.json`
+  - `.claude-plugin/marketplace.json` — situate appended (first-listing path)
+  - `.ai/BLACKBOARD.md`, `.ai/jobs/active/J1 - Build situate skill.md`, `.gitignore` (SESSION.md)
+- **Push held.** Commit is staged locally; push is a shared-state action, so
+  it waits on Emily's OK. When ready:
+  `git push -u origin feature/situate-skill`. PR URL will be surfaced by
+  GitHub after the push (no `gh` on this NixOS box).
+- **Cross-branch note.** This branch does NOT include the Nimbus 17:37 LEDGER
+  entry from `feature/gate-packaging-check` (PR #10 still open). When PR #10
+  merges, the two LEDGER edits will conflict trivially at the top of §Log —
+  keep both entries in reverse-chronological order.
+
 ### [2026-07-28 00:40] Lee + Claude — Added `.gitattributes` to stop phantom whole-file diffs
 
 - Symptom: all 107 tracked files showed as modified on a clean Windows checkout, with a

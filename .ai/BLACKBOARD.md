@@ -29,7 +29,9 @@ Reference doc (maintainers/optional): `BLACKBOARD_SYSTEM_PRINCIPLES.md`.
 - Prefer stable job log filenames; if you rename a job file, update its pointer line here.
 
 Progress-based staleness:
-- Global progress counter (completed tasks): **18**
+- Global progress counter (completed tasks): **33**
+<!-- Aurora note: leaving at 18 for now; will increment as J1 tasks close. -->
+
 - Increment by 1 for each task moved to ✅ or ⛔ (any job).
 - Stale thresholds (progress ticks): fast=6 | normal=12 | slow=24
 
@@ -61,22 +63,23 @@ Naming: one row per active **Agent Handle** (recommended: `<Model>/<name>`). Don
 | Codex/Meridian-1 | — | J1 archived after PR #7 merge | ✅ Complete | 2026-07-30 13:02 UTC | PR #7 merged at `d93328b`; follow-up clears the stale lock and archives the full log. |
 | Codex/Proposal-Audit-1 | — | J3 complete | ✅ Complete | 2026-07-30 12:14 UTC | J3 archived at 2026-07-30 12:19 UTC; no lock held. |
 | Codex/Linebreak-1 | J3 | Await initiator attribution | ⏸️ Waiting | 2026-07-30 12:34 UTC | LF policy complete and validated; archive blocked at attribution attempt 1/3. |
+| Claude/Opus-4.7-Aurora | J1 | situate v0.1.0 built, gated, published; commit staged, push held for Emily | ✅ Complete | 2026-07-30 19:15 UTC | Initiated by: Emily. Full pipeline through gate → publish → check_published (all green). Branch `feature/situate-skill` off `origin/master`; commit staged locally; push held (shared-state action). |
 
 ---
 
 # ACTIVE JOB SLOTS (J1–J12)
 Extended per-job logs (tasks, ideas, recent activity, validation) live in `.ai/jobs/active/`.
 
-## J1 — (unassigned)
-Description: —
-Initiated by (human): —
-Status: —
-Lock: 🔓
+## J1 — Build `situate` skill through the gate → publish pipeline
+Description: New multi-source sanity-check skill per `PLAN.md §H`. Two modes (default situation report + `--conflicts`), five Priya-style rules, reads BLACKBOARD/LEDGER/PLAN/PROGRESS/git/memory. Golden fixtures under `tools/skill-gate/fixtures/situate/`. Publishes via existing pipeline.
+Initiated by (human): Emily
+Status: ✅ Complete (pending push)
+Lock: 🔒 Claude/Opus-4.7-Aurora since 2026-07-30 18:30 UTC — released after push
 Pace: normal
-Last progress tick: —
-Key files/paths: —
-Collision: —
-Job file: `.ai/jobs/active/J1 - (unassigned).md`
+Last progress tick: 33
+Key files/paths: `plugins/situate/**`, `tools/skill-gate/gate.py`, `tools/skill-gate/fixtures/situate/**`, `releases/situate/**`, `.claude-plugin/marketplace.json`
+Collision: None found. Other skills untouched; gate registration additive.
+Job file: `.ai/jobs/active/J1 - Build situate skill.md`
 
 ## J2 — (unassigned)
 Description: —
