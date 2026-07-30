@@ -29,7 +29,7 @@ Reference doc (maintainers/optional): `BLACKBOARD_SYSTEM_PRINCIPLES.md`.
 - Prefer stable job log filenames; if you rename a job file, update its pointer line here.
 
 Progress-based staleness:
-- Global progress counter (completed tasks): **14**
+- Global progress counter (completed tasks): **15**
 - Increment by 1 for each task moved to ✅ or ⛔ (any job).
 - Stale thresholds (progress ticks): fast=6 | normal=12 | slow=24
 
@@ -58,7 +58,7 @@ Naming: one row per active **Agent Handle** (recommended: `<Model>/<name>`). Don
 | Agent Handle | Job | Task | Status | Since (UTC) | Notes |
 |---|---|---|---|---|---|
 | Codex/Vellum | J2 | Review refined Harrow & Vale logo | ⏸️ Waiting | 2026-07-30 12:23 UTC | Lead concept saved; awaiting user reaction. |
-| Codex/Meridian-1 | J1 | Publish and merge all workspace changes | ▶️ Active | 2026-07-30 12:48 UTC | Lee resolved attribution; whole-workspace scope authorized; J2/J3 outputs are publish-only overlaps. |
+| Codex/Meridian-1 | — | J1 archived after PR #7 merge | ✅ Complete | 2026-07-30 13:02 UTC | PR #7 merged at `d93328b`; follow-up clears the stale lock and archives the full log. |
 | Codex/Proposal-Audit-1 | — | J3 complete | ✅ Complete | 2026-07-30 12:14 UTC | J3 archived at 2026-07-30 12:19 UTC; no lock held. |
 | Codex/Linebreak-1 | J3 | Await initiator attribution | ⏸️ Waiting | 2026-07-30 12:34 UTC | LF policy complete and validated; archive blocked at attribution attempt 1/3. |
 
@@ -67,15 +67,15 @@ Naming: one row per active **Agent Handle** (recommended: `<Model>/<name>`). Don
 # ACTIVE JOB SLOTS (J1–J12)
 Extended per-job logs (tasks, ideas, recent activity, validation) live in `.ai/jobs/active/`.
 
-## J1 — Require three initiator-identification attempts
-Description: Require three logged attempts to identify the human initiator, keep a pending state until resolved, and permit an unresolved closure fallback only after attempt 3 genuinely goes unanswered.
-Initiated by (human): Lee
-Status: 🟢 Active
-Lock: 🔒 Codex/Meridian-1 since 2026-07-30 12:48 UTC
+## J1 — (unassigned)
+Description: —
+Initiated by (human): —
+Status: —
+Lock: 🔓
 Pace: normal
-Last progress tick: 14
-Key files/paths: entire current workspace, Git branch/commit, GitHub pull request, `.ai/BLACKBOARD.md`, and J1 log
-Collision: OVERLAP: J2 and J3 publish-only. Both jobs are Warm and unlocked; Lee explicitly authorized one whole-workspace PR, and J1 will not alter their substantive outputs.
+Last progress tick: —
+Key files/paths: —
+Collision: —
 Job file: `.ai/jobs/active/J1 - (unassigned).md`
 
 ## J2 — Create wide Harrow & Vale logo concept
@@ -283,6 +283,7 @@ Job file: `.ai/jobs/backburner/B12 - (unassigned).md`
 ---
 
 # RECENT HISTORY (completed milestones worth remembering)
+- 2026-07-30 13:02 UTC — J1 completed by Codex/Meridian-1; initiated by: Lee: implemented the three-attempt attribution protocol, backfilled linked records, published all workspace changes, and merged PR #7 with the GitHub gate passing. Log: `.ai/jobs/done/2026-07-30_1302UTC_J1 - Require three initiator-identification attempts and publish workspace.md`
 - 2026-07-30 12:19 UTC — J3 completed by Codex/Proposal-Audit-1; initiated by: Lee: separated data residency, repository security and open decisions; excluded pricing; added provisional presenter ownership; validation passed. Log: `.ai/jobs/done/2026-07-30_1219UTC_J3 - Refine presentation structure and presenter plan.md`
 - 2026-07-30 12:08 UTC — J1 completed by Codex/Meridian-1; initiated by: Lee: removed personal conversational preferences and added durable human-initiator provenance across active, parked, and archived job records; validation passed. Log: `.ai/jobs/done/2026-07-30_1208UTC_J1 - Remove personal style and add human initiator provenance.md`
 - 2026-07-30 12:00 UTC — J2 completed by Codex/Proposal-Audit-1; initiated by: Lee: added the how-Claude-helped slide and truthful live/prerecorded demo sequence to the Friday presentation plan; validation passed. Log: `.ai/jobs/done/2026-07-30_1200UTC_J2 - Add presentation slide and demo cues.md`
