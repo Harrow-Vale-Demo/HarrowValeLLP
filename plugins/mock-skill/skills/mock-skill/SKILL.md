@@ -10,7 +10,7 @@ argument-hint: <path-to-term-sheet>
 
 # Mock Skill — Gate Smoke Test (not a real deliverable)
 
-**Skill version:** 1.0.0
+**Skill version:** 1.1.0
 
 This skill exists only to prove the skill-gate pipeline works end to end: a new
 skill is registered in `tools/skill-gate/gate.py`'s `SKILLS` dict, given golden

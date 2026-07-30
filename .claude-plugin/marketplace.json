@@ -29,7 +29,7 @@
       "name": "mock-skill",
       "source": "./plugins/mock-skill",
       "description": "Not a real deliverable. A minimal triage skill used only to smoke-test the skill-gate/publish/check_published pipeline end to end.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "Harrow & Vale LLP",
         "email": "tom.harrow@harrowvale.example"
