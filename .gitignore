@@ -15,3 +15,7 @@ Thumbs.db
 # Editors
 .vscode/
 .idea/
+
+# Personal working notes (not shared coordination — that's LEDGER.md)
+PLAN.md
+PROGRESS.md

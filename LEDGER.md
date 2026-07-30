@@ -80,6 +80,39 @@ across the firm is the point — ties directly to "standardisation").
 
 ## Log
 
+### [2026-07-30 01:30] Emily + Claude — The plugins were installed all along; our docs and our check were both wrong
+
+- Symptom: plugins appeared "both installed and uninstalled". `/term-sheet-review` never
+  showed up under `/`, so we assumed the install had failed and kept reinstalling.
+- **Cause 1 — the slash command does not exist.** Every plugin under `plugins/` ships only a
+  `skills/` directory. A slash command exists only if a plugin provides a `commands/`
+  directory; none does. Skills are model-invoked from their `description` frontmatter, so
+  `/term-sheet-review:term-sheet-review` could never appear no matter what we did.
+  `CLAUDE.md`, `docs/governance/pipeline-rehearsal.md`, `tools/org-policy/README.md` and
+  `deliverables/skills-pipeline-process.md` all documented that invocation. All four corrected.
+- **Cause 2 — our verification was a false positive.** `claude plugin list` is not a valid
+  subcommand in this Claude Code version ("unknown command 'list'"). Asked inside a session,
+  an agent instead ran a pre-approved python one-liner from `.claude/settings.local.json`
+  that reads `.claude-plugin/marketplace.json`, and printed the result under the heading
+  "Installed plugins:". That is the **shelf**, not the install state — it prints identically
+  on a machine with nothing installed. The tell was `mock-skill v1.0.0` appearing as
+  "installed" the moment it was committed to the shelf.
+- Ground truth came from the `/plugin` panel: "All plugins from this marketplace are already
+  installed." Nothing was ever broken.
+- **Rule going forward:** verify installs from the `/plugin` panel only — Installed vs
+  Discover. Never accept an agent's summary of install state, and never document a slash
+  command without a `commands/` directory behind it.
+- Untouched, needs a human: remove the marketplace-reading python entry from
+  `.claude/settings.local.json` (protected file, agents cannot edit it). While it sits in the
+  allow-list it runs without prompting and will mislead the next person the same way.
+- Unrelated but worth knowing: the Cowork/desktop app keeps a **separate** skill store. Its
+  copy of `term-sheet-review` has only `SKILL.md` — no `reference/`, `examples/` or
+  `templates/` — so it cannot read Priya's verbatim checklist and will improvise one. Getting
+  Claude Code working tells you nothing about the desktop app, or vice versa.
+- Gate re-run after all edits: term-sheet-review 1.000 PASS, leestestskill 1.000 PASS,
+  mock-skill 1.000 PASS, cool-new-skill 0.750 FAIL (unpublished by design).
+  `check_published.py` green on all three shelf entries. No skill behaviour was changed.
+
 ### [2026-07-28 00:40] Lee + Claude — Added `.gitattributes` to stop phantom whole-file diffs
 
 - Symptom: all 107 tracked files showed as modified on a clean Windows checkout, with a
