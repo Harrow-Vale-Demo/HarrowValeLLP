@@ -80,6 +80,55 @@ across the firm is the point — ties directly to "standardisation").
 
 ## Log
 
+### [2026-07-30 17:37] Emily + Claude/Opus-4.7-Nimbus — HANDOVER jobs 1–5 all closed; packaging check landed in the gate; branch pushed for PR
+
+- **HANDOVER-to-claude-code.md is now complete.** All five jobs shipped:
+  - **Job 1** — Emily manually removed the shelf-reader Python one-liner from
+    `.claude/settings.local.json`.
+  - **Job 2** — commit `0db5727` fixed `.claude/skills/publish-hv-skill/SKILL.md`
+    line 130: replaced `claude plugin list` with `/plugin` panel guidance and a
+    note not to fall back on reading `.claude-plugin/marketplace.json` (that's the
+    shelf, not the install state).
+  - **Job 3** — commit `df64f1a` undid the "no slash command" claim across
+    `CLAUDE.md`, `deliverables/lawyer-installation-guide.md`,
+    `deliverables/skills-pipeline-process.md`,
+    `docs/governance/pipeline-rehearsal.md`, and
+    `plugins/term-sheet-review-plugin/skills/term-sheet-review/README.md`. Each
+    kept the correct `/plugin` panel additions the drift session also made,
+    restored the namespaced slash invocation, and carries a
+    `Verified against Claude Code 2.1.140, 2026-07-30` stamp.
+  - **Job 4** — Emily's live check on Claude Code 2.1.140 confirmed the
+    namespaced slash form registers and fires.
+  - **Job 5** — acceptance test on `assets/source/term-sheets/safe-nimbus-robotics.md`
+    passed all four criteria: Parts A–D output structure, £6m cap flagged as
+    post-money with 20% discount (🟡) and MFN (🔴) called out, all 28 checklist
+    items with statuses, and reads bundled `reference/dd-checklist.md` from the
+    installed cache — no repo-globbing.
+- **Substantial governance addition:** commit `6d4ff4d` added a **packaging
+  check** to `tools/skill-gate/gate.py`. The gate now asserts every file each
+  skill's `SKILL.md` references actually exists in the shipped tree; a broken
+  package is a hard FAIL that blocks publication before the scorer runs. Closes
+  the silent Rule-1-breach path the Desktop upload demonstrated. Negative-tested
+  live: renaming `reference/dd-checklist.md` produces
+  `packaging FAIL — 1 referenced file(s) missing from shipped tree`.
+- **Merged origin/master** (BLACKBOARD protocol from PRs #7 and #8) into the
+  feature branch — one small conflict in `CLAUDE.md` §"Skill Usage", resolved
+  in favour of the feature branch's version. Gate + `check_published.py` both
+  green post-merge.
+- **BLACKBOARD adoption:** skinny. Focus Board row + one Recent History entry
+  under `Claude/Opus-4.7-Nimbus`, initiated by Emily. Retroactive record; work
+  happened pre-adoption without a lock. Close-out (this LEDGER entry + PR + file
+  delete) is single-agent sequential, no collision risk, stays outside
+  BLACKBOARD per the "simple Q&A does not require a job" rule.
+- **New skill spec queued:** `situate` — the multi-source sanity-check skill
+  Emily proposed. Spec written up in `PLAN.md` §H. Cross-references sources of
+  truth (`.ai/BLACKBOARD.md`, `LEDGER.md`, `PLAN.md`, `PROGRESS.md`, git state,
+  memory), catches drift, and asks the user for clarification when conflicts
+  can't be resolved from the sources themselves. Proposed as the Phase-5
+  demo-opening candidate; ~2 sessions of work through the gate.
+- **Branch pushed** at `6a17f69`. PR pending; URL:
+  `https://github.com/f7-rage-gremlin/HarrowValeLLP/pull/new/feature/gate-packaging-check`
+
 ### [2026-07-30 01:30] Emily + Claude — The plugins were installed all along; our docs and our check were both wrong
 
 - Symptom: plugins appeared "both installed and uninstalled". `/term-sheet-review` never
