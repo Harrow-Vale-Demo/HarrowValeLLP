@@ -22,13 +22,13 @@ The output is a consistent, plain-English memo that you verify before use. The s
 
 Approved skills are pushed to your machine by firm policy. You do not need a GitHub account, a copy of any repository, or an install step. Open Claude Code and the skill is there.
 
-To confirm:
+To confirm, open the plugin panel:
 
-```bash
-claude plugin list
+```
+/plugin
 ```
 
-You should see `term-sheet-review` with a version number. If you do, skip to **Using the skill**.
+Find `harrowvale-legal-skills` and look for `term-sheet-review` with a version number under **Installed**. If it is there, skip to **Using the skill**. If it appears under **Discover** instead, it is on the firm's shelf but not yet on your machine — see the next section.
 
 ### If you are setting it up yourself
 
@@ -58,27 +58,32 @@ Activate it in the current session:
 
 ## Using the skill
 
-The simplest way is to ask for it in plain English. Claude selects the right skill from what you are asking for:
+Ask for it in plain English and name the file. Claude reads what each approved skill is for and picks the right one:
 
 > Review this term sheet against our DD checklist: `NimbusRobotics-SAFE.pdf`
 
-To invoke it explicitly, skills are named `plugin:skill`:
+Paths containing spaces need quotes:
 
-```bash
-/term-sheet-review:term-sheet-review path/to/term-sheet.md
+> Review `"C:\Users\YourName\Documents\NimbusRobotics-SAFE.pdf"` against our DD checklist
+
+If you prefer to type it as a command, the same skill is also available as a namespaced slash form (verified on Claude Code 2.1.140, July 2026):
+
 ```
-
-Paths with spaces need quotes:
-
-```bash
+/term-sheet-review:term-sheet-review path/to/term-sheet.md
 /term-sheet-review:term-sheet-review "C:\Users\YourName\Documents\NimbusRobotics-SAFE.pdf"
 ```
 
+Both routes reach the same skill.
+
 ### With a data room
 
-If you have a folder of DD documents — cap table, articles, contracts, leases:
+If you have a folder of DD documents — cap table, articles, contracts, leases — say so and give the folder:
 
-```bash
+> Review `GreenGrid-SeriesA.md` against our DD checklist, with the data room at `C:\Deals\GreenGrid\data-room\`
+
+Or, typed as a command:
+
+```
 /term-sheet-review:term-sheet-review path/to/term-sheet.md --dd-room path/to/data-room/
 ```
 
@@ -148,11 +153,7 @@ To pull an update immediately rather than waiting:
 /plugin marketplace update harrowvale-legal-skills
 ```
 
-To see which version you are on:
-
-```bash
-claude plugin list
-```
+To see which version you are on, open `/plugin` and read the version beside `term-sheet-review` under **Installed**. Every review also states the version that produced it, so the memo itself is a record.
 
 **Why the version matters.** If you are asked six months from now why a review said what it said, the version is the answer. Every approved version has a stored evaluation report in the firm's repository, so the firm can always show the evidence behind the skill you used.
 
@@ -170,9 +171,9 @@ The firm's shelf carries more than this one skill, and it grows. Anything approv
 
 ## Troubleshooting
 
-### "Skill not found" or the skill does not appear
+### The skill does not seem to be there
 
-Run `/reload-plugins`. If that does not fix it, check it is installed with `claude plugin list`. If it is missing entirely, contact Tom — it is a policy issue, not something you can fix locally.
+Try asking for a review of a document, or typing `/term-sheet-review:` and letting autocomplete offer the rest. If neither works, run `/reload-plugins` — a session holds the plugins it started with. If that does not fix it, open `/plugin` and check whether `term-sheet-review` sits under **Installed** or **Discover**. If it is missing entirely, contact Tom — it is a policy issue, not something you can fix locally.
 
 ### The version looks out of date
 
@@ -190,7 +191,7 @@ then `/reload-plugins`.
 
 ### The output looks wrong
 
-Check your version first (`claude plugin list`). If you are current and the output is still wrong, this matters — raise it with Marcus. A wrong output is a gap in the firm's test set, and the fix is to add your document as a test case so no future version can regress on it.
+Check your version first, in `/plugin`. If you are current and the output is still wrong, this matters — raise it with Marcus. A wrong output is a gap in the firm's test set, and the fix is to add your document as a test case so no future version can regress on it.
 
 ### Diagnosing configuration
 
@@ -215,24 +216,30 @@ Lists every setting in effect and where it came from. Useful to send to Tom if s
 
 ## Quick reference
 
-```bash
-# Which version am I on?
-claude plugin list
+Reviews can be asked for in plain English:
 
-# Review a term sheet
+> Review `path/to/file.md` against our DD checklist
+
+> Review `path/to/file.md` against our DD checklist, with the data room at `path/to/folder/`
+
+Or typed as a namespaced slash command:
+
+```
 /term-sheet-review:term-sheet-review path/to/file.md
-
-# Review with a data room
 /term-sheet-review:term-sheet-review path/to/file.md --dd-room path/to/folder/
+```
+
+Other useful commands:
+
+```
+# Which version am I on / browse the firm's approved skills
+/plugin
 
 # Pull updates now
 /plugin marketplace update harrowvale-legal-skills
 
 # Apply them to this session
 /reload-plugins
-
-# Browse the firm's approved skills
-/plugin
 ```
 
 ---

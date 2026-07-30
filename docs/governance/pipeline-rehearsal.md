@@ -199,8 +199,8 @@ git add -A && git commit -m "Publish cool-new-skill v1.1.0" && git push
 A real lawyer does none of this: the firm's managed policy force-enables the
 skill and it is simply there. That is the route to demo, and it is set up in
 [tools/org-policy/README.md](../../tools/org-policy/README.md) — apply the policy
-once per machine, restart, and confirm with `claude doctor` and
-`claude plugin list`.
+once per machine, restart, and confirm with `claude doctor` and the `/plugin`
+panel.
 
 The commands below are the manual equivalent, which is what you want for a solo
 rehearsal because it is immediate and needs nothing pushed.
@@ -229,14 +229,26 @@ one in `.claude/settings.json`:
 /reload-plugins
 ```
 
-Then use it. Skills are namespaced by plugin name:
+Then use it. Skills are namespaced by plugin name, and can also be triggered by
+description (*verified against Claude Code 2.1.140, 2026-07-30*):
 
 ```bash
 /cool-new-skill:cool-new-skill assets/source/term-sheets/seed-solace-data.md
 ```
 
-It should answer `seed_summary` and sign off `Triaged by: cool-new-skill v1.1.0`.
-That signature is what makes the next step visible.
+Or in plain language:
+
+```
+Triage assets/source/term-sheets/seed-solace-data.md
+```
+
+Either route should answer `seed_summary` and sign off
+`Triaged by: cool-new-skill v1.1.0`. That signature is what makes the next step
+visible.
+
+If it does not trigger, the session is still holding the plugins it launched with
+— `/reload-plugins` or restart. Check the `/plugin` panel to confirm the plugin
+is under **Installed** rather than **Discover**.
 
 ---
 

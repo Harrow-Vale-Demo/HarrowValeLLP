@@ -18,11 +18,20 @@ due-diligence checklist.
 
 ## Usage
 
-Ask in plain English — Claude selects the skill from what you need:
+*Verified against Claude Code 2.1.140, 2026-07-30.*
+
+Two invocation routes, either works:
+
+**Plain English.** Claude selects the skill from what you ask for:
 
 > Review this term sheet against our DD checklist: `NimbusRobotics-SAFE.pdf`
 
-Or invoke it explicitly. Plugin skills are namespaced `plugin:skill`:
+To include a data room, say so and give the folder:
+
+> Review `GreenGrid-SeriesA.md` against our DD checklist, with the data room at `assets/source/data-room/`
+
+**Namespaced slash.** Plugin skills are named `plugin:skill`:
+
 ```
 /term-sheet-review:term-sheet-review <path-to-term-sheet>
 /term-sheet-review:term-sheet-review <path-to-term-sheet> --dd-room <path-to-folder>

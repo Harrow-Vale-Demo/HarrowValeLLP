@@ -215,7 +215,9 @@ The same JSON deploys through any standard channel: the claude.ai admin console,
 
 ### What a lawyer does
 
-Nothing, to receive a skill. To check what they have: `claude plugin list`. To pull an update immediately rather than waiting: `/plugin marketplace update harrowvale-legal-skills`, then `/reload-plugins`.
+Nothing, to receive a skill. To check what they have: the `/plugin` panel, which separates plugins that are installed on the machine from those merely sitting on the shelf. To pull an update immediately rather than waiting: `/plugin marketplace update harrowvale-legal-skills`, then `/reload-plugins`.
+
+A skill can be invoked either in plain language — Claude picks the right skill from its description — or with a namespaced slash command in the form `/plugin-name:skill-name <args>`. Both routes reach the same skill.
 
 Updates are checked shortly after a session starts, and the running session keeps the versions it launched with — so a review never shifts under a lawyer mid-document.
 
