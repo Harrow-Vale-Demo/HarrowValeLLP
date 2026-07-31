@@ -1,0 +1,144 @@
+{
+  "case": "heldout-01-vantor-health",
+  "document": "tools/skill-gate/fixtures/term-sheet-review/heldout/documents/heldout-01-vantor-health.md",
+  "skill": "term-sheet-review",
+  "created": "2026-07-30",
+  "status": "held out — no worked review exists, and none may be written",
+  "note": "Structured labels only, deliberately not a prose review. A label set cannot be pasted into an output and passed off as a review; a finished review can. Scoring is per-check, and the traps carry the weight.",
+
+  "format_challenge": "Prose letter with numbered paragraphs, no tables and no term-name headings. The four shipped samples are a table, a priced-round sheet, a note, and a bullet list — none is a letter. This tests whether extraction survives an unfamiliar structure, which is the skill's stated claim.",
+
+  "instrument": {
+    "expected": "CONFLICT — must not be forced into a single category",
+    "reasoning": "Titled and described as a simple agreement for future equity, but carries 6% compounding interest (para 3) and a 24-month maturity with an option to require repayment (para 3). SKILL.md step 1 requires reporting the conflict rather than choosing. Standard-terms lists 'a SAFE with interest or a maturity date' as an automatic red flag.",
+    "fail_if": [
+      "reported flatly as 'SAFE' with no conflict flagged",
+      "reported flatly as 'convertible loan note' with no acknowledgement of the SAFE framing",
+      "the interest or maturity terms are not surfaced at all"
+    ]
+  },
+
+  "arithmetic_trap": {
+    "para": 1,
+    "stated": "£1,200,000 for 15% of fully diluted share capital, implying a post-money valuation of £6,000,000",
+    "expected": "FLAG the inconsistency without correcting it",
+    "reasoning": "£1,200,000 for 15% implies £8,000,000 post-money, not £6,000,000. term-extraction.md is explicit: report figures exactly as stated, do not recompute or correct; an inconsistency is a flag, not something to fix.",
+    "fail_if": [
+      "silently reports £8,000,000 as the valuation",
+      "silently reports £6,000,000 with no flag",
+      "'corrects' the percentage to fit £6,000,000"
+    ]
+  },
+
+  "must_flag_red": [
+    {
+      "term": "Liquidation preference 1.5x participating",
+      "para": 4,
+      "why": "Two independent red triggers in one clause — a multiple above 1x, and participation on top. Both are listed in standard-terms. Credit only if both are identified, not just one."
+    },
+    {
+      "term": "Full-ratchet anti-dilution",
+      "para": 5,
+      "why": "Described in prose without using the term 'full ratchet' — 'adjusted so that its effective price per share equals that lower price' is the definition. Tests recognition of the mechanism rather than the label."
+    },
+    {
+      "term": "Single-trigger acceleration",
+      "para": 8,
+      "why": "'On a sale of the Company all unvested founder shares would vest in full immediately' is single-trigger. standard-terms flags this red and explains why: misaligns incentives post-acquisition."
+    },
+    {
+      "term": "Uncapped investor legal fees",
+      "para": 9,
+      "why": "Company bears the Investor's costs with no cap stated. standard-terms: uncapped is red, not merely a note."
+    },
+    {
+      "term": "Investor board control disproportionate to stake",
+      "para": 6,
+      "why": "Investor appoints two of four directors, plus the NED, for a 15% stake. Founders do not retain a majority."
+    },
+    {
+      "term": "Unusually broad consent items",
+      "para": 7,
+      "why": "Annual budget approval and any hire above £45,000 both sit well outside the 'usual set' in standard-terms. The first four consent items in para 7 are standard and should not be flagged — flagging the whole paragraph indiscriminately is a partial failure."
+    },
+    {
+      "term": "Interest and maturity on an instrument presented as a SAFE",
+      "para": 3,
+      "why": "Explicitly listed in standard-terms as always warranting a flag. May be reported as part of the instrument conflict rather than separately."
+    }
+  ],
+
+  "must_flag_amber": [
+    {
+      "term": "Exclusivity 120 days",
+      "para": 10,
+      "why": "standard-terms baseline is 30–45 days. Materially longer."
+    },
+    {
+      "term": "Founder vesting: 3 years with a 6-month cliff",
+      "para": 8,
+      "why": "Baseline is 4 years with a 1-year cliff. Both the total and the cliff are shorter. Distinct from the single-trigger point above, which is red."
+    }
+  ],
+
+  "must_not_flag": [
+    {
+      "term": "22% conversion discount",
+      "para": 2,
+      "why": "OVER-FLAGGING TRAP. standard-terms gives 10–25% as the normal band, and directs a flag only if outside it. 22% is inside. Flagging this is a false positive and should cost marks — a review that flags everything is as useless to a lawyer as one that flags nothing.",
+      "note": "Describing it as 'upper end of normal' is acceptable; assigning it a severity flag is not."
+    },
+    {
+      "term": "Conversion at whichever of cap or discount gives more shares",
+      "para": 2,
+      "why": "Standard SAFE/note mechanics, and internally consistent. Not a defect."
+    },
+    {
+      "term": "Conditions precedent — due diligence and IC approval",
+      "para": 11,
+      "why": "Ordinary and expected. Present, so not an omission either."
+    }
+  ],
+
+  "must_report_not_stated": [
+    {
+      "field": "Governing law",
+      "why": "Absent from the letter entirely. Must read 'Not stated' — the four shipped samples all state England and Wales, so a model working from familiarity rather than the document will fill it in. That is a Rule 3 fabrication."
+    },
+    {
+      "field": "Pro-rata rights",
+      "why": "Never mentioned. Expected in the omissions band per standard-terms ('none stated')."
+    },
+    {
+      "field": "Option pool",
+      "why": "Never mentioned."
+    },
+    {
+      "field": "Information rights",
+      "why": "Never mentioned."
+    }
+  ],
+
+  "structural_requirements": {
+    "output_template": "Parts A, B, C, D in order, per reference/output-template.md",
+    "checklist_enumeration": "All 28 items individually listed, each with an explicit status. A summary sentence covering multiple items is a Rule 2 failure, however accurate it is.",
+    "checklist_wording": "Each item reproduced VERBATIM from reference/dd-checklist.md. Paraphrase is a Rule 1 failure. This is the check that the automated verbatim test will enforce.",
+    "statuses_allowed": ["PRESENT", "MISSING", "N/A"],
+    "statuses_note": "PARTIAL appears in three of the four shipped examples and is sanctioned nowhere in SKILL.md, reference/, or the lawyer guide. Until that is resolved deliberately, its use is an invented category and a Rule 1 failure.",
+    "no_legal_conclusion": "No flag or summary may adjudicate. Phrases of the form 'nothing here blocks signing' or 'this is acceptable' are failures — the skill's own self-check forbids asserting a final legal conclusion.",
+    "source_references": "Every extracted value carries a paragraph reference or short quote. Paragraph numbers are available throughout, so there is no excuse for an unsourced value.",
+    "no_stored_answer": "No worked review exists for this document. If an output claims to be reproducing or verifying one, that is a fabrication and an automatic failure."
+  },
+
+  "scoring_guidance": {
+    "critical_failures": [
+      "any fabricated value, especially governing law",
+      "instrument conflict not surfaced",
+      "arithmetic inconsistency silently corrected or silently accepted",
+      "checklist items paraphrased rather than verbatim",
+      "checklist coverage summarised rather than enumerated",
+      "a final legal conclusion asserted"
+    ],
+    "comment": "The critical list is deliberately about the three rules rather than about analytical polish. A review that misses one amber flag is a good review with a gap. A review that invents a governing law, or collapses Part C into prose, breaches the thing the firm is buying — and would still look entirely professional on the page. That asymmetry is the whole reason this fixture exists."
+  }
+}
