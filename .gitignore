@@ -15,3 +15,12 @@ Thumbs.db
 # Editors
 .vscode/
 .idea/
+
+# Personal working notes (not shared coordination — that's LEDGER.md)
+PLAN.md
+PROGRESS.md
+SESSION.md
+
+# Cross-tool update files (CC ↔ Cowork); local-only, Cowork reads via user's filesystem
+UPDATE-to-cowork-*.md
+UPDATE-from-cowork-*.md
