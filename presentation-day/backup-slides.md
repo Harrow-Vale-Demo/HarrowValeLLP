@@ -20,6 +20,7 @@ Re-checked against the code on master before writing these. Do not upgrade any o
 | Gate-report enforcement | **Genuinely on master.** `check_published.py` asserts a stored passing `gate-report.json` and version agreement. |
 | Install verification | **Nothing exists.** No code anywhere reads the machine's install state. |
 | Held-out test document | Written, on `feature/handover-02-artefacts`. **Not on master, and not wired into the gate** — `gate.py` and `scorers/termsheet.py` both have zero references to it. |
+| CI enforcement | `check_published.py` is the **blocking** step. `gate.py --all` runs `continue-on-error` and is **informational** — do not say "CI blocks a low score". |
 
 **The correction that matters:** the held-out test was briefly described as "Fixed" on Slide 4.
 It is not. The document exists; the test has never been run. Row 3 was replaced with the
@@ -248,6 +249,35 @@ Do not claim the loop harness was used to build this. It was not. The claim is n
 still true: **the defects were found by adversarial testing, and adopting that discipline earlier
 would have found them earlier.** Coordination via a shared working-memory file *was* genuinely
 adopted mid-build, so that one may be described in the past tense.
+
+---
+
+# B6 — "Every test we had run was an open-book exam"
+
+**Status: the problem is real and current. The fix is written but not wired in.**
+
+Added because the open-book story has no home on the main slide — it came off Slide 4 when the
+"Fixed" label turned out to be false, and it is too good a finding to lose.
+
+### On-slide wording
+
+> ## Every test we had run was an *open-book exam*
+>
+> | | |
+> |---|---|
+> | **What we did** | Graded the skill against our four sample term sheets. It passed |
+> | **What we missed** | The skill ships worked answers for those same four documents |
+> | **Why that matters** | It can recognise the document and return the stored answer without doing the work |
+> | **What we did about it** | Wrote a fifth term sheet it has never seen — unfamiliar format, deliberate traps |
+> | **Where it stands** | The document exists. Not wired into the gate; nothing graded against it |
+>
+> **The four samples no longer prove much. That is why we stopped saying "verified".**
+
+### Language discipline
+
+Never say "we tested against it", "the held-out test passes", or "verified". Correct verbs:
+**we have written**, and **the principle we took from it**. If asked directly whether the fifth
+document has been run — **it has not**.
 
 ---
 
