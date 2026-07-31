@@ -42,10 +42,10 @@ Ease scale: 1 trivial, 2 simple, 3 moderate, 4 substantial, 5 complex, 6 major.
 | ✅ | Resolve `marketplace.json` conflict per Option A | Master's 3 entries kept (term-sheet-review, leestestskill, mock-skill); his 4th REJECTED. | 2 | Validated as JSON; 3 plugins. |
 | ✅ | Verify `gate.py --all` still green | leestestskill/mock-skill/term-sheet-review PASS; cool-new-skill FAIL pre-existing by design. | 1 | No new regression. |
 | ✅ | Verify `check_published.py` still green | "Every published version is backed by the gate." | 1 | Correctly does not require gate evidence for dd-checklist-mapper (Option A: off-shelf). |
-| ▶️ | Commit the merge | Merge commit lands with Phurin authored on the plugin files. | 1 | Use HEREDOC message. |
-| ⬜ | Push branch | Pushed; branch tracks origin. | 1 | Hold PR for Emily. |
+| ✅ | Commit the merge | Merge commit `37c75c4` with two parents (`823337f` master + `903368f` Phurin). Phurin's authorship preserved on the plugin files. | 1 | |
+| ✅ | Push branch | Pushed; branch tracks `origin/feature/merge-dd-checklist`; PR URL surfaced. | 1 | PR held for Emily's decision. |
 | ✅ | LEDGER entry + sign-off | Entry at top of §Log; Focus Board updated. | 2 | |
-| ⬜ | Update SESSION.md + PROGRESS.md running logs | Blocks appended. | 1 | |
+| ✅ | Update SESSION.md + PROGRESS.md running logs | Blocks appended. | 1 | Both gitignored, personal-only. |
 
 ## Ideas (holding area)
 - **Follow-up:** publish `dd-checklist-mapper-plugin` through the gate in a
