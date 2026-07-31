@@ -356,13 +356,47 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
         <div class="rows an">
           <div class="split"><div>Interpreted differently structured term sheets</div><div>Defined the checklist and legal standards</div></div>
           <div class="split"><div>Produced a structured, source-linked first pass</div><div>Set expected results and the release threshold</div></div>
-          <div class="split"><div>Helped iterate the skill against synthetic examples</div><div>Reviewed outputs and retained final sign-off</div></div>
+          <div class="split"><div>Found defects a skim would pass — including in its own fix</div><div>Turned each one into a mechanical check, not a promise</div></div>
         </div>
         <div class="claim an">Claude accelerates the first pass. It does not replace legal judgement.</div>
         <template data-notes>
           <span class="presenter">Emily</span>
+
+          <p><strong>IF YOUR MIND GOES BLANK — read this, it is the whole slide:</strong><br>
+          "Claude did the reading. We did the rules. Then we tested it — and the interesting part
+          is what the testing found. Every mistake looked fine on the page. Nothing crashed,
+          nothing warned us. So we stopped asking the model to be careful and started making the
+          checks automatic. Claude speeds up the first pass. A lawyer still signs it."</p>
+
           <p>Claude helped in two distinct ways. During development, Claude Code accelerated the drafting and refinement of the skill against synthetic examples. In use, Claude provides the adaptable document reasoning: it identifies the instrument, extracts the required terms, applies the fixed checklist and makes missing or uncertain information explicit.</p>
           <p>It does not decide the firm's legal standard or approve its own work. The firm's checklist and review method define the expected behaviour, the evaluation gate tests it, and a lawyer remains responsible for every decision and sign-off.</p>
+
+          <p><strong>Row 3 — the reliability beat (~35 sec if you take it).</strong> Five defects
+          were found during the build, and they turned out to be the same defect five times: in
+          every case something was verified in one place while the thing that mattered ran
+          somewhere else — and not one of them announced itself. Nothing crashed; the output
+          stayed clean and confident. In a legal review that is the failure that should worry
+          you, because it does not look like a failure.</p>
+
+          <p><strong>The framing to use — chain of custody.</strong> Our gate proved the skill was
+          right when we examined it. It did not prove that what reached the lawyer was that same
+          thing, unaltered. Each defect was a break in the chain, and none of the breaks were
+          logged. The fix is the ordinary professional one: stamp the package with what was
+          approved, check it where it actually runs, and make a mismatch refuse rather than
+          quietly carry on.</p>
+
+          <p><strong>Honesty tags — do not upgrade these on stage.</strong> The packaging check is
+          <em>written but not merged</em> — say "we have written", never "our gate blocks this".
+          Run-time provenance is <em>design, not build</em> — say "the design we would take into
+          the next phase". Do not say "verified" or "validated" about anything tested only against
+          the four sample documents.</p>
+
+          <p><strong>If asked whether the fix works:</strong> be straight about it. The packaging
+          check inspects the source tree, but the incident happened in transit to another surface —
+          so it would not have caught the case that prompted it. The fix has the same shape as the
+          bug, one level up. That is precisely why the next step is checking provenance where the
+          skill actually runs. Saying this costs nothing and demonstrates the discipline better
+          than any claim could.</p>
         </template>
       </section>
 
@@ -443,6 +477,11 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           <div class="cue"><strong>Part B: LIVE LOCAL lawyer experience · 60–75 sec</strong>
           <code>/plugin marketplace add .</code> · <code>/plugin</code> · <code>/plugin install term-sheet-review@harrowvale-legal-skills</code> · <code>/reload-plugins</code><br>
           Explain that the local public repository is the demo stand-in for the private organisation-owned source shown in the clip.</div>
+          <div class="cue"><strong>⚠ PREFLIGHT — the repository has moved organisation and the move is incomplete</strong>
+          Pushes report <code>f7-rage-gremlin/HarrowValeLLP</code> → <code>Harrow-Vale-Demo/HarrowValeLLP</code>, and <code>.claude/settings.json</code> still names the old owner. It currently works on GitHub's redirect.<br>
+          Use <code>/plugin marketplace add .</code> (the local path) for the demo, not the <code>owner/repo</code> form — the local path does not depend on the redirect.<br>
+          Also confirm the checkout is level with origin before starting: a stale checkout serves an old catalogue and is indistinguishable from a broken install.<br>
+          <em>If asked why it is public:</em> it is a hackathon prototype on synthetic data; private from day one for live use, which is a settings change rather than a design change. The distribution model does not depend on the repository being public.</div>
           <div class="cue"><strong>Part C: LIVE UPDATE — only with a staged version transition · 20–30 sec</strong>
           <code>claude plugin list</code> → <code>/plugin marketplace update harrowvale-legal-skills</code> · <code>/reload-plugins</code> → <code>claude plugin list</code> again, show the version change.<br>
           If a distinct newer version has not been staged and verified, use the prerecorded fallback — do not imply that a no-change refresh installed an update.<br>
