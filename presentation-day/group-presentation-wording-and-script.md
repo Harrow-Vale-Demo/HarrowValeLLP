@@ -52,17 +52,21 @@ This is provisional and intended to minimise handovers while keeping the demonst
 
 # From ten private prompts to one governed legal workflow
 
-**Harrow & Vale LLP**<br>
-Term-sheet review and due diligence
+**Harrow & Vale LLP — built on Claude's organisation marketplace**<br>
+Private-repository distribution · Claude-assisted skills · deterministic regression testing
 
 ### Spoken script
 
-Harrow & Vale's lawyers were already using Claude, but each person had developed their own prompts and working methods. That created duplicated effort, inconsistent results, and no clear route for partner approval. Our opportunity was not merely to make one review faster. It was to show how a useful legal workflow could be made consistent, testable and governable across the firm.
+Harrow & Vale's lawyers were already using Claude, but each person had developed their own prompts and working methods. The challenge was not merely to make one review faster; it was to turn that individual work into something consistent, testable and governable across the firm.
+
+We did not build a distribution platform from scratch. Claude already provides an organisation marketplace designed to share approved plugins from a private or internal repository. We use that as the production distribution model; this public demonstration repository contains only synthetic material and stands in for the private, organisation-owned source. We also used Claude Code to create and refine the two legal skills and the deterministic regression harness, which checks recorded outputs against fixed synthetic expectations before a release decision. Claude provides the controlled shelf and helped us build what sits on it; Harrow & Vale's legal method, evidence and governance determine what is approved.
 
 ### Source notes
 
 - `../docs/engagement/engagement-pack.md`
 - `../docs/discovery/hackathon-log.md`
+- `../tools/termsheet-harness/README.md` — recorded fixtures and deterministic gate boundary
+- Anthropic organisation plugin administration: <https://support.claude.com/en/articles/13837433-manage-plugins-for-your-organization>
 
 ---
 
