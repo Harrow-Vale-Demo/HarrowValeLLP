@@ -108,6 +108,39 @@ not certain, use the primary version.
 
 ---
 
+## The handover — how to end, every time (~12 seconds)
+
+**Say this last, whichever spoken track you used:**
+
+> "So that is the honest list. The thread running through all of it is the same: we stop asking
+> the model to be careful, and turn the rule into something that fails on its own. That mechanism
+> is the next slide."
+
+Then hand to **the lead**, not to Phurin. The order is: Emily (Slide 4) → **lead (Slide 5)** →
+Phurin (Demo 2). Demo 2 does not follow your slide directly.
+
+### Three rules for the handover
+
+1. **Do not say what the demo will show.** The blocked candidate is Phurin's reveal. If the room
+   has already been told the gate refuses bad skills, the live moment lands flat. Tee up the
+   *mechanism*, not the *outcome*.
+2. **Do not connect Demo 2 to the silent-failure story.** Demo 2 blocks a candidate that scores
+   below the threshold. The packaging check that addresses silent failure is written and
+   unmerged. They are different things and linking them would be an overclaim.
+3. **Credit Phurin in the room, not on the wall.** If you want to acknowledge the work, the
+   natural moment is a half-sentence as you hand over — the deliberately broken test skill in
+   Demo 2 is Phurin's, and it exists so the gate can be shown saying no. A gate that has only
+   ever approved things is not a gate.
+
+### Why this row is *not* on the slide
+
+"A failing skill could reach the shelf — Fixed — the gate blocks publication" is true, and it was
+considered as a fifth row. It was left off deliberately: it is Slide 5's whole thesis and Demo 2's
+punchline, so putting it on Slide 4 would state the conclusion two beats early and flatten the
+best live moment in the deck. Slide 4 keeps four rows.
+
+---
+
 ## Q&A defences — the four questions most likely to come at this slide
 
 **"How do you know the output is actually right?"**
