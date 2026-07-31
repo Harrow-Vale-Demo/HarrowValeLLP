@@ -71,6 +71,59 @@ Every incident was the same failure wearing different clothes:
 kept working and kept looking confident. That is the property that makes them dangerous in a
 legal setting, and it is why "it works when we try it" was never going to be sufficient evidence.
 
+### The improvement this pattern points to
+
+Naming a pattern is only half the work. The pattern has **two** properties, and a good fix has
+to address both:
+
+| Property | What it means | What fixes it |
+|---|---|---|
+| **Displaced verification** | Checked in one place, used in another | Move the check to the point of use |
+| **Silent divergence** | Nothing signals when the two differ | Refuse, don't degrade |
+
+**Level 1 — the artefact checks itself at the point of use.**
+The skill asserts it can read `reference/dd-checklist.md` before doing anything, and refuses to
+produce a review if it cannot. Cheap, local, and it fixes both properties in one change: the
+check happens where the work happens, and silence becomes a refusal. This is the highest-value
+outstanding item in `docs/hardening/H2`, because it defends against every future variant rather
+than the one instance we found.
+
+**Level 2 — gate-stamped provenance, which closes the entire class.**
+The gate already stores a report of what it graded. Extend it to record the **exact file list
+and a hash of each file**, ship that manifest inside the package, and verify it at install time
+and at run time. Anything that differs from what was graded refuses loudly.
+
+One mechanism, all five incidents:
+
+| Incident | How provenance catches it |
+|---|---|
+| H1 | Compares the machine's actual install state against what was graded, not the shelf's claim |
+| H2 | Missing `reference/` files break the file list immediately |
+| H3 | Exposes that a test document's answer also ships inside the skill |
+| H4 | Asserts the checklist in use is the approved copy, not one of five |
+| H5 | Asserts the manifest resolves and matches what was graded |
+
+**Level 3 — the principle worth stating once:**
+
+> **Verify where it runs, not where it's convenient. Make absence refuse, not degrade.**
+
+### Framing it for a law firm: chain of custody
+
+Priya and Tom already think in these terms, so use them:
+
+- The **gate** proves the skill was correct **when we examined it**.
+- What it never proved is **chain of custody** — that the artefact on a lawyer's machine is
+  that same examined thing, unaltered.
+- Every one of the five was a **break in the chain**, and **none of the breaks were logged**.
+- The fix is the ordinary professional one: stamp the package with what was approved, verify it
+  where it is used, and make a mismatch refuse rather than quietly carry on.
+
+This reframes five awkward-sounding bugs as **one well-understood problem with a standard
+answer** — which is a considerably better impression than five unrelated mistakes.
+
+**Status honesty:** Levels 1 and 2 are **design, not build**. Neither exists. Present them as
+"the design we'd take into the next phase", never as something running today.
+
 ### The sharpest single example — H2, for the stage
 
 The skill shipped to a second surface **without its checklist file**. It still ran. It still

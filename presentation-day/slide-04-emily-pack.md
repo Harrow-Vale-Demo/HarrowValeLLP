@@ -193,6 +193,98 @@ A team that knows precisely what is and isn't deployed reads as *more* governed,
 
 ---
 
+## The pattern beat — one failure shape, five costumes (added 2026-07-31)
+
+**Emily's call on presentation day: the hardening story is in.** This is the version that
+generalises, rather than telling five separate war stories. It is stronger than any single
+incident because it shows you understood the *class*, not just the bug.
+
+### The finding, in one line
+
+> Every defect we found had the same shape: **something was verified somewhere other than
+> where it is used — and none of them announced themselves.**
+
+Two properties, and the second is what makes it dangerous:
+
+1. **Displaced verification** — we checked in one place; the thing that mattered ran in another.
+2. **Silent divergence** — when the two drifted apart, nothing said so. No error, no warning,
+   no missing section. The system kept working and kept looking confident.
+
+### The five, in one table (for a backup slide or Q&A, not the main slide)
+
+| | Verified here | Actually used here |
+|---|---|---|
+| H1 | The shelf manifest | The machine's install state |
+| H2 | A recorded output | The package that reached the machine |
+| H3 | A test document | ...whose answer shipped inside the skill |
+| H4 | One of five copies of the checklist | Whichever copy was loaded |
+| H5 | A manifest | ...pointing at a directory that wasn't a plugin |
+
+### The improvement — say this, not just the diagnosis
+
+A diagnosis without a fix reads as an apology. Three levels, cheapest first:
+
+**1. Make the artefact check itself, at the point of use.**
+The skill asserts it can read `reference/dd-checklist.md` before it does anything, and
+**refuses to produce a review if it cannot**. One change fixes both properties at once: it
+moves the check to where the work happens, and it converts silence into a loud refusal.
+*A refusal is worth more to a partner than a plausible answer.*
+
+**2. Gate-stamped provenance — the version that closes the whole class.**
+The gate already records what it graded. Extend that record to the **exact file list and a
+hash of each file**, ship it with the skill, and check it at install and at run time. Anything
+that differs from what was graded refuses loudly.
+
+That single mechanism catches all five: a missing reference file, a stale install, a manifest
+pointing nowhere, the wrong copy of the checklist, a test document whose answer shipped
+alongside it.
+
+**3. The principle, stated once and remembered:**
+> **Verify where it runs, not where it's convenient. Make absence refuse, not degrade.**
+
+### The framing that lands with a law firm — chain of custody
+
+This is the analogy to use with Priya and Tom, because it is already how they think:
+
+> "In evidence terms, our gate proves the document was authentic **when we examined it**. What
+> it didn't prove was chain of custody — that the thing on the lawyer's machine is that same
+> document, unaltered. Every defect we found was a break in the chain, and none of the breaks
+> were logged. So we're closing it the way you would: the package is stamped with what was
+> approved, and anything that doesn't match refuses to run rather than quietly carrying on."
+
+That reframes five embarrassing-sounding bugs as **one well-understood problem with a standard
+professional answer** — which is exactly the impression you want to leave.
+
+### Spoken track — the pattern beat (~35 seconds)
+
+Use *instead of* the single-incident version if you want the stronger claim. Pairs with the
+~25-second H2 wording above; **do not use both**, you will overrun.
+
+> "We found five defects during the build, and the useful thing wasn't any one of them — it was
+> that they turned out to be the same defect five times.
+>
+> In every case we had verified something in one place, and the thing that actually mattered
+> was running somewhere else. And not one of them announced itself. Nothing crashed. The output
+> stayed clean and confident the whole time. In a legal review that is the failure that should
+> worry you, because it doesn't look like a failure.
+>
+> It's a chain-of-custody problem. Our gate proved the skill was right when we examined it; it
+> didn't prove that what reached the lawyer was that same thing. So the fix is the one you'd
+> expect: stamp the package with what was approved, check it where it actually runs, and make a
+> mismatch refuse rather than quietly carry on."
+
+**Landing line:** *"A governance system that has never found anything isn't evidence of
+quality. It's evidence of not having looked."*
+
+### Honesty tags for this beat
+
+- "We found five defects" — ✅ true, documented in `docs/hardening/`
+- "We're closing it" / "the fix is" — describe as **intended design**. Level 1 and Level 2 are
+  **not built**. Say *"that's the design we'd take into the next phase"* if pressed.
+- The packaging check specifically — 🟡 written, unmerged. "We've written" only.
+
+---
+
 ## Do not say
 
 - **"Verified"** or **"validated"** about anything that has only been tested against the four
