@@ -356,7 +356,7 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
         <div class="rows an">
           <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>A skill can ship without the checklist and still read as authoritative</div><div>On a branch</div><div>Refuse to publish a skill missing a file it depends on</div></div>
           <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>The checklist can be summarised instead of reproduced</div><div>To do</div><div>Compare every output against the source, word for word</div></div>
-          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>Our own tests used answers that shipped inside the skill</div><div>Fixed</div><div>Grade against a document the skill has never seen</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>A version could reach the shelf with no evidence it passed</div><div>Fixed</div><div>Every published version must have a stored gate report</div></div>
           <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>A lawyer's machine can run a version nobody approved</div><div>To do</div><div>Check what is installed against what was approved</div></div>
         </div>
         <div class="claim an">None of these announce themselves. That is why each becomes a check, not a promise to be careful.</div>
@@ -387,11 +387,21 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           idea of a checklist rather than Priya's; the check is written but not merged.
           <em>Summarised not reproduced</em> — a paraphrase currently passes silently; the check is
           specified, not built.
-          <em>Tests used its own answers</em> — the skill shipped worked examples for the very
-          documents we graded it on, so every test was an open-book exam; closed with a held-out
-          document it has never seen.
+          <em>No evidence it passed</em> — this one is genuinely closed: nothing reaches the shelf
+          unless a stored gate report says it passed, and the version in the plugin, the shelf and
+          the skill text must all agree.
           <em>Unapproved version</em> — nothing today compares what is installed on a machine
-          against what was actually approved.</p>
+          against what was actually approved. Note the pairing with the row above: we verify at
+          the shelf, not at the machine. That is the boundary, and it is the honest edge of the
+          whole story.</p>
+
+          <p><strong>The open-book exam — best told aloud, deliberately not on the wall.</strong>
+          We tested the skill against our four sample documents and it passed. Then we noticed the
+          skill ships worked examples for those same four documents, so it could recognise the
+          document and return the stored answer without doing the work. Every test we had run was
+          an open-book exam. We have written a fifth term sheet it has never seen, with deliberate
+          traps in it — but be precise if asked: <em>the document is written and is not yet wired
+          into the gate</em>. Do not say this one is fixed.</p>
 
           <p>Claude did not decide the firm's legal standard or approve its own work. The firm's
           checklist and review method define the expected behaviour, the evaluation gate tests it,
