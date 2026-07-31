@@ -80,6 +80,57 @@ across the firm is the point — ties directly to "standardisation").
 
 ## Log
 
+### [2026-07-31 00:45] Emily + Claude/Opus-4.7-Aurora — Merged Phurin's `dd-checklist` branch (Handover 02 Job 1, Option A — plugin only, off-shelf)
+
+- **Merged `origin/dd-checklist-marketplace-plugin-and-fixed-json`**
+  (Phurin, `903368f`, 2026-07-29) into `feature/merge-dd-checklist`. Branch
+  had been unmerged for 48+ hours; the same diagnosis was rediscovered from
+  scratch by two later sessions (see `docs/hardening/H4-duplicate-overlapping-projects.md`).
+- **Option A per Handover 02** — plugin lands, shelf entry deferred until
+  gated:
+  - ✅ Took the three new plugin files under `plugins/dd-checklist-mapper-plugin/`
+    (`.claude-plugin/plugin.json`, `skills/dd-checklist/SKILL.md`,
+    `skills/dd-checklist/reference/dd-checklist.md`) — Phurin's authorship
+    preserved in the merge commit.
+  - ✅ Resolved the `.claude-plugin/marketplace.json` conflict by keeping
+    master's 3 shelf entries and **rejecting** his 4th
+    (`dd-checklist-mapper-plugin`). No new entry reaches the shelf until it
+    has been through the gate.
+  - ✅ `tools/termsheet-harness/.claude-plugin/marketplace.json` — deleted
+    on both sides (already gone incidentally in Lee's `e5e2fa9`); git
+    auto-resolved.
+- **Verification:**
+  - `python tools/skill-gate/gate.py --all` — no regression;
+    leestestskill/mock-skill/term-sheet-review PASS, cool-new-skill FAIL
+    (pre-existing, by design).
+  - `python tools/skill-gate/check_published.py` — green;
+    *"Every published version is backed by the gate."* Correctly does not
+    ask for gate evidence for `dd-checklist-mapper-plugin` since it isn't
+    on the shelf.
+- **Naming decision deferred.** His directory is `dd-checklist-mapper-plugin`;
+  every other shelf entry drops the `-plugin` suffix. Consistency says
+  `dd-checklist` or `dd-checklist-mapper`. Because Option A doesn't publish
+  now, kept his original directory name at merge time — settle naming (and
+  the derived evidence path `releases/<name>/v1.0.0/`) before generating any
+  gate artefacts.
+- **Situate work (Session 1) lives on a separate held branch.** Emily flagged
+  possible private-marketplace path; `feature/situate-skill` is not being
+  PR'd to `Harrow-Vale-Demo/HarrowValeLLP` for now. Cowork Session 1
+  artefacts (Handover 02 + `docs/hardening/` + verbatim spec + heldout
+  fixture + session-notes extension) are parked on that branch as a stacked
+  commit (`6860cfc`) with a STACKING NOTICE and cherry-pick recipe in
+  personal `SESSION.md`.
+- **Handover 02 remaining jobs** — Job 2 (`instrument-applicability.md`,
+  decision required), Job 3 (verbatim checklist check + fix examples), Job 4
+  (three status vocabularies, deferred D1), Job 5 (small verified items).
+  Job 3 is the biggest demo-relevance body of work; separate branch when
+  picked up.
+- **Cross-branch note.** This branch does NOT include the Nimbus 17:37
+  entry (PR #10 still open) or Aurora's 19:15 situate entry
+  (feature/situate-skill, held). When either PR merges, expect a trivial
+  reverse-chronological ordering conflict at the top of §Log — keep all
+  entries.
+
 ### [2026-07-28 00:40] Lee + Claude — Added `.gitattributes` to stop phantom whole-file diffs
 
 - Symptom: all 107 tracked files showed as modified on a clean Windows checkout, with a

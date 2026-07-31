@@ -61,22 +61,23 @@ Naming: one row per active **Agent Handle** (recommended: `<Model>/<name>`). Don
 | Codex/Meridian-1 | — | J1 archived after PR #7 merge | ✅ Complete | 2026-07-30 13:02 UTC | PR #7 merged at `d93328b`; follow-up clears the stale lock and archives the full log. |
 | Codex/Proposal-Audit-1 | — | J3 complete | ✅ Complete | 2026-07-30 12:14 UTC | J3 archived at 2026-07-30 12:19 UTC; no lock held. |
 | Codex/Linebreak-1 | J3 | Await initiator attribution | ⏸️ Waiting | 2026-07-30 12:34 UTC | LF policy complete and validated; archive blocked at attribution attempt 1/3. |
+| Claude/Opus-4.7-Aurora | J1 | Merge Phurin's dd-checklist branch (Handover 02 Job 1, Option A) | 🟢 Active | 2026-07-31 00:40 UTC | Initiated by: Emily. Fresh branch `feature/merge-dd-checklist` off master. Merges `origin/dd-checklist-marketplace-plugin-and-fixed-json` (Phurin, `903368f`, unmerged 48h+). Option A per Handover 02: take the 3 new plugin files, hold `marketplace.json` off-shelf until it passes the gate. Related situate work (Session 1) lives on `feature/situate-skill`, PR held pending private-marketplace decision. |
 
 ---
 
 # ACTIVE JOB SLOTS (J1–J12)
 Extended per-job logs (tasks, ideas, recent activity, validation) live in `.ai/jobs/active/`.
 
-## J1 — (unassigned)
-Description: —
-Initiated by (human): —
-Status: —
-Lock: 🔓
+## J1 — Merge Phurin's dd-checklist branch (Handover 02 Job 1)
+Description: Merge `origin/dd-checklist-marketplace-plugin-and-fixed-json` (Phurin, `903368f`, 2026-07-29). Option A per Handover 02: take the three new plugin files (`plugins/dd-checklist-mapper-plugin/**`); hold the marketplace entry off-shelf until the plugin has been through the gate. Resolves the "unmerged work indistinguishable from work never done" hardening issue (H4).
+Initiated by (human): Emily
+Status: 🟢 Active
+Lock: 🔒 Claude/Opus-4.7-Aurora since 2026-07-31 00:40 UTC
 Pace: normal
-Last progress tick: —
-Key files/paths: —
-Collision: —
-Job file: `.ai/jobs/active/J1 - (unassigned).md`
+Last progress tick: 18
+Key files/paths: `plugins/dd-checklist-mapper-plugin/**`, `.claude-plugin/marketplace.json`, `tools/termsheet-harness/.claude-plugin/marketplace.json` (already deleted on both sides)
+Collision: None expected on master files. Situate work lives on a separate held branch — no overlap.
+Job file: `.ai/jobs/active/J1 - Merge Phurin's dd-checklist branch.md`
 
 ## J2 — (unassigned)
 Description: —
