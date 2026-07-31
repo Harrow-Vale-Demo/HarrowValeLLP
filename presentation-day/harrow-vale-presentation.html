@@ -342,33 +342,52 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
 
       <!-- ══════════ 4 · HOW CLAUDE HELPED ══════════ -->
       <section class="slide" data-eyebrow="How Claude helped" data-title="How Claude helped">
-        <h2>Claude handled the interpretation; <span class="hl">evidence</span> made it usable</h2>
+        <h2>Claude found the gaps in <span class="hl">its own work</span> — measured against Priya's rules</h2>
         <div class="headrule"></div>
-        <div class="rowhead an"><span>Claude contributed</span><span>The firm stayed in control</span></div>
+        <div class="rowhead an" style="grid-template-columns:1.7fr .75fr 1.55fr"><span>What fails the firm's rule</span><span>Status</span><span>The fix</span></div>
         <div class="rows an">
-          <div class="split"><div>Interpreted differently structured term sheets</div><div>Defined the checklist and legal standards</div></div>
-          <div class="split"><div>Produced a structured, source-linked first pass</div><div>Set expected results and the release threshold</div></div>
-          <div class="split"><div>Found defects a skim would pass — including in its own fix</div><div>Turned each one into a mechanical check, not a promise</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>A skill can ship without the checklist and still read as authoritative</div><div>On a branch</div><div>Refuse to publish a skill missing a file it depends on</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>The checklist can be summarised instead of reproduced</div><div>To do</div><div>Compare every output against the source, word for word</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>Our own tests used answers that shipped inside the skill</div><div>Fixed</div><div>Grade against a document the skill has never seen</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>A lawyer's machine can run a version nobody approved</div><div>To do</div><div>Check what is installed against what was approved</div></div>
         </div>
-        <div class="claim an">Claude accelerates the first pass. It does not replace legal judgement.</div>
+        <div class="claim an">None of these announce themselves. That is why each becomes a check, not a promise to be careful.</div>
         <template data-notes>
           <span class="presenter">Emily</span>
 
           <p><strong>IF YOUR MIND GOES BLANK — read this, it is the whole slide:</strong><br>
-          "Claude did the reading. We did the rules. Then we tested it — and the interesting part
-          is what the testing found. Every mistake looked fine on the page. Nothing crashed,
-          nothing warned us. So we stopped asking the model to be careful and started making the
-          checks automatic. Claude speeds up the first pass. A lawyer still signs it."</p>
+          "Claude did the reading. The firm set the rules. Then we tested whether it actually
+          follows them — and the testing is the interesting part. Every gap on this slide looked
+          completely fine on the page. Nothing crashed, nothing warned us. Some are fixed, some
+          are half done, some are not started, and we would rather show you the honest list.
+          Claude speeds up the first pass. A lawyer still signs it."</p>
 
-          <p>Claude helped in two distinct ways. During development, Claude Code accelerated the drafting and refinement of the skill against synthetic examples. In use, Claude provides the adaptable document reasoning: it identifies the instrument, extracts the required terms, applies the fixed checklist and makes missing or uncertain information explicit.</p>
-          <p>It does not decide the firm's legal standard or approve its own work. The firm's checklist and review method define the expected behaviour, the evaluation gate tests it, and a lawyer remains responsible for every decision and sign-off.</p>
+          <p><strong>The point of the slide.</strong> Priya's rules are the specification: use the
+          checklist verbatim, never skip a step, never fabricate. So the right question is not
+          whether Claude is impressive, it is whether we can prove it obeys those rules — and
+          where it currently cannot. Everything on this slide was found by testing the skill
+          against the firm's own standard, and each line says plainly whether it is closed, in
+          progress, or outstanding.</p>
 
-          <p><strong>Row 3 — the reliability beat (~35 sec if you take it).</strong> Five defects
-          were found during the build, and they turned out to be the same defect five times: in
-          every case something was verified in one place while the thing that mattered ran
-          somewhere else — and not one of them announced itself. Nothing crashed; the output
-          stayed clean and confident. In a legal review that is the failure that should worry
-          you, because it does not look like a failure.</p>
+          <p><strong>The common thread — say this.</strong> Not one of these announces itself.
+          Nothing crashes; the output stays clean and confident throughout. In a legal review that
+          is the failure that should worry you, because it does not look like a failure. Each one
+          was verified in one place while the thing that mattered ran somewhere else.</p>
+
+          <p><strong>Row by row, if asked.</strong>
+          <em>Ships without the checklist</em> — it kept producing confident reviews using its own
+          idea of a checklist rather than Priya's; the check is written but not merged.
+          <em>Summarised not reproduced</em> — a paraphrase currently passes silently; the check is
+          specified, not built.
+          <em>Tests used its own answers</em> — the skill shipped worked examples for the very
+          documents we graded it on, so every test was an open-book exam; closed with a held-out
+          document it has never seen.
+          <em>Unapproved version</em> — nothing today compares what is installed on a machine
+          against what was actually approved.</p>
+
+          <p>Claude did not decide the firm's legal standard or approve its own work. The firm's
+          checklist and review method define the expected behaviour, the evaluation gate tests it,
+          and a lawyer remains responsible for every decision and sign-off.</p>
 
           <p><strong>The framing to use — chain of custody.</strong> Our gate proved the skill was
           right when we examined it. It did not prove that what reached the lawyer was that same

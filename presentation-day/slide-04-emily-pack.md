@@ -9,44 +9,46 @@
 
 ---
 
-## The existing slide (unchanged — this is what's in the HTML now)
+## The slide as it now stands in the HTML (rebuilt 2026-07-31)
 
-> ## Claude handled the interpretation; evidence made it usable
+Emily's call: frame the slide around **what currently fails the firm's own rules**, with an
+honest status against each. This replaced the earlier "Claude contributed / firm stayed in
+control" two-column table.
+
+> ## Claude found the gaps in *its own work* — measured against Priya's rules
 >
-> | Claude contributed | The firm stayed in control |
-> |---|---|
-> | Interpreted differently structured term sheets | Defined the checklist and legal standards |
-> | Produced a structured, source-linked first pass | Set expected results and the release threshold |
-> | Helped iterate the skill against synthetic examples | Reviewed outputs and retained final sign-off |
+> | What fails the firm's rule | Status | The fix |
+> |---|---|---|
+> | A skill can ship without the checklist and still read as authoritative | On a branch | Refuse to publish a skill missing a file it depends on |
+> | The checklist can be summarised instead of reproduced | To do | Compare every output against the source, word for word |
+> | Our own tests used answers that shipped inside the skill | Fixed | Grade against a document the skill has never seen |
+> | A lawyer's machine can run a version nobody approved | To do | Check what is installed against what was approved |
 >
-> **Claude accelerates the first pass. It does not replace legal judgement.**
+> **None of these announce themselves. That is why each becomes a check, not a promise to be
+> careful.**
 
-This is good. The two-column contrast is the right structure and the closing line is the right
-closing line. **Recommendation: change at most one row.** A slide that grows in the last hours
-before a presentation is a slide that gets misread on stage.
+### Why this framing is stronger
 
----
+It answers the question Priya is actually asking. Her rules — use the checklist verbatim, never
+skip a step, never fabricate — are the **specification**. So the useful thing to show is not
+that Claude is impressive, but whether we can *prove it obeys those rules*, and where it
+currently cannot.
 
-## The one change worth making
+It also removes the temptation to overclaim: the status column does the honesty work for you, on
+the wall, so you cannot accidentally imply everything is finished.
 
-The current three rows all describe Claude *producing* things. Nothing describes Claude
-**finding its own mistakes**, which is the more interesting claim and the one that speaks to
-reliability rather than capability.
+### What moved to the presenter notes
 
-Optional replacement for row 3 — swap, don't add:
+The old slide's closing line — *"Claude accelerates the first pass. It does not replace legal
+judgement"* — is no longer on the wall. **Say it anyway**; it is the deck's core safety message
+and it is the last line of the ELI5 fallback in the notes.
 
-| Claude contributed | The firm stayed in control |
-|---|---|
-| Interpreted differently structured term sheets | Defined the checklist and legal standards |
-| Produced a structured, source-linked first pass | Set expected results and the release threshold |
-| **Surfaced defects in its own output that a skim would pass** | **Turned each one into a mechanical check, not a promise** |
+### Two cautions
 
-Why this row earns its place: every other reliability claim in the deck is an assertion about
-design. This one is an assertion about *behaviour under test*, which is much harder to say and
-therefore much more credible.
-
-**If in doubt, leave the slide alone and put this in the spoken track instead.** The material is
-strong; it does not need to be on the wall.
+- **Four rows is the maximum.** Do not add a fifth. The deck auto-scales so nothing will
+  overflow, but a five-row three-column table stops being readable from the back.
+- **"On a branch" and "To do" are load-bearing.** If anyone asks you to soften them to make the
+  slide look better, don't. The honesty is the argument.
 
 ---
 
