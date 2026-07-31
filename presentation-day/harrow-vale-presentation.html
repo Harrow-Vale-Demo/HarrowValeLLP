@@ -469,6 +469,11 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           <div class="cue"><strong>Part B: LIVE LOCAL lawyer experience · 60–75 sec</strong>
           <code>/plugin marketplace add .</code> · <code>/plugin</code> · <code>/plugin install term-sheet-review@harrowvale-legal-skills</code> · <code>/reload-plugins</code><br>
           Explain that the local public repository is the demo stand-in for the private organisation-owned source shown in the clip.</div>
+          <div class="cue"><strong>⚠ PREFLIGHT — the repository has moved organisation and the move is incomplete</strong>
+          Pushes report <code>f7-rage-gremlin/HarrowValeLLP</code> → <code>Harrow-Vale-Demo/HarrowValeLLP</code>, and <code>.claude/settings.json</code> still names the old owner. It currently works on GitHub's redirect.<br>
+          Use <code>/plugin marketplace add .</code> (the local path) for the demo, not the <code>owner/repo</code> form — the local path does not depend on the redirect.<br>
+          Also confirm the checkout is level with origin before starting: a stale checkout serves an old catalogue and is indistinguishable from a broken install.<br>
+          <em>If asked why it is public:</em> it is a hackathon prototype on synthetic data; private from day one for live use, which is a settings change rather than a design change. The distribution model does not depend on the repository being public.</div>
           <div class="cue"><strong>Part C: LIVE UPDATE — only with a staged version transition · 20–30 sec</strong>
           <code>claude plugin list</code> → <code>/plugin marketplace update harrowvale-legal-skills</code> · <code>/reload-plugins</code> → <code>claude plugin list</code> again, show the version change.<br>
           If a distinct newer version has not been staged and verified, use the prerecorded fallback — do not imply that a no-change refresh installed an update.<br>
