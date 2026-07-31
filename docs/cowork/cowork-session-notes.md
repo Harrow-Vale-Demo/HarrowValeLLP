@@ -10,6 +10,64 @@
 
 ---
 
+## ✅ Which directory is the right one — settled 2026-07-31
+
+**We have been working in the right place.** Verified against commit history, not assumption.
+
+| Path | Verdict | Provenance |
+|---|---|---|
+| **`plugins/term-sheet-review-plugin/`** | ✅ **THE LIVE PRODUCT.** All work belongs here. | Created by **Emily**, 2026-07-22 (`43835da`, `5776772`). On master, on the shelf, gate-governed, and what actually installs. |
+| `plugins/term-sheet-review-plugin/skills/term-sheet-review/reference/dd-checklist.md` | ✅ **CANONICAL checklist** (Emily's decision, 2026-07-31) | It ships, the gate governs it, the skill reads it. Everything else derives. |
+| `tools/skill-gate/` | ✅ live — the approval gate | **Lee (AiioApeira)**, 2026-07-29 (`03c7288`) |
+| `releases/` | ✅ live — frozen release history | Grew out of **Phurin's** `harrow-vale-skills/` (2026-07-23, `dcac354`), renamed by Lee's layout refactor `e5e2fa9` |
+| `tools/termsheet-harness/` | ⚠️ **earlier prototype, leftover artefact** | **Lee**, 2026-07-26 (`b4fa838`, "Integrate harness, demo, and canonical project assets") |
+| `assets/source/` | ✅ captured input documents | Lee, 2026-07-27, during the layout refactor |
+| `harrow-vale-skills/` | ❌ gone — became `releases/` | Phurin, deleted in `e5e2fa9` |
+
+**Correcting one thing in the record:** the recollection was that Phurin built the gate and
+pipeline. Close, but it splits differently — **Phurin** built the *versioned release structure* and
+the evaluation evidence (`harrow-vale-skills/`, the CONTRIBUTING guide, `eval-results.md`, the
+v1.0.0 reference files) which became `releases/`. **Lee** built the gate scripts
+(`gate.py`, `publish.py`, `check_published.py`). **Emily** built the skill itself. All three
+contributions are live; none is the leftover.
+
+The only genuine leftover is `tools/termsheet-harness/` — and it is Lee's, not Phurin's.
+
+### 🔴 Phurin's work that never merged
+
+`origin/dd-checklist-marketplace-plugin-and-fixed-json` — commit `903368f`, 2026-07-29.
+Confirmed **not an ancestor of `origin/master`**.
+
+Two other branches are also unmerged, both Emily's and both known:
+`feature/gate-packaging-check` and `feature/situate-skill`.
+
+To re-check at any time:
+
+```bash
+for b in $(git branch -r --format='%(refname:short)' | grep -v HEAD); do
+  git merge-base --is-ancestor "$b" origin/master 2>/dev/null \
+    && echo "merged      $b" || echo "NOT MERGED  $b"
+done
+```
+
+### Transfer list — what needs bringing across, and whether it is still needed
+
+| # | Item | Source | Still needed? |
+|---|---|---|---|
+| 1 | `plugins/dd-checklist-mapper-plugin/` — `dd-checklist` packaged as an installable plugin, plus its shelf entry | Phurin's unmerged branch | **YES.** Master still has only a loose `SKILL-dd-checklist.md` in the harness, ungoverned. **Review and merge his branch — do not rebuild it.** Check for drift against the gate's fixture move in `d4e1d99`. |
+| 2 | Removal of the orphaned `tools/termsheet-harness/.claude-plugin/marketplace.json` | Phurin's unmerged branch | **NO — already achieved.** Lee's refactor `e5e2fa9` removed it incidentally. Only one manifest exists on disk. Nobody recorded that it was closed, which is why it kept resurfacing. See H5. |
+| 3 | `instrument-applicability.md` | `releases/…/v1.1.0/references/` — in snapshots, **never in the active plugin** | **FLAGGED, do not transfer yet.** History checked: it was never dropped, it was never there. Only ever existed in Phurin's release tree. `SKILL.md` step 4 already carries a low-resolution version of the same idea ("most items will be N/A"), so it may have been deliberately superseded. Adding a fifth reference file changes behaviour → version bump through the gate. **Decision needed from Emily or Phurin before acting.** |
+| 4 | `bvca_baseline.md` | `tools/termsheet-harness/reference/` | **Probably not.** The active plugin's `standard-terms.md` supersedes it, but the two differ in content. Diff them before deleting, in case the harness version carries anything the live one lost. |
+| 5 | The four term sheets under `tools/termsheet-harness/data/` | harness | **NO.** Byte-identical to `assets/source/term-sheets/`, just different filenames. Delete with the harness. |
+| 6 | `run_harness.py`, `consistency_check.py` | harness | **Probably not** — `gate.py` supersedes them. |
+| 7 | `dd_mapper.py` | harness | **Check.** `README.md` says the DD mapper "still runs" from here and `gate.py` does not cover it. If item 1 merges, Phurin's plugin may replace it entirely — confirm before deleting. |
+
+**Nothing from the past few sessions needs relocating.** Every change made in this Cowork
+thread — the hardening docs, the spec, the held-out fixture, the session notes — went into
+`docs/`, `tools/skill-gate/fixtures/`, or the live plugin. No work landed in the prototype.
+
+---
+
 ## Where things stand right now
 
 | Thing | State |
@@ -301,6 +359,87 @@ than a rule asserted.
 
 ---
 
+## Built this session — ready for Claude Code
+
+Three new files. Nothing else in the repo was touched.
+
+| File | What it is |
+|---|---|
+| `docs/governance/verbatim-checklist-check-spec.md` | Implementation spec for the verbatim check, plus the three content fixes that must land with it |
+| `tools/skill-gate/fixtures/term-sheet-review/heldout/documents/heldout-01-vantor-health.md` | Fifth term sheet — prose letter format, never seen by the skill, with deliberate traps |
+| `tools/skill-gate/fixtures/term-sheet-review/heldout/labels/…labels.json` | Expected answers as **structured labels, not a prose review** — so they can't be copied into an output and passed off |
+| `tools/skill-gate/fixtures/term-sheet-review/heldout/README.md` | The one rule: never write a worked review for a held-out document |
+
+### The held-out document's traps
+
+Deliberately chosen so that each one tests a *stated* behaviour of the skill rather than
+general competence:
+
+- **Instrument conflict** — presented as a SAFE, but carries 6% compounding interest and a
+  24-month maturity. `SKILL.md` step 1 says report the conflict, don't force a category.
+- **Arithmetic inconsistency** — "£1,200,000 for 15% … implying a post-money valuation of
+  £6,000,000" (it implies £8m). `term-extraction.md` says report as stated and flag; never
+  recompute or correct.
+- **Over-flagging trap** — a 22% discount, inside the 10–25% standard band. Flagging it is a
+  false positive and should cost marks. A review that flags everything is as useless as one
+  that flags nothing.
+- **Fabrication trap** — governing law is absent. All four shipped samples say England and
+  Wales, so a model working from familiarity rather than the document will fill it in. That's
+  a Rule 3 breach.
+- **Prose-letter format** — no tables, no term headings. The four samples are a table, a
+  priced sheet, a note and a bullet list. Tests the structure-independence the skill claims.
+- Plus the genuinely off-market terms: 1.5x participating preference, full-ratchet
+  anti-dilution described without using the term, single-trigger acceleration, uncapped
+  investor legal fees, 2-of-4 board seats on a 15% stake, and consent over budgets and any
+  hire above £45,000.
+
+### Session 2 additions — 2026-07-31
+
+**Hardening directory created:** `docs/hardening/`, one document per issue, plus `INDEX.md`.
+There was no existing hardening doc, so H1 and H2 were backfilled from `PLAN.md` and
+`PROGRESS.md` to make the set coherent. H3 (answer-key contamination) and H4 (duplicate
+projects) are new and written in full.
+
+The index makes a point worth carrying into the demo: **all four incidents are the same failure
+mode** — something verified somewhere other than where it is used. That is the boundary of the
+gate, not a defect in it, and naming the boundary is more credible than implying it is covered.
+
+**`PARTIAL` downgraded to deferred.** Not a blocker. The spec now says to implement the check
+with `PARTIAL` temporarily permitted and a `TODO: D1` comment, so the valuable assertions land
+now. Decide it if there's time.
+
+**Two projects — confirmed, and it's worth untangling.** See
+`docs/hardening/H4-duplicate-overlapping-projects.md`. Short version:
+
+- Two skills both named `term-sheet-review` — the plugin (106 lines, Parts A–D, 28-item
+  coverage) and `tools/termsheet-harness/SKILL.md` (61 lines, "Exception Report", its own
+  BVCA baseline). Same frontmatter name, different output contracts.
+- A third skill definition, `dd-checklist`, in `tools/termsheet-harness/SKILL-dd-checklist.md` —
+  not on the marketplace, not in `plugins/`, not registered with the gate. Ungoverned, and
+  arguably more useful to the firm than single-sheet review.
+- The four term sheets exist twice, byte-identical, under different filenames.
+- Two different "standard" baselines — `reference/standard-terms.md` and
+  `reference/bvca_baseline.md` — with no statement of which governs.
+
+**Demo note:** don't show both systems. "Here is our gate" is strong; "here is our gate, and
+also this other evaluator, and these two baselines" invites the question you least want on
+stage.
+
+### One decision, deferred (D1)
+
+**Is `PARTIAL` a sanctioned status or not?** It appears in three of the four shipped examples
+and nowhere in `SKILL.md`, `reference/`, or the lawyer guide — which tells lawyers there are
+exactly three statuses.
+
+It's arguably a genuinely useful category: *"this SAFE is one such instrument, but the others
+weren't provided"* is honestly neither PRESENT nor MISSING nor N/A. But right now it is an
+undocumented fourth category invented at run time, which is the shape of a Rule 1 breach.
+
+Either sanction it properly everywhere, or remove it from the examples. **Emily or Priya
+decides — not the implementer**, and the spec blocks on it deliberately.
+
+---
+
 ## For Claude Code (paste-back queue)
 
 Small, verified items to hand back next time Emily is in a Claude Code session:
@@ -313,3 +452,9 @@ Small, verified items to hand back next time Emily is in a Claude Code session:
       Desktop's — currently invisible until upload.
 - [ ] Update the git remote and the 4 remaining `plugin.json` `repository` fields to
       `Harrow-Vale-Demo/HarrowValeLLP` **before** any decision to flip the repo private.
+- [ ] **Implement `docs/governance/verbatim-checklist-check-spec.md`** — the check, plus the
+      three content fixes that must land with it. Blocks on decision D1 (`PARTIAL`).
+- [ ] Decide whether to strip the "NOTES vs BVCA baseline (for skill)" scaffolding section from
+      `assets/source/term-sheets/safe-nimbus-robotics.md` before anything is shown to a client.
+- [ ] Later, separate change: wire the held-out fixture into `gate.py` as a scored case. Needs
+      a scoring approach for structured labels, which the existing fixtures don't use.
