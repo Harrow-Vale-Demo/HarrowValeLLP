@@ -304,7 +304,6 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           <div class="cue"><strong>Communication job</strong>By the end, the audience should understand that the useful result is not simply a clever legal prompt: it is a controlled workflow that makes AI-assisted review consistent, testable, reviewable, and capable of being governed by the firm. Target 10–12 minutes; 15-minute hard ceiling.</div>
         </template>
       </section>
-
       <!-- ══════════ 2 · WHAT WE LEARNED ══════════ -->
       <section class="slide" data-eyebrow="What we learned" data-title="What we learned">
         <h2>The hard problem was <span class="hl">trust</span>, not extraction</h2>
@@ -319,7 +318,6 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           <p>Tom described the Thursday-afternoon document dump that associates must map against the due-diligence checklist by Friday. But the adoption gate sat above both use cases: the partners wanted to know where client data went and how the firm would remain in control.</p>
         </template>
       </section>
-
       <!-- ══════════ 3 · THE RESPONSE ══════════ -->
       <section class="slide" data-eyebrow="The response" data-title="The response" data-demo="1">
         <h2>One governed pipeline, beginning with <span class="hl">two useful skills</span></h2>
@@ -347,10 +345,190 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           <em>Transition:</em> the output is useful; the next question is how we know a future version remains safe to use.</div>
         </template>
       </section>
-
       <!-- ══════════ 4 · HOW CLAUDE HELPED ══════════ -->
       <section class="slide" data-eyebrow="How Claude helped" data-title="How Claude helped">
-        <h2>Claude found the gaps in <span class="hl">its own work</span> — measured against Priya's rules</h2>
+        <h2>Claude handled the interpretation; <span class="hl">evidence</span> made it usable</h2>
+        <div class="headrule"></div>
+        <div class="rowhead an"><span>Claude contributed</span><span>The firm stayed in control</span></div>
+        <div class="rows an">
+          <div class="split"><div>Interpreted differently structured term sheets</div><div>Defined the checklist and legal standards</div></div>
+          <div class="split"><div>Produced a structured, source-linked first pass</div><div>Set expected results and the release threshold</div></div>
+          <div class="split"><div>Helped iterate the skill against synthetic examples</div><div>Reviewed outputs and retained final sign-off</div></div>
+        </div>
+        <div class="claim an">Claude accelerates the first pass. It does not replace legal judgement.</div>
+        <template data-notes>
+          <p><strong>Two distinct kinds of help — say both, they are routinely confused.</strong></p>
+
+          <p><strong>During development.</strong> Claude Code accelerated the drafting and
+          refinement of the skill against synthetic examples — the instructions, the reference
+          files, the extraction logic, and the harness that grades it. That is how a working skill
+          and its evaluation came to exist inside a hackathon week rather than a quarter.</p>
+
+          <p><strong>In use.</strong> Claude provides the adaptable document reasoning: it
+          identifies the instrument, extracts the required terms, applies the fixed checklist, and
+          makes missing or uncertain information explicit. That is the part that survives four
+          differently structured term sheets without a separate parser for each.</p>
+
+          <p>It does not decide the firm's legal standard or approve its own work. The firm's
+          checklist and review method define the expected behaviour, the evaluation gate tests it,
+          and a lawyer remains responsible for every decision and sign-off.</p>
+
+          <p><strong>Landing line, said slowly:</strong> "Claude accelerates the first pass. It
+          does not replace legal judgement."</p>
+
+          <div class="cue"><strong>Two free wins — both true, both in the brief, both unclaimed</strong>
+          Say "<b>four formats</b>" — the brief only asked for three, and the terse seed summary was
+          extra. And say "<b>test-driven from the start</b>" — the brief explicitly asks for that
+          approach and nothing else in the deck claims it. Neither costs a second.</div>
+
+          <div class="cue"><strong>Where the evidence sits, if pressed</strong>
+          The engagement pack asks specifically for an explanation of how Claude solved the problem.
+          The live procedure and its controls are in the skill itself (<code>SKILL.md</code>); the
+          synthetic evaluation evidence and the current limitations are in
+          <code>tools/termsheet-harness/README.md</code>.<br>
+          <em>Presenter:</em> the lead runs this slide. Emily now takes <b>What the testing
+          found</b>, second from the end.<br>
+          <em>Do not</em> reach for the hardening or defect material here — it has its own slide
+          near the close, and spending it early costs Emily her strongest beat.<br>
+          <em>Transition:</em> the output is useful and the division of labour is clear — the next
+          question is what makes a future version safe to use.</div>
+        </template>
+      </section>
+      <!-- ══════════ 5 · APPROVAL ══════════ -->
+      <section class="slide" data-eyebrow="How approval becomes meaningful" data-title="How approval becomes meaningful" data-demo="2">
+        <h2>A skill cannot be approved until it can be <span class="hl">tested</span></h2>
+        <div class="headrule"></div>
+        <div class="steps">
+          <div class="step an"><div class="n"><i>1</i>Constrain</div><p>Fixed schema and fixed checklist</p></div>
+          <div class="step an"><div class="n"><i>2</i>Evaluate</div><p>Known-good, known-bad and varied formats</p></div>
+          <div class="step an"><div class="n"><i>3</i>Publish</div><p>Version only after the gate passes</p></div>
+        </div>
+        <template data-notes>
+          <p>Approval needs to mean more than somebody reading a prompt and deciding that it looks sensible. Each skill defines a fixed output contract, the firm's authoritative reference material, and a regression set containing expected results and deliberately difficult cases.</p>
+          <p>The harness compares a proposed version with those expectations and identifies misses or regressions. Only a passing version should be promoted to the approved catalogue. The prototype demonstrates this gate; production would enforce it through protected continuous integration rather than relying on somebody to remember to run a command.</p>
+          <div class="cue"><strong>Live demo 2 follows — Phurin · LIVE TERMINAL · 45–60 sec</strong>
+          <code>python tools/skill-gate/gate.py term-sheet-review</code><br>
+          <code>python tools/skill-gate/gate.py cool-new-skill</code><br>
+          <code>python tools/skill-gate/publish.py term-sheet-review --candidate v2 --as-version 1.2.0 --dry-run</code><br>
+          Show the approved skill passing, the deliberately weak candidate being blocked, and the dry-run listing the files publication would update. Say explicitly that the current gate scores recorded synthetic runs; production would connect the same release decision to protected CI and approved generation runs.<br>
+          <em>Fallback:</em> captured terminal recording with PASS, BLOCKED and dry-run visible.<br>
+          <em>Transition:</em> once a version passes, it can move onto the firm's approved shelf.</div>
+        </template>
+      </section>
+      <!-- ══════════ 6 · HUMAN CONTROL ══════════ -->
+      <section class="slide" data-eyebrow="Human control" data-title="Human control">
+        <h2>The output is designed to be <span class="hl">checked</span></h2>
+        <div class="headrule"></div>
+        <ul class="checks">
+          <li class="an"><b>No guessed terms</b> — absent means “not stated”</li>
+          <li class="an"><b>Source-linked findings</b> — every point can be verified</li>
+          <li class="an"><b>Explicit dispositions</b> — high-risk flags cannot disappear silently</li>
+          <li class="an"><b>The skill flags; the lawyer decides</b></li>
+        </ul>
+        <template data-notes>
+          <p>The objective is not to pretend that the model is infallible. It is to make mistakes easier to detect and prevent uncertain output from becoming an unexamined conclusion.</p>
+          <p>Missing information is reported as missing rather than filled in from a typical deal. Findings point back to the relevant source text. High-risk points require an explicit lawyer response, and the resulting report remains a working document until a qualified lawyer has checked it.</p>
+        </template>
+      </section>
+      <!-- ══════════ 7 · WHERE MATTER DATA GOES ══════════ -->
+      <section class="slide" data-eyebrow="Where matter data goes" data-title="Where matter data goes">
+        <h2>Data location is <span class="hl">not one question</span></h2>
+        <div class="headrule"></div>
+        <div class="rows an">
+          <div class="row"><dt>Authoritative matter file</dt><dd>SharePoint remains the home for original and approved documents.</dd></div>
+          <div class="row"><dt>Claude processing</dt><dd>Only content deliberately selected by a lawyer is transmitted for review under the approved commercial terms.</dd></div>
+          <div class="row"><dt>Residency and transfers</dt><dd>Inference, storage, connector and subprocessor locations must be verified separately. No UK or EU residency claim has been established.</dd></div>
+          <div class="row"><dt>Skills repository</dt><dd>No client documents, prompts, outputs, screenshots or matter logs belong in the repository.</dd></div>
+        </div>
+        <div class="claim an">Live-matter use waits for contractual and data-protection sign-off.</div>
+        <template data-notes>
+          <p>We are not claiming that selected documents never leave SharePoint. SharePoint remains the authoritative matter record, but content selected for review is transmitted to the approved Claude environment for processing.</p>
+          <p>Data residency therefore has several layers: where the original file is stored, where model inference runs, where chats, files or logs are retained, and where connectors or subprocessors handle data. Anthropic's published controls differ by product: the first-party API currently documents US or global inference and US workspace storage, while certain usage-based Enterprise organisations can enforce US-only inference.</p>
+          <p>We have not validated the mock client's Team tenant, contract or transfer safeguards, so the presentation must not imply UK or EU residency. Before live use, the firm would confirm the chosen product, retention, training, inference, storage, subprocessor and international-transfer position together with its Microsoft 365 controls.</p>
+        </template>
+      </section>
+      <!-- ══════════ 8 · REPOSITORY SECURITY ══════════ -->
+      <section class="slide" data-eyebrow="Repository security and controlled distribution" data-title="Repository security" data-demo="3">
+        <h2>Only reviewed releases reach the firm's <span class="hl">approved shelf</span></h2>
+        <div class="headrule"></div>
+        <div class="kicker an" style="margin:0 0 10px">Production control model</div>
+        <ul class="checks an" style="margin-top:0">
+          <li>A separate, private Harrow &amp; Vale repository</li>
+          <li>An organisation-managed marketplace; reviewed pull requests to change</li>
+          <li>Technical review and Priya's substantive approval</li>
+          <li>Protected main branch, required evaluation and versioned releases</li>
+          <li>Synthetic tests only — never client matter data</li>
+        </ul>
+        <template data-notes>
+          <p>The public hackathon repository is suitable for the demonstration because its documents and results are synthetic. It is not the proposed production shelf. Live deployment would use a separate private or internal repository owned by the Harrow &amp; Vale organisation, connected by an organisation owner through the Claude GitHub App.</p>
+          <p>The owner controls whether each plugin is required, installed by default, available for self-service installation or hidden. Lawyers can receive approved releases without permission to change the repository. Every release carries its version, changelog and evaluation evidence, allowing the firm to identify, withdraw or roll back the version used on a matter.</p>
+          <div class="cue"><strong>Demo 3 — Phurin · Part A: PRERECORDED ADMIN · 10–20 sec</strong>
+          Organization settings → Plugins → Add plugin → GitHub → enter the private marketplace repo in <code>owner/repo</code> form → initial sync completes, <code>term-sheet-review</code> set to <b>Available for install</b>.<br>
+          Keep the caption visible throughout: <em>Illustrative organisation-admin workflow — requires client owner access, a private/internal repository and the Claude GitHub App; not performed in this workspace.</em> Never fake a live login.</div>
+          <div class="cue"><strong>Part B: LIVE LOCAL lawyer experience · 60–75 sec</strong>
+          <code>/plugin marketplace add .</code> · <code>/plugin</code> · <code>/plugin install term-sheet-review@harrowvale-legal-skills</code> · <code>/reload-plugins</code><br>
+          Explain that the local public repository is the demo stand-in for the private organisation-owned source shown in the clip.</div>
+          <div class="cue"><strong>⚠ PREFLIGHT — the repository has moved organisation and the move is incomplete</strong>
+          Pushes report <code>f7-rage-gremlin/HarrowValeLLP</code> → <code>Harrow-Vale-Demo/HarrowValeLLP</code>, and <code>.claude/settings.json</code> still names the old owner. It currently works on GitHub's redirect.<br>
+          Use <code>/plugin marketplace add .</code> (the local path) for the demo, not the <code>owner/repo</code> form — the local path does not depend on the redirect.<br>
+          Also confirm the checkout is level with origin before starting: a stale checkout serves an old catalogue and is indistinguishable from a broken install.<br>
+          <em>If asked why it is public:</em> it is a hackathon prototype on synthetic data; private from day one for live use, which is a settings change rather than a design change. The distribution model does not depend on the repository being public.</div>
+          <div class="cue"><strong>Part C: LIVE UPDATE — only with a staged version transition · 20–30 sec</strong>
+          <code>claude plugin list</code> → <code>/plugin marketplace update harrowvale-legal-skills</code> · <code>/reload-plugins</code> → <code>claude plugin list</code> again, show the version change.<br>
+          If a distinct newer version has not been staged and verified, use the prerecorded fallback — do not imply that a no-change refresh installed an update.<br>
+          <em>Transition:</em> distribution is controlled; the final boundary is what an installed skill is actually allowed to do.</div>
+        </template>
+      </section>
+      <!-- ══════════ 9 · LIMITING THE SKILL ══════════ -->
+      <section class="slide" data-eyebrow="Limiting what the skill can do" data-title="Limiting what the skill can do">
+        <h2>The skill can read the matter — but it <span class="hl">cannot act</span> on it</h2>
+        <div class="headrule"></div>
+        <ul class="checks">
+          <li class="an"><b>Read, search and classify only</b></li>
+          <li class="an"><b>No shell, write, web or unapproved connectors</b></li>
+          <li class="an"><b>Document text is evidence, never an instruction</b></li>
+          <li class="an"><b>Adversarial documents join the release tests</b></li>
+        </ul>
+        <template data-notes>
+          <p>The current skill manifest already limits its tools to reading and searching supplied files; it has no shell, write or network tool. That materially reduces the consequences of an unsafe response.</p>
+          <p>Production hardening would also state explicitly that instructions embedded inside a term sheet or data-room document must be treated as untrusted text, and it would add prompt-injection examples to the release gate. Read-only access does not eliminate manipulation risk, but it prevents the skill from turning a misleading document into an external action.</p>
+        </template>
+      </section>
+      <!-- ══════════ 10 · THE HONEST BOUNDARY ══════════ -->
+      <section class="slide" data-eyebrow="The honest boundary" data-title="The honest boundary">
+        <h2>The prototype proves the workflow; <span class="hl">deployment adds the controls</span></h2>
+        <div class="headrule" style="margin:22px 0 30px"></div>
+        <div class="rowhead an"><span>Demonstrated now</span><span>Before live matters</span></div>
+        <div class="rows an">
+          <div class="split"><div>Synthetic documents</div><div>Commercial contract and data-processing terms</div></div>
+          <div class="split"><div>Structured, source-linked output</div><div>Retention, transfer and residency decision</div></div>
+          <div class="split"><div>Evaluation and versioning prototype</div><div>Enforced private-repository controls</div></div>
+          <div class="split"><div>Read-only skill permissions</div><div>DPIA screening and firm usage policy</div></div>
+          <div class="split"><div>Lawyer review and disposition</div><div>Access, incident and offboarding procedures</div></div>
+        </div>
+        <template data-notes>
+          <p>This distinction matters. The demonstration shows that the two workflows can produce useful, reviewable outputs on synthetic documents, and that a skill can be tested, versioned and constrained.</p>
+          <p>It does not prove that Harrow &amp; Vale's production environment has already been configured. Real matters should begin only after the commercial terms, data flow, retention choice, repository controls and internal policies have been reviewed by the appropriate partner, IT and data-protection owners.</p>
+        </template>
+      </section>
+      <!-- ══════════ 11 · OPEN QUESTIONS ══════════ -->
+      <section class="slide" data-eyebrow="Open questions before live use" data-title="Open questions">
+        <h2><span class="hl">Four decisions</span> remain before a live pilot</h2>
+        <div class="headrule" style="margin:22px 0 26px"></div>
+        <ul class="num">
+          <li class="an"><div class="idx">01</div><div class="txt"><b>Residency and transfers</b>What processing and storage locations are acceptable, and what contractual safeguards are required?</div></li>
+          <li class="an"><div class="idx">02</div><div class="txt"><b>Pilot scope</b>Which matters, document types and risk categories may be used first?</div></li>
+          <li class="an"><div class="idx">03</div><div class="txt"><b>Ownership and approval</b>Who owns the private repository, reviews technical changes and gives substantive release approval?</div></li>
+          <li class="an"><div class="idx">04</div><div class="txt"><b>Distribution and support</b>Which skills are required, optional or hidden, and who handles access, incidents and offboarding?</div></li>
+        </ul>
+        <template data-notes>
+          <p>These are the open questions the prototype cannot answer on Harrow &amp; Vale's behalf. They are governance decisions, not missing software features.</p>
+          <p>The firm must choose its acceptable residency and transfer position, define a bounded pilot, allocate technical and substantive ownership, and decide how approved plugins are distributed and supported. Once those decisions are recorded, the existing prototype and release gate can be turned into a controlled pilot without pretending that the production environment is already configured.</p>
+        </template>
+      </section>
+      <!-- ══════════ 12 · WHAT THE TESTING FOUND ══════════ -->
+      <section class="slide" data-eyebrow="What the testing found" data-title="What the testing found">
+        <h2>What the testing found — <span class="hl">and what each one became</span></h2>
         <div class="headrule"></div>
         <div class="rowhead an" style="grid-template-columns:1.7fr .75fr 1.55fr"><span>What fails the firm's rule</span><span>Status</span><span>The fix</span></div>
         <div class="rows an">
@@ -366,8 +544,9 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           <p><strong>★ READ THIS OUT, WORD FOR WORD (~60 sec). Nothing else needs saying.</strong></p>
 
           <p style="font-size:1.06em;line-height:1.62">
-          "Claude did the reading. The firm set the rules.<br><br>
-          Then we tested whether it actually follows them — and that is the interesting part.<br><br>
+          "Before we finish — one thing we have not shown you yet.<br><br>
+          Claude did the reading. The firm set the rules. Then we tested whether it actually
+          follows them, and that is the part worth your time.<br><br>
           This is a short list of examples. In every one, something looked completely fine on the
           page and was quietly wrong. Nothing crashed. Nothing warned us. That is the kind of
           mistake that worries me in legal work, because there is nothing for a busy person to
@@ -414,17 +593,18 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           approved, check it where it actually runs, and make a mismatch refuse rather than
           quietly carry on.</p>
 
-          <div class="cue"><strong>HANDOVER — say this last, then hand to the lead (~12 sec)</strong>
+          <div class="cue"><strong>HANDOVER — say this last, then hand back to the lead to close (~12 sec)</strong>
           "So that is the honest list. The thread running through all of it is the same: we stop
           asking the model to be careful, and turn the rule into something that fails on its own.
-          That mechanism is the next slide."<br>
-          <em>Hand to the lead for Slide 5. Phurin's Demo 2 follows Slide 5, not this slide.</em><br>
-          <em>Do not describe what the demo will show.</em> The blocked candidate is Phurin's
-          reveal; if the room has already been told the gate refuses things, the live moment
-          lands flat. Tee up the mechanism, not the outcome.<br>
-          <em>Accuracy:</em> Demo 2 shows the gate blocking a candidate that scores below the
-          threshold. It does <b>not</b> demonstrate protection against the silent packaging
-          failure — that check is written and unmerged. Do not link the two.</div>
+          That is the mechanism the whole approach rests on — and it is why we would rather start
+          controlled than start fast."<br>
+          <em>This slide is now second from the end.</em> The gate itself was Slide 5 and Phurin's
+          Demo 2 has already run, so <b>refer back</b> to it — do not tee it up, and do not
+          re-explain the mechanism.<br>
+          <em>Accuracy:</em> Demo 2 showed the gate blocking a candidate that scores below the
+          threshold. It did <b>not</b> demonstrate protection against the silent packaging
+          failure — that check is written and unmerged. Do not link the two.<br>
+          <em>Then hand to the lead for the close.</em></div>
 
           <p><strong>Honesty tags — do not upgrade these on stage.</strong> The packaging check is
           <em>written but not merged</em> — say "we have written", never "our gate blocks this".
@@ -440,147 +620,7 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           than any claim could.</p>
         </template>
       </section>
-
-      <!-- ══════════ 5 · APPROVAL ══════════ -->
-      <section class="slide" data-eyebrow="How approval becomes meaningful" data-title="How approval becomes meaningful" data-demo="2">
-        <h2>A skill cannot be approved until it can be <span class="hl">tested</span></h2>
-        <div class="headrule"></div>
-        <div class="steps">
-          <div class="step an"><div class="n"><i>1</i>Constrain</div><p>Fixed schema and fixed checklist</p></div>
-          <div class="step an"><div class="n"><i>2</i>Evaluate</div><p>Known-good, known-bad and varied formats</p></div>
-          <div class="step an"><div class="n"><i>3</i>Publish</div><p>Version only after the gate passes</p></div>
-        </div>
-        <template data-notes>
-          <p>Approval needs to mean more than somebody reading a prompt and deciding that it looks sensible. Each skill defines a fixed output contract, the firm's authoritative reference material, and a regression set containing expected results and deliberately difficult cases.</p>
-          <p>The harness compares a proposed version with those expectations and identifies misses or regressions. Only a passing version should be promoted to the approved catalogue. The prototype demonstrates this gate; production would enforce it through protected continuous integration rather than relying on somebody to remember to run a command.</p>
-          <div class="cue"><strong>Live demo 2 follows — Phurin · LIVE TERMINAL · 45–60 sec</strong>
-          <code>python tools/skill-gate/gate.py term-sheet-review</code><br>
-          <code>python tools/skill-gate/gate.py cool-new-skill</code><br>
-          <code>python tools/skill-gate/publish.py term-sheet-review --candidate v2 --as-version 1.2.0 --dry-run</code><br>
-          Show the approved skill passing, the deliberately weak candidate being blocked, and the dry-run listing the files publication would update. Say explicitly that the current gate scores recorded synthetic runs; production would connect the same release decision to protected CI and approved generation runs.<br>
-          <em>Fallback:</em> captured terminal recording with PASS, BLOCKED and dry-run visible.<br>
-          <em>Transition:</em> once a version passes, it can move onto the firm's approved shelf.</div>
-        </template>
-      </section>
-
-      <!-- ══════════ 6 · HUMAN CONTROL ══════════ -->
-      <section class="slide" data-eyebrow="Human control" data-title="Human control">
-        <h2>The output is designed to be <span class="hl">checked</span></h2>
-        <div class="headrule"></div>
-        <ul class="checks">
-          <li class="an"><b>No guessed terms</b> — absent means “not stated”</li>
-          <li class="an"><b>Source-linked findings</b> — every point can be verified</li>
-          <li class="an"><b>Explicit dispositions</b> — high-risk flags cannot disappear silently</li>
-          <li class="an"><b>The skill flags; the lawyer decides</b></li>
-        </ul>
-        <template data-notes>
-          <p>The objective is not to pretend that the model is infallible. It is to make mistakes easier to detect and prevent uncertain output from becoming an unexamined conclusion.</p>
-          <p>Missing information is reported as missing rather than filled in from a typical deal. Findings point back to the relevant source text. High-risk points require an explicit lawyer response, and the resulting report remains a working document until a qualified lawyer has checked it.</p>
-        </template>
-      </section>
-
-      <!-- ══════════ 7 · WHERE MATTER DATA GOES ══════════ -->
-      <section class="slide" data-eyebrow="Where matter data goes" data-title="Where matter data goes">
-        <h2>Data location is <span class="hl">not one question</span></h2>
-        <div class="headrule"></div>
-        <div class="rows an">
-          <div class="row"><dt>Authoritative matter file</dt><dd>SharePoint remains the home for original and approved documents.</dd></div>
-          <div class="row"><dt>Claude processing</dt><dd>Only content deliberately selected by a lawyer is transmitted for review under the approved commercial terms.</dd></div>
-          <div class="row"><dt>Residency and transfers</dt><dd>Inference, storage, connector and subprocessor locations must be verified separately. No UK or EU residency claim has been established.</dd></div>
-          <div class="row"><dt>Skills repository</dt><dd>No client documents, prompts, outputs, screenshots or matter logs belong in the repository.</dd></div>
-        </div>
-        <div class="claim an">Live-matter use waits for contractual and data-protection sign-off.</div>
-        <template data-notes>
-          <p>We are not claiming that selected documents never leave SharePoint. SharePoint remains the authoritative matter record, but content selected for review is transmitted to the approved Claude environment for processing.</p>
-          <p>Data residency therefore has several layers: where the original file is stored, where model inference runs, where chats, files or logs are retained, and where connectors or subprocessors handle data. Anthropic's published controls differ by product: the first-party API currently documents US or global inference and US workspace storage, while certain usage-based Enterprise organisations can enforce US-only inference.</p>
-          <p>We have not validated the mock client's Team tenant, contract or transfer safeguards, so the presentation must not imply UK or EU residency. Before live use, the firm would confirm the chosen product, retention, training, inference, storage, subprocessor and international-transfer position together with its Microsoft 365 controls.</p>
-        </template>
-      </section>
-
-      <!-- ══════════ 8 · REPOSITORY SECURITY ══════════ -->
-      <section class="slide" data-eyebrow="Repository security and controlled distribution" data-title="Repository security" data-demo="3">
-        <h2>Only reviewed releases reach the firm's <span class="hl">approved shelf</span></h2>
-        <div class="headrule"></div>
-        <div class="kicker an" style="margin:0 0 10px">Production control model</div>
-        <ul class="checks an" style="margin-top:0">
-          <li>A separate, private Harrow &amp; Vale repository</li>
-          <li>An organisation-managed marketplace; reviewed pull requests to change</li>
-          <li>Technical review and Priya's substantive approval</li>
-          <li>Protected main branch, required evaluation and versioned releases</li>
-          <li>Synthetic tests only — never client matter data</li>
-        </ul>
-        <template data-notes>
-          <p>The public hackathon repository is suitable for the demonstration because its documents and results are synthetic. It is not the proposed production shelf. Live deployment would use a separate private or internal repository owned by the Harrow &amp; Vale organisation, connected by an organisation owner through the Claude GitHub App.</p>
-          <p>The owner controls whether each plugin is required, installed by default, available for self-service installation or hidden. Lawyers can receive approved releases without permission to change the repository. Every release carries its version, changelog and evaluation evidence, allowing the firm to identify, withdraw or roll back the version used on a matter.</p>
-          <div class="cue"><strong>Demo 3 — Phurin · Part A: PRERECORDED ADMIN · 10–20 sec</strong>
-          Organization settings → Plugins → Add plugin → GitHub → enter the private marketplace repo in <code>owner/repo</code> form → initial sync completes, <code>term-sheet-review</code> set to <b>Available for install</b>.<br>
-          Keep the caption visible throughout: <em>Illustrative organisation-admin workflow — requires client owner access, a private/internal repository and the Claude GitHub App; not performed in this workspace.</em> Never fake a live login.</div>
-          <div class="cue"><strong>Part B: LIVE LOCAL lawyer experience · 60–75 sec</strong>
-          <code>/plugin marketplace add .</code> · <code>/plugin</code> · <code>/plugin install term-sheet-review@harrowvale-legal-skills</code> · <code>/reload-plugins</code><br>
-          Explain that the local public repository is the demo stand-in for the private organisation-owned source shown in the clip.</div>
-          <div class="cue"><strong>⚠ PREFLIGHT — the repository has moved organisation and the move is incomplete</strong>
-          Pushes report <code>f7-rage-gremlin/HarrowValeLLP</code> → <code>Harrow-Vale-Demo/HarrowValeLLP</code>, and <code>.claude/settings.json</code> still names the old owner. It currently works on GitHub's redirect.<br>
-          Use <code>/plugin marketplace add .</code> (the local path) for the demo, not the <code>owner/repo</code> form — the local path does not depend on the redirect.<br>
-          Also confirm the checkout is level with origin before starting: a stale checkout serves an old catalogue and is indistinguishable from a broken install.<br>
-          <em>If asked why it is public:</em> it is a hackathon prototype on synthetic data; private from day one for live use, which is a settings change rather than a design change. The distribution model does not depend on the repository being public.</div>
-          <div class="cue"><strong>Part C: LIVE UPDATE — only with a staged version transition · 20–30 sec</strong>
-          <code>claude plugin list</code> → <code>/plugin marketplace update harrowvale-legal-skills</code> · <code>/reload-plugins</code> → <code>claude plugin list</code> again, show the version change.<br>
-          If a distinct newer version has not been staged and verified, use the prerecorded fallback — do not imply that a no-change refresh installed an update.<br>
-          <em>Transition:</em> distribution is controlled; the final boundary is what an installed skill is actually allowed to do.</div>
-        </template>
-      </section>
-
-      <!-- ══════════ 9 · LIMITING THE SKILL ══════════ -->
-      <section class="slide" data-eyebrow="Limiting what the skill can do" data-title="Limiting what the skill can do">
-        <h2>The skill can read the matter — but it <span class="hl">cannot act</span> on it</h2>
-        <div class="headrule"></div>
-        <ul class="checks">
-          <li class="an"><b>Read, search and classify only</b></li>
-          <li class="an"><b>No shell, write, web or unapproved connectors</b></li>
-          <li class="an"><b>Document text is evidence, never an instruction</b></li>
-          <li class="an"><b>Adversarial documents join the release tests</b></li>
-        </ul>
-        <template data-notes>
-          <p>The current skill manifest already limits its tools to reading and searching supplied files; it has no shell, write or network tool. That materially reduces the consequences of an unsafe response.</p>
-          <p>Production hardening would also state explicitly that instructions embedded inside a term sheet or data-room document must be treated as untrusted text, and it would add prompt-injection examples to the release gate. Read-only access does not eliminate manipulation risk, but it prevents the skill from turning a misleading document into an external action.</p>
-        </template>
-      </section>
-
-      <!-- ══════════ 10 · THE HONEST BOUNDARY ══════════ -->
-      <section class="slide" data-eyebrow="The honest boundary" data-title="The honest boundary">
-        <h2>The prototype proves the workflow; <span class="hl">deployment adds the controls</span></h2>
-        <div class="headrule" style="margin:22px 0 30px"></div>
-        <div class="rowhead an"><span>Demonstrated now</span><span>Before live matters</span></div>
-        <div class="rows an">
-          <div class="split"><div>Synthetic documents</div><div>Commercial contract and data-processing terms</div></div>
-          <div class="split"><div>Structured, source-linked output</div><div>Retention, transfer and residency decision</div></div>
-          <div class="split"><div>Evaluation and versioning prototype</div><div>Enforced private-repository controls</div></div>
-          <div class="split"><div>Read-only skill permissions</div><div>DPIA screening and firm usage policy</div></div>
-          <div class="split"><div>Lawyer review and disposition</div><div>Access, incident and offboarding procedures</div></div>
-        </div>
-        <template data-notes>
-          <p>This distinction matters. The demonstration shows that the two workflows can produce useful, reviewable outputs on synthetic documents, and that a skill can be tested, versioned and constrained.</p>
-          <p>It does not prove that Harrow &amp; Vale's production environment has already been configured. Real matters should begin only after the commercial terms, data flow, retention choice, repository controls and internal policies have been reviewed by the appropriate partner, IT and data-protection owners.</p>
-        </template>
-      </section>
-
-      <!-- ══════════ 11 · OPEN QUESTIONS ══════════ -->
-      <section class="slide" data-eyebrow="Open questions before live use" data-title="Open questions">
-        <h2><span class="hl">Four decisions</span> remain before a live pilot</h2>
-        <div class="headrule" style="margin:22px 0 26px"></div>
-        <ul class="num">
-          <li class="an"><div class="idx">01</div><div class="txt"><b>Residency and transfers</b>What processing and storage locations are acceptable, and what contractual safeguards are required?</div></li>
-          <li class="an"><div class="idx">02</div><div class="txt"><b>Pilot scope</b>Which matters, document types and risk categories may be used first?</div></li>
-          <li class="an"><div class="idx">03</div><div class="txt"><b>Ownership and approval</b>Who owns the private repository, reviews technical changes and gives substantive release approval?</div></li>
-          <li class="an"><div class="idx">04</div><div class="txt"><b>Distribution and support</b>Which skills are required, optional or hidden, and who handles access, incidents and offboarding?</div></li>
-        </ul>
-        <template data-notes>
-          <p>These are the open questions the prototype cannot answer on Harrow &amp; Vale's behalf. They are governance decisions, not missing software features.</p>
-          <p>The firm must choose its acceptable residency and transfer position, define a bounded pilot, allocate technical and substantive ownership, and decide how approved plugins are distributed and supported. Once those decisions are recorded, the existing prototype and release gate can be turned into a controlled pilot without pretending that the production environment is already configured.</p>
-        </template>
-      </section>
-
-      <!-- ══════════ 12 · CLOSE ══════════ -->
+      <!-- ══════════ 13 · CLOSE ══════════ -->
       <section class="slide" data-eyebrow="Close" data-title="Close">
         <h2>Start controlled, prove value, <span class="hl">then expand</span></h2>
         <div class="headrule"></div>
@@ -595,7 +635,6 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           <p>If the pilot succeeds, further skills can be added without returning to ten different personal prompts, because each new capability must pass through the same evidence, approval and release process.</p>
         </template>
       </section>
-
     </div>
 
     <div class="nav-zone l" id="zoneL" aria-hidden="true"></div>
