@@ -350,33 +350,62 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
 
       <!-- ══════════ 4 · HOW CLAUDE HELPED ══════════ -->
       <section class="slide" data-eyebrow="How Claude helped" data-title="How Claude helped">
-        <h2>Claude handled the interpretation; <span class="hl">evidence</span> made it usable</h2>
+        <h2>Claude found the gaps in <span class="hl">its own work</span> — measured against Priya's rules</h2>
         <div class="headrule"></div>
-        <div class="rowhead an"><span>Claude contributed</span><span>The firm stayed in control</span></div>
+        <div class="rowhead an" style="grid-template-columns:1.7fr .75fr 1.55fr"><span>What fails the firm's rule</span><span>Status</span><span>The fix</span></div>
         <div class="rows an">
-          <div class="split"><div>Interpreted differently structured term sheets</div><div>Defined the checklist and legal standards</div></div>
-          <div class="split"><div>Produced a structured, source-linked first pass</div><div>Set expected results and the release threshold</div></div>
-          <div class="split"><div>Found defects a skim would pass — including in its own fix</div><div>Turned each one into a mechanical check, not a promise</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>A skill can ship without the checklist and still read as authoritative</div><div>On a branch</div><div>Refuse to publish a skill missing a file it depends on</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>The checklist can be summarised instead of reproduced</div><div>To do</div><div>Compare every output against the source, word for word</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>A version could reach the shelf with no evidence it passed</div><div>Fixed</div><div>Every published version must have a stored gate report</div></div>
+          <div class="split" style="grid-template-columns:1.7fr .75fr 1.55fr;gap:28px"><div>A lawyer's machine can run a version nobody approved</div><div>To do</div><div>Check what is installed against what was approved</div></div>
         </div>
-        <div class="claim an">Claude accelerates the first pass. It does not replace legal judgement.</div>
+        <div class="claim an">None of these announce themselves. That is why each becomes a check, not a promise to be careful.</div>
         <template data-notes>
           <span class="presenter">Emily</span>
 
-          <p><strong>IF YOUR MIND GOES BLANK — read this, it is the whole slide:</strong><br>
-          "Claude did the reading. We did the rules. Then we tested it — and the interesting part
-          is what the testing found. Every mistake looked fine on the page. Nothing crashed,
-          nothing warned us. So we stopped asking the model to be careful and started making the
-          checks automatic. Claude speeds up the first pass. A lawyer still signs it."</p>
+          <p><strong>★ READ THIS OUT, WORD FOR WORD (~60 sec). Nothing else needs saying.</strong></p>
 
-          <p>Claude helped in two distinct ways. During development, Claude Code accelerated the drafting and refinement of the skill against synthetic examples. In use, Claude provides the adaptable document reasoning: it identifies the instrument, extracts the required terms, applies the fixed checklist and makes missing or uncertain information explicit.</p>
-          <p>It does not decide the firm's legal standard or approve its own work. The firm's checklist and review method define the expected behaviour, the evaluation gate tests it, and a lawyer remains responsible for every decision and sign-off.</p>
+          <p style="font-size:1.06em;line-height:1.62">
+          "Claude did the reading. The firm set the rules.<br><br>
+          Then we tested whether it actually follows them — and that is the interesting part.<br><br>
+          This is a short list of examples. In every one, something looked completely fine on the
+          page and was quietly wrong. Nothing crashed. Nothing warned us. That is the kind of
+          mistake that worries me in legal work, because there is nothing for a busy person to
+          notice.<br><br>
+          The reason kept turning out to be the same. We had checked the work in one place, and it
+          was being used somewhere else, and nobody spotted when those two stopped matching.<br><br>
+          One of these is fixed. One is written and waiting to go in. Two are not started yet.
+          You can see which is which, and we would rather show you the honest list.<br><br>
+          So the answer is not to ask Claude to be more careful. It is to turn each rule into a
+          check that stops the work on its own.<br><br>
+          Claude speeds up the first pass. A lawyer still signs it."
+          </p>
 
-          <p><strong>Row 3 — the reliability beat (~35 sec if you take it).</strong> Five defects
-          were found during the build, and they turned out to be the same defect five times: in
-          every case something was verified in one place while the thing that mattered ran
-          somewhere else — and not one of them announced itself. Nothing crashed; the output
-          stayed clean and confident. In a legal review that is the failure that should worry
-          you, because it does not look like a failure.</p>
+          <p><strong>Delivery.</strong> Read it straight. Pause at each blank line. Do not
+          apologise anywhere in it — the honesty is the argument, and it only reads as strength if
+          you deliver it briskly.</p>
+
+          <p><strong>Row by row, only if asked.</strong>
+          <em>Ships without the checklist</em> — it kept producing confident reviews using its own
+          idea of a checklist rather than Priya's. The fix is written but not switched on yet.
+          <em>Summarised instead of copied out</em> — a reworded checklist passes unnoticed today.
+          We have written down how to catch it; we have not built it.
+          <em>No evidence it passed</em> — this one is done. Nothing reaches the shelf unless there
+          is a stored test result saying it passed, and the version has to match everywhere.
+          <em>Unapproved version on a laptop</em> — nothing checks what a person actually has
+          installed. We check the shelf, not the machine. That is the honest edge of it.</p>
+
+          <p><strong>The open-book exam — best told aloud, deliberately not on the wall.</strong>
+          We tested the skill against our four sample documents and it passed. Then we noticed the
+          skill ships worked examples for those same four documents, so it could recognise the
+          document and return the stored answer without doing the work. Every test we had run was
+          an open-book exam. We have written a fifth term sheet it has never seen, with deliberate
+          traps in it — but be precise if asked: <em>the document is written and is not yet wired
+          into the gate</em>. Do not say this one is fixed.</p>
+
+          <p>Claude did not decide the firm's legal standard or approve its own work. The firm's
+          checklist and review method define the expected behaviour, the evaluation gate tests it,
+          and a lawyer remains responsible for every decision and sign-off.</p>
 
           <p><strong>The framing to use — chain of custody.</strong> Our gate proved the skill was
           right when we examined it. It did not prove that what reached the lawyer was that same
@@ -384,6 +413,18 @@ kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);bo
           logged. The fix is the ordinary professional one: stamp the package with what was
           approved, check it where it actually runs, and make a mismatch refuse rather than
           quietly carry on.</p>
+
+          <div class="cue"><strong>HANDOVER — say this last, then hand to the lead (~12 sec)</strong>
+          "So that is the honest list. The thread running through all of it is the same: we stop
+          asking the model to be careful, and turn the rule into something that fails on its own.
+          That mechanism is the next slide."<br>
+          <em>Hand to the lead for Slide 5. Phurin's Demo 2 follows Slide 5, not this slide.</em><br>
+          <em>Do not describe what the demo will show.</em> The blocked candidate is Phurin's
+          reveal; if the room has already been told the gate refuses things, the live moment
+          lands flat. Tee up the mechanism, not the outcome.<br>
+          <em>Accuracy:</em> Demo 2 shows the gate blocking a candidate that scores below the
+          threshold. It does <b>not</b> demonstrate protection against the silent packaging
+          failure — that check is written and unmerged. Do not link the two.</div>
 
           <p><strong>Honesty tags — do not upgrade these on stage.</strong> The packaging check is
           <em>written but not merged</em> — say "we have written", never "our gate blocks this".

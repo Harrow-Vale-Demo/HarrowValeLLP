@@ -9,44 +9,46 @@
 
 ---
 
-## The existing slide (unchanged — this is what's in the HTML now)
+## The slide as it now stands in the HTML (rebuilt 2026-07-31)
 
-> ## Claude handled the interpretation; evidence made it usable
+Emily's call: frame the slide around **what currently fails the firm's own rules**, with an
+honest status against each. This replaced the earlier "Claude contributed / firm stayed in
+control" two-column table.
+
+> ## Claude found the gaps in *its own work* — measured against Priya's rules
 >
-> | Claude contributed | The firm stayed in control |
-> |---|---|
-> | Interpreted differently structured term sheets | Defined the checklist and legal standards |
-> | Produced a structured, source-linked first pass | Set expected results and the release threshold |
-> | Helped iterate the skill against synthetic examples | Reviewed outputs and retained final sign-off |
+> | What fails the firm's rule | Status | The fix |
+> |---|---|---|
+> | A skill can ship without the checklist and still read as authoritative | On a branch | Refuse to publish a skill missing a file it depends on |
+> | The checklist can be summarised instead of reproduced | To do | Compare every output against the source, word for word |
+> | A version could reach the shelf with no evidence it passed | Fixed | Every published version must have a stored gate report |
+> | A lawyer's machine can run a version nobody approved | To do | Check what is installed against what was approved |
 >
-> **Claude accelerates the first pass. It does not replace legal judgement.**
+> **None of these announce themselves. That is why each becomes a check, not a promise to be
+> careful.**
 
-This is good. The two-column contrast is the right structure and the closing line is the right
-closing line. **Recommendation: change at most one row.** A slide that grows in the last hours
-before a presentation is a slide that gets misread on stage.
+### Why this framing is stronger
 
----
+It answers the question Priya is actually asking. Her rules — use the checklist verbatim, never
+skip a step, never fabricate — are the **specification**. So the useful thing to show is not
+that Claude is impressive, but whether we can *prove it obeys those rules*, and where it
+currently cannot.
 
-## The one change worth making
+It also removes the temptation to overclaim: the status column does the honesty work for you, on
+the wall, so you cannot accidentally imply everything is finished.
 
-The current three rows all describe Claude *producing* things. Nothing describes Claude
-**finding its own mistakes**, which is the more interesting claim and the one that speaks to
-reliability rather than capability.
+### What moved to the presenter notes
 
-Optional replacement for row 3 — swap, don't add:
+The old slide's closing line — *"Claude accelerates the first pass. It does not replace legal
+judgement"* — is no longer on the wall. **Say it anyway**; it is the deck's core safety message
+and it is the last line of the ELI5 fallback in the notes.
 
-| Claude contributed | The firm stayed in control |
-|---|---|
-| Interpreted differently structured term sheets | Defined the checklist and legal standards |
-| Produced a structured, source-linked first pass | Set expected results and the release threshold |
-| **Surfaced defects in its own output that a skim would pass** | **Turned each one into a mechanical check, not a promise** |
+### Two cautions
 
-Why this row earns its place: every other reliability claim in the deck is an assertion about
-design. This one is an assertion about *behaviour under test*, which is much harder to say and
-therefore much more credible.
-
-**If in doubt, leave the slide alone and put this in the spoken track instead.** The material is
-strong; it does not need to be on the wall.
+- **Four rows is the maximum.** Do not add a fifth. The deck auto-scales so nothing will
+  overflow, but a five-row three-column table stops being readable from the back.
+- **"On a branch" and "To do" are load-bearing.** If anyone asks you to soften them to make the
+  slide look better, don't. The honesty is the argument.
 
 ---
 
@@ -87,11 +89,16 @@ above:
 > shipped worked examples for those same four documents — so it could recognise the document and
 > return the stored answer without doing the work. Every test we had run was an open-book exam.
 >
-> So we wrote a fifth term sheet the skill had never seen, in a format unlike the others, with
-> deliberate traps in it. And where the firm's rule was 'use the checklist word for word', we
-> stopped asking the model to be careful and made it a check that fails the build.
+> So we have written a fifth term sheet the skill has never seen, in a format unlike the others,
+> with deliberate traps in it — and the principle we took from it is that where the firm has a
+> rule, we stop asking the model to be careful and turn it into a check that fails on its own.
 >
 > That is the difference between a clever prompt and a workflow a firm can govern."
+
+> ⚠️ **Corrected wording.** An earlier draft said "we *made* it a check that fails the build."
+> No such check exists for the verbatim rule. The held-out document is also written but not yet
+> graded against. Say **"we have written"** and **"the principle we took from it"** — both true.
+> If pressed on whether the fifth document has been run: **it has not**.
 
 **Why this is worth 15 extra seconds:** it directly answers the question a technical person in
 the room is already forming — *how do you know it works?* — and answers it with a specific
@@ -106,6 +113,39 @@ not certain, use the primary version.
 
 ---
 
+## The handover — how to end, every time (~12 seconds)
+
+**Say this last, whichever spoken track you used:**
+
+> "So that is the honest list. The thread running through all of it is the same: we stop asking
+> the model to be careful, and turn the rule into something that fails on its own. That mechanism
+> is the next slide."
+
+Then hand to **the lead**, not to Phurin. The order is: Emily (Slide 4) → **lead (Slide 5)** →
+Phurin (Demo 2). Demo 2 does not follow your slide directly.
+
+### Three rules for the handover
+
+1. **Do not say what the demo will show.** The blocked candidate is Phurin's reveal. If the room
+   has already been told the gate refuses bad skills, the live moment lands flat. Tee up the
+   *mechanism*, not the *outcome*.
+2. **Do not connect Demo 2 to the silent-failure story.** Demo 2 blocks a candidate that scores
+   below the threshold. The packaging check that addresses silent failure is written and
+   unmerged. They are different things and linking them would be an overclaim.
+3. **Credit Phurin in the room, not on the wall.** If you want to acknowledge the work, the
+   natural moment is a half-sentence as you hand over — the deliberately broken test skill in
+   Demo 2 is Phurin's, and it exists so the gate can be shown saying no. A gate that has only
+   ever approved things is not a gate.
+
+### Why this row is *not* on the slide
+
+"A failing skill could reach the shelf — Fixed — the gate blocks publication" is true, and it was
+considered as a fifth row. It was left off deliberately: it is Slide 5's whole thesis and Demo 2's
+punchline, so putting it on Slide 4 would state the conclusion two beats early and flatten the
+best live moment in the deck. Slide 4 keeps four rows.
+
+---
+
 ## Q&A defences — the four questions most likely to come at this slide
 
 **"How do you know the output is actually right?"**
@@ -115,18 +155,26 @@ not certain, use the primary version.
 > next slide.
 
 **"What stops it inventing a checklist item, or paraphrasing one?"**
-> The checklist is a fixed file the skill reads; it is not in the model's head. And we have
-> written a check that compares the checklist in any output against that file character for
-> character, so a paraphrase fails rather than passing quietly. *(Honest caveat if pressed: the
-> check is specified and being implemented — the file it enforces against is already the single
-> source of truth.)*
+> The checklist is a fixed file the skill reads — it is not in the model's head, so there is one
+> authoritative copy to compare against. Inventing a category is prevented by the instruction and
+> caught by review. **Paraphrasing is the honest gap**: we have specified a check that compares
+> the checklist in any output against that file character for character, so a paraphrase would
+> fail rather than pass quietly. That check is specified, not yet built. Today it is caught by a
+> lawyer reading the output, which is exactly why sign-off still sits with a lawyer.
+
+> ⚠️ **Corrected wording.** An earlier draft of this answer said "we have *written* a check". We
+> have not — it is a specification. Say **"specified"**.
 
 **"Did it get anything wrong?"**
 > Yes, and that is the part worth telling you about. It found a definitional problem in one of
 > the sample SAFEs that a first read would miss — a discount defined in a way that, read
 > literally, gives an eighty percent discount rather than twenty. It also, in one run, summarised
 > a section of the checklist instead of listing it out, which is exactly the behaviour Priya said
-> she would not accept. That one is now a hard check rather than an instruction.
+> she would not accept. **That is the one we have specified a mechanical check for, and have not
+> yet built** — so today it depends on the lawyer's read.
+
+> ⚠️ **Corrected wording.** An earlier draft ended "that one is now a hard check rather than an
+> instruction." It is not. It is still an instruction. Do not claim otherwise.
 
 **"Is this just a prompt?"**
 > No — and that distinction is the whole engagement. A prompt lives on one lawyer's machine and
@@ -160,11 +208,23 @@ What the engagement pack asks for, and whether the deck says it:
 **Status check before using any of this.** Three different tenses are needed, because the
 three hardening artefacts are at three different stages:
 
-| Artefact | Actually in the working tree? | Safe verb |
+**Re-verified against the code 2026-07-31. Two earlier entries in this table were wrong and are
+corrected here.**
+
+| Artefact | Verified state | Safe verb |
 |---|---|---|
-| Held-out test (Vantor Health) | ✅ real, on disk | "we wrote", "we tested against" |
-| Verbatim checklist check | 📄 spec only (`docs/governance/verbatim-checklist-check-spec.md`) | "we've specified" |
-| Packaging check (the silent failure) | ⛔ **not merged** — sits on `feature/gate-packaging-check` | **"we've written"** — never "our gate blocks this" |
+| Gate-report enforcement | ✅ **On master and blocking in CI** (`check_published.py`, `skill-gate.yml`) | "enforced in CI" — the one present-tense claim |
+| Packaging check (the silent failure) | ⛔ written, **not merged** — `feature/gate-packaging-check` | **"we've written"** — never "our gate blocks this" |
+| Verbatim checklist check | 📄 **spec only, and the spec is not even on master** | "we've specified" — never "we've written" |
+| Held-out test (Vantor Health) | ⛔ document written, **not on master and not wired into the gate** (0 references in `gate.py` and the scorer) | "we've written a document" — **never "we tested against it"** |
+
+⚠️ **Correction:** the held-out test was previously described here as real and as merged. It is
+neither. The document exists on an unmerged branch and no code reads it. Nothing has been graded
+against it.
+
+⚠️ **Precision on CI:** the *blocking* CI step is `check_published.py`. The score report
+(`gate.py --all`) runs with `continue-on-error` and is informational. **Do not say "CI blocks a
+low score"** — the publish path is what refuses a failing score. Tom may read the workflow.
 
 ### ~25 seconds, drop-in
 
@@ -190,6 +250,51 @@ three hardening artefacts are at three different stages:
 > We'd rather tell you where the line is than blur it."
 
 A team that knows precisely what is and isn't deployed reads as *more* governed, not less.
+
+---
+
+## ELI5 — the overarching theme, in plain words
+
+**If you remember one thing, remember this.** Every mistake we made was the same mistake:
+
+> **We checked the thing in one place. It was used in a different place. Nobody noticed when
+> those two stopped matching.**
+
+### The everyday version — use this if the room looks lost
+
+> "Imagine you check a recipe is correct while it's still in the cookbook. Then someone
+> photocopies a page, and the photocopy misses the ingredients list. The cook follows the
+> photocopy and produces something that looks like dinner. You checked the cookbook. Nobody
+> checked the photocopy. And nothing went wrong loudly enough for anyone to notice."
+
+That's it. That's all five defects.
+
+### Why it's dangerous rather than just annoying
+
+A normal bug **tells you**. It crashes, it errors, it leaves a gap on the page. These didn't.
+Every single one carried on producing clean, confident, well-formatted output. **The only thing
+that changed was whether it was right.**
+
+In a legal review that's the worst possible shape for a failure, because there is nothing for a
+busy person to notice.
+
+### The fix, in the same plain words
+
+Two halves, and you need both:
+
+1. **Check it where it's actually used** — not where it's convenient for us to look.
+2. **Make it refuse, not carry on** — if the thing it needs isn't there, it should stop, not
+   improvise.
+
+### The one-liner to land it
+
+> **"Verify where it runs, not where it's convenient. Make absence refuse, not degrade."**
+
+### The lawyer's version — chain of custody
+
+> "Our gate proves the document was sound when we examined it. It doesn't prove the copy in the
+> room is that same document. Every defect was a break in the chain, and none of the breaks were
+> logged."
 
 ---
 

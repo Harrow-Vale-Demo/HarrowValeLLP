@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harrow &amp; Vale LLP — Backup detail slides (only if asked)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   HARROW & VALE LLP — PRESENTATION DECK
+   Palette sampled from wide logo concept V3
+   ============================================================ */
+:root{
+  color-scheme:dark;
+  --navy-900:#030D1A;
+  --navy-850:#051426;
+  --navy-800:#071A2E;
+  --navy-700:#0C2440;
+  --navy-600:#123253;
+  --line:rgba(123,162,196,.20);
+  --line-soft:rgba(123,162,196,.11);
+  --cream:#EFEAE1;
+  --cream-2:rgba(239,234,225,.74);
+  --cream-3:rgba(239,234,225,.52);
+  --orange:#CA6E36;
+  --orange-lt:#E68B4B;
+  --blue:#7BA2C4;
+  --font-d:'Jost','Futura','Century Gothic','Segoe UI',system-ui,sans-serif;
+  --font-b:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.85,.28,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;overflow:hidden;background:var(--navy-900);
+  font-family:var(--font-b);color:var(--cream);-webkit-font-smoothing:antialiased}
+
+/* ---------- ambient background ---------- */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;
+  background:
+    radial-gradient(1200px 700px at 78% 12%, rgba(202,110,54,.13), transparent 62%),
+    radial-gradient(1000px 800px at 10% 92%, rgba(18,50,83,.75), transparent 65%),
+    linear-gradient(160deg,#071A2E 0%,#04101F 48%,#030D1A 100%);}
+.bg:before{content:"";position:absolute;inset:-20%;
+  background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+  background-size:74px 74px;opacity:.5;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 20%,transparent 78%);
+  animation:drift 46s linear infinite}
+@keyframes drift{to{transform:translate3d(74px,74px,0)}}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;will-change:transform}
+.orb-a{width:620px;height:620px;left:-140px;top:-180px;background:radial-gradient(circle,rgba(18,50,83,.9),transparent 68%);animation:float1 26s ease-in-out infinite}
+.orb-b{width:520px;height:520px;right:-120px;bottom:-160px;background:radial-gradient(circle,rgba(202,110,54,.30),transparent 68%);animation:float2 32s ease-in-out infinite}
+@keyframes float1{50%{transform:translate3d(90px,60px,0) scale(1.12)}}
+@keyframes float2{50%{transform:translate3d(-70px,-70px,0) scale(1.08)}}
+/* angled brand motif echoing the logo mark */
+.motif{position:absolute;right:-70px;top:50%;transform:translateY(-50%);width:560px;height:900px;opacity:.055;pointer-events:none}
+
+/* ---------- layout ---------- */
+.app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column}
+.viewport{flex:1;position:relative;overflow:hidden}
+.deck{position:absolute;left:50%;top:50%;width:1600px;height:900px;margin-left:-800px;margin-top:-450px;
+  transform-origin:50% 50%;perspective:1800px;transform-style:preserve-3d}
+
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:78px 104px 96px;opacity:0;pointer-events:none;
+  transform:translate3d(110px,0,-200px) rotateY(-9deg);
+  transition:opacity .5s var(--ease),transform .68s var(--ease),filter .5s var(--ease);
+  filter:blur(7px);backface-visibility:hidden}
+.slide.past{transform:translate3d(-110px,0,-200px) rotateY(9deg)}
+.slide.active{opacity:1;transform:none;filter:none;pointer-events:auto;z-index:2}
+
+/* slide chrome */
+.stamp{position:absolute;top:52px;left:104px;display:flex;align-items:center;gap:14px}
+.stamp img{height:30px;width:auto;opacity:.92}
+.stamp .rule{width:1px;height:20px;background:var(--line)}
+.stamp .eyebrow{font-family:var(--font-d);font-size:13px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--orange-lt);font-weight:500}
+.pageno{position:absolute;bottom:44px;right:104px;font-family:var(--font-d);font-size:14px;
+  letter-spacing:.2em;color:var(--cream-3);font-weight:400}
+.pageno b{color:var(--cream-2);font-weight:600}
+
+/* ---------- type ---------- */
+h1{font-family:var(--font-d);font-weight:600;font-size:78px;line-height:1.02;letter-spacing:-.018em;
+  margin:0 0 30px;color:var(--cream);max-width:20ch}
+h2{font-family:var(--font-d);font-weight:600;font-size:54px;line-height:1.08;letter-spacing:-.014em;
+  margin:0 0 8px;color:var(--cream);max-width:26ch}
+h2 .hl{color:var(--orange-lt)}
+.headrule{width:74px;height:3px;background:linear-gradient(90deg,var(--orange),rgba(202,110,54,0));
+  border-radius:2px;margin:26px 0 40px}
+.kicker{font-family:var(--font-d);font-size:15px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--orange-lt);font-weight:500;margin:0 0 22px}
+.lede{font-size:24px;line-height:1.5;color:var(--cream-2);max-width:60ch;margin:0;font-weight:300}
+
+/* content wrapper — measured and auto-scaled so a slide can never overflow */
+.s-body{display:flex;flex-direction:column;width:100%;transform-origin:center center;
+  transition:transform .25s var(--ease)}
+
+/* footer statement */
+.claim{margin-top:34px;padding-top:0;display:flex;align-items:center;gap:16px;
+  font-family:var(--font-d);font-size:22px;font-weight:500;color:var(--cream);letter-spacing:.005em}
+.claim:before{content:"";width:34px;height:2px;background:var(--orange);flex:none;border-radius:2px}
+
+/* ---------- columns ---------- */
+.cols{display:grid;gap:26px;margin-top:6px}
+.c2{grid-template-columns:1fr 1fr}
+.c3{grid-template-columns:repeat(3,1fr)}
+.panel{position:relative;background:linear-gradient(165deg,rgba(18,50,83,.52),rgba(7,26,46,.34));
+  border:1px solid var(--line);border-radius:18px;padding:32px 32px 34px;overflow:hidden}
+.panel:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--orange),rgba(202,110,54,.05))}
+.panel .who{font-family:var(--font-d);font-size:14px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--blue);font-weight:500;margin-bottom:14px}
+.panel .big{font-family:var(--font-d);font-size:29px;line-height:1.18;font-weight:500;color:var(--cream);letter-spacing:-.008em}
+.panel h3{font-family:var(--font-d);font-size:27px;font-weight:600;margin:0 0 18px;color:var(--cream);letter-spacing:-.008em}
+.panel ul{list-style:none;margin:0;padding:0}
+.panel ul li{font-size:19.5px;line-height:1.45;color:var(--cream-2);padding:11px 0 11px 22px;position:relative;font-weight:300}
+.panel ul li+li{border-top:1px solid var(--line-soft)}
+.panel ul li:before{content:"";position:absolute;left:0;top:20px;width:7px;height:7px;
+  background:var(--orange);transform:rotate(45deg)}
+
+/* ---------- numbered steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:6px}
+.step{position:relative;background:linear-gradient(165deg,rgba(18,50,83,.5),rgba(7,26,46,.3));
+  border:1px solid var(--line);border-radius:18px;padding:34px 32px 36px}
+.step .n{font-family:var(--font-d);font-size:15px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--orange-lt);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.step .n i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border:1.5px solid var(--orange);border-radius:50%;font-size:16px;letter-spacing:0}
+.step p{margin:0;font-size:21px;line-height:1.42;color:var(--cream-2);font-weight:300}
+
+/* ---------- two-column definition rows ---------- */
+.rows{display:grid;gap:0;margin-top:4px;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(230px,.9fr) 2.1fr;gap:40px;
+  padding:19px 4px;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.row dt{font-family:var(--font-d);font-size:21px;font-weight:600;color:var(--cream);letter-spacing:-.004em}
+.row dd{margin:0;font-size:19.5px;line-height:1.45;color:var(--cream-2);font-weight:300}
+.rowhead{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:2px}
+.rowhead span{font-family:var(--font-d);font-size:14px;letter-spacing:.24em;text-transform:uppercase;font-weight:500}
+.rowhead span:first-child{color:var(--blue)}
+.rowhead span:last-child{color:var(--orange-lt)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:17px 4px;
+  border-bottom:1px solid var(--line-soft);align-items:baseline}
+.split div{font-size:20px;line-height:1.4;color:var(--cream-2);font-weight:300}
+.split div:first-child{color:var(--cream);font-weight:400}
+
+/* ---------- checklist ---------- */
+.checks{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:4px}
+.checks li{position:relative;padding:20px 0 20px 50px;font-size:25px;line-height:1.35;
+  color:var(--cream-2);border-bottom:1px solid var(--line-soft);font-weight:300}
+.checks li:last-child{border-bottom:0}
+.checks li b{color:var(--cream);font-weight:600;font-family:var(--font-d)}
+.checks li:before{content:"";position:absolute;left:6px;top:26px;width:14px;height:14px;
+  border:2px solid var(--orange);transform:rotate(45deg);border-radius:2px}
+
+/* ---------- numbered list (decisions / phases) ---------- */
+.num{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:16px}
+.num li{display:grid;grid-template-columns:64px 1fr;gap:22px;align-items:start;
+  padding:16px 0;border-bottom:1px solid var(--line-soft)}
+.num li:last-child{border-bottom:0}
+.num .idx{font-family:var(--font-d);font-size:34px;font-weight:300;color:var(--orange);line-height:1;
+  padding-top:2px;letter-spacing:-.02em}
+.num .txt{font-size:21px;line-height:1.42;color:var(--cream-2);font-weight:300}
+.num .txt b{display:block;font-family:var(--font-d);font-size:25px;font-weight:600;color:var(--cream);
+  margin-bottom:5px;letter-spacing:-.006em}
+.phase .txt b{margin-bottom:0}
+.phase li{align-items:center}
+
+/* ---------- title slide ---------- */
+.title{justify-content:center;padding-left:112px}
+.title .logo{width:640px;max-width:52%;height:auto;margin:0 0 56px;display:block}
+.title h1{font-size:82px;max-width:19ch;margin-bottom:34px}
+.title .meta{display:flex;align-items:center;gap:22px;margin-top:6px;
+  font-family:var(--font-d);font-size:20px;color:var(--cream-2);letter-spacing:.02em;font-weight:400}
+.title .meta .dot{width:5px;height:5px;border-radius:50%;background:var(--orange)}
+.title .foot{position:absolute;left:112px;bottom:64px;font-size:15px;color:var(--cream-3);letter-spacing:.06em}
+.title .stamp,.title .pageno{display:none}
+.title:after{content:"";position:absolute;right:-40px;top:0;bottom:0;width:44%;
+  background:linear-gradient(200deg,rgba(202,110,54,.10),transparent 55%);
+  clip-path:polygon(28% 0,100% 0,100% 100%,0 100%);pointer-events:none}
+
+/* ---------- entrance animation for children ---------- */
+.an{opacity:0;transform:translateY(26px)}
+.slide.active .an{animation:rise .78s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.slide.active h1,.slide.active h2{animation-name:riseHead}
+@keyframes riseHead{from{opacity:0;transform:translateY(30px);letter-spacing:.01em}
+  to{opacity:1;transform:none}}
+.slide.active .headrule{animation:wipe .9s var(--ease) both}
+@keyframes wipe{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:none}}
+.headrule{transform-origin:left center}
+
+/* ---------- click-anywhere navigation zones ----------
+   Deliberately invisible and silent: no chevrons, no hover state,
+   no cursor change, no tooltip. Nothing for an audience to notice. */
+.nav-zone{position:absolute;top:0;bottom:0;width:50%;z-index:4;background:none;border:0;
+  cursor:default;-webkit-tap-highlight-color:transparent}
+.nav-zone.l{left:0}
+.nav-zone.r{right:0}
+
+/* ---------- control bar ---------- */
+.bar{position:relative;z-index:5;display:flex;align-items:center;gap:18px;padding:11px 22px;
+  background:rgba(3,13,26,.82);border-top:1px solid var(--line);backdrop-filter:blur(14px)}
+.bar button{background:rgba(123,162,196,.10);border:1px solid var(--line);color:var(--cream-2);
+  border-radius:9px;padding:7px 13px;font-size:13.5px;font-family:var(--font-b);cursor:pointer;
+  transition:.18s var(--ease);line-height:1.2}
+.bar button:hover{background:rgba(202,110,54,.22);border-color:var(--orange);color:var(--cream)}
+.bar button.on{background:rgba(202,110,54,.3);border-color:var(--orange);color:var(--cream)}
+.dots{display:flex;gap:7px;flex:1;justify-content:center;flex-wrap:wrap}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(239,234,225,.22);cursor:pointer;
+  transition:.25s var(--ease);position:relative}
+.dot:hover{background:rgba(239,234,225,.5);transform:scale(1.25)}
+.dot.on{background:var(--orange);box-shadow:0 0 0 4px rgba(202,110,54,.20)}
+.dot.demo:after{content:"";position:absolute;inset:-4px;border:1px solid rgba(202,110,54,.55);border-radius:50%}
+.clock{font-family:var(--font-d);font-size:15px;letter-spacing:.09em;color:var(--cream-2);
+  min-width:66px;text-align:center;font-variant-numeric:tabular-nums;font-weight:500}
+.clock.warn{color:var(--orange-lt)}
+.clock.over{color:#E4693F}
+.count{font-family:var(--font-d);font-size:14px;letter-spacing:.12em;color:var(--cream-3);min-width:62px;text-align:center}
+.prog{position:absolute;left:0;right:0;top:-2px;height:2px;background:rgba(123,162,196,.16)}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-lt));
+  transition:width .55s var(--ease);box-shadow:0 0 10px rgba(202,110,54,.6)}
+
+/* ---------- presenter notes drawer ---------- */
+.notes{position:fixed;left:0;right:0;bottom:0;z-index:20;max-height:46vh;overflow-y:auto;
+  background:linear-gradient(180deg,rgba(5,20,38,.97),rgba(3,13,26,.98));
+  border-top:2px solid var(--orange);padding:24px 34px 30px;
+  transform:translateY(101%);transition:transform .42s var(--ease);
+  box-shadow:0 -22px 60px rgba(0,0,0,.55);backdrop-filter:blur(16px)}
+.notes.open{transform:none}
+.notes h4{font-family:var(--font-d);font-size:13px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--orange-lt);margin:0 0 12px;font-weight:600;display:flex;justify-content:space-between}
+.notes h4 em{font-style:normal;color:var(--cream-3);letter-spacing:.08em;text-transform:none;font-size:12.5px}
+.notes .body{font-size:16.5px;line-height:1.62;color:var(--cream-2);max-width:118ch;font-weight:300}
+.notes .body p{margin:0 0 12px}
+.notes .cue{margin-top:14px;padding:14px 18px;border-left:3px solid var(--blue);
+  background:rgba(123,162,196,.08);border-radius:0 10px 10px 0;font-size:15.5px;line-height:1.55;color:var(--cream-2)}
+.notes .cue strong{color:var(--blue);font-family:var(--font-d);letter-spacing:.06em;
+  text-transform:uppercase;font-size:12.5px;display:block;margin-bottom:6px;font-weight:600}
+.notes .cue code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:rgba(123,162,196,.14);
+  padding:1px 6px;border-radius:5px;color:var(--cream)}
+.notes .presenter{display:inline-block;font-family:var(--font-d);font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--navy-900);background:var(--orange);padding:3px 11px;
+  border-radius:20px;font-weight:600;margin-bottom:12px}
+
+/* ---------- jump / overview ---------- */
+.jump{position:fixed;inset:0;z-index:30;background:rgba(3,13,26,.94);backdrop-filter:blur(18px);
+  display:none;padding:56px 6vw;overflow-y:auto}
+.jump.open{display:block;animation:fadein .3s var(--ease)}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.jump h3{font-family:var(--font-d);font-size:14px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--orange-lt);margin:0 0 26px;font-weight:600}
+.jgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.jcard{text-align:left;background:rgba(18,50,83,.4);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;cursor:pointer;transition:.2s var(--ease);color:var(--cream);font-family:var(--font-b)}
+.jcard:hover{background:rgba(202,110,54,.2);border-color:var(--orange);transform:translateY(-3px)}
+.jcard.on{border-color:var(--orange);background:rgba(202,110,54,.16)}
+.jcard .jn{font-family:var(--font-d);font-size:12px;letter-spacing:.2em;color:var(--orange-lt);
+  text-transform:uppercase;font-weight:600;margin-bottom:7px}
+.jcard .jt{font-family:var(--font-d);font-size:18px;line-height:1.25;font-weight:500}
+
+/* ---------- help ---------- */
+.help{position:fixed;right:22px;bottom:70px;z-index:25;background:rgba(5,20,38,.96);
+  border:1px solid var(--line);border-radius:14px;padding:18px 22px;font-size:13.5px;
+  color:var(--cream-2);display:none;box-shadow:0 18px 50px rgba(0,0,0,.5);line-height:1.9}
+.help.open{display:block;animation:fadein .25s var(--ease)}
+.help b{font-family:var(--font-d);color:var(--cream);display:inline-block;min-width:74px;font-weight:600}
+kbd{font-family:var(--font-d);font-size:12px;background:rgba(123,162,196,.16);border:1px solid var(--line);
+  border-radius:5px;padding:1px 7px;color:var(--cream)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.08s!important}
+  .bg:before,.orb{animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <svg class="motif" viewBox="0 0 560 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M120 60 L300 20 L300 880 L120 840 Z" fill="#EFEAE1"/>
+    <path d="M330 20 L510 60 L510 840 L330 880 Z" fill="#CA6E36"/>
+  </svg>
+</div>
+
+<div class="app">
+  <div class="viewport" id="viewport">
+    <div class="deck" id="deck">
+
+      <!-- ══════════ 1 · TITLE ══════════ -->
+      <!-- ══════════ B0 · COVER ══════════ -->
+      <section class="slide title" data-eyebrow="Backup" data-title="Backup slides">
+        <h1>Backup detail<br><span class="hl">Only if asked</span></h1>
+        <div class="headrule"></div>
+        <div class="claim an">Every status below was verified against the code on 31 July. Do not upgrade one on stage.</div>
+        <template data-notes>
+          <span class="presenter">Emily</span>
+          <p>This is a separate deck. Nothing here is shown unless someone asks for detail — most likely Tom, on one of the Slide 4 rows. Slides B1 to B4 map one-to-one onto the four rows. B5 is the if-time slide about how we would run the build itself better.</p>
+          <p><strong>Every slide has a READ ALOUD block in these notes.</strong> If you go blank, read it verbatim at pace; it is written to work as spoken English.</p>
+        </template>
+      </section>
+
+      <!-- ══════════ B1 · PACKAGING ══════════ -->
+      <section class="slide" data-eyebrow="Slide 4, row 1 — detail" data-title="Shipped without its checklist">
+        <h2>The skill kept working after losing its <span class="hl">own ground truth</span></h2>
+        <div class="headrule"></div>
+        <div class="rowhead an"><span>What we found</span><span>Detail</span></div>
+        <div class="rows an">
+          <div class="split"><div>What happened</div><div>A copy shipped with SKILL.md but without its reference folder</div></div>
+          <div class="split"><div>What it looked like</div><div>A clean, confident, correctly formatted review</div></div>
+          <div class="split"><div>What was actually wrong</div><div>It was using its own idea of a checklist, not Priya's</div></div>
+          <div class="split"><div>Why the gate missed it</div><div>The gate scores a recorded output; it never inspected the package</div></div>
+          <div class="split"><div>The fix</div><div>Block publication if SKILL.md names a file absent from the shipped tree</div></div>
+        </div>
+        <div class="claim an">Written, not merged — and it would not have caught this exact case.</div>
+        <template data-notes>
+          <span class="presenter">Emily</span>
+          <p><strong>READ ALOUD:</strong> "This is the one that worried us most. We put the skill on a second surface, and the checklist file didn't travel with it. The skill carried on working. It produced a review that looked exactly like a good one — right structure, confident tone, nothing missing on the page. But it had stopped using Priya's checklist and started using its own idea of one, and nothing in the output said so.</p>
+          <p>Our evaluation gate couldn't catch it, because the gate marks the answer, not the parcel. So we've written a check that refuses to publish a skill if it points at a file that isn't in the package.</p>
+          <p>And I should be straight with you about the limit of that. The check looks at our source folder, but this failure happened in transit to the other surface — so it would not have caught the case that prompted it. The fix has the same shape as the bug. That's exactly why the next step is checking the package where the skill actually runs, not where it's convenient for us to look."</p>
+          <div class="cue"><strong>If pushed further</strong>
+          <em>Why isn't it merged?</em> Written today; we chose to freeze the demo rather than land code we could not test properly first. Small change, sitting on a branch.<br>
+          <em>How would we know today?</em> Look at the folder on disk. Not good enough as a permanent answer, which is why it becomes a check.</div>
+        </template>
+      </section>
+
+      <!-- ══════════ B2 · VERBATIM ══════════ -->
+      <section class="slide" data-eyebrow="Slide 4, row 2 — detail" data-title="Verbatim is an instruction, not a guarantee">
+        <h2>Priya's rule is "verbatim". Today that is an <span class="hl">instruction</span></h2>
+        <div class="headrule"></div>
+        <div class="rowhead an"><span>What we found</span><span>Detail</span></div>
+        <div class="rows an">
+          <div class="split"><div>The rule</div><div>Use the checklist word for word — never rename, merge or invent an item</div></div>
+          <div class="split"><div>Today</div><div>The rule lives in the skill's instructions; the model is asked to comply</div></div>
+          <div class="split"><div>The gap</div><div>A paraphrase or a merged pair of items passes silently</div></div>
+          <div class="split"><div>Observed</div><div>One run summarised a checklist section instead of listing it</div></div>
+          <div class="split"><div>The fix</div><div>Compare the checklist in every output against the source, character for character</div></div>
+        </div>
+        <div class="claim an">Specified, not built. The file it would enforce against is already the single source of truth.</div>
+        <template data-notes>
+          <span class="presenter">Emily</span>
+          <p><strong>READ ALOUD:</strong> "Priya's first rule is that the checklist is used word for word — nothing renamed, nothing merged, nothing invented. Right now that rule is written into the skill's instructions, which means we are asking the model to comply rather than requiring it.</p>
+          <p>Most of the time it does. But we saw a run where it summarised a section of the checklist instead of listing every item out, which is precisely the behaviour Priya told us she would not accept. It passed unnoticed, because a summary of a checklist still looks like a checklist.</p>
+          <p>The fix is not cleverer wording. It's a comparison: take the checklist out of the output, put it next to the source file, and require them to match character for character. A paraphrase then fails the build instead of reaching a lawyer.</p>
+          <p>That one is specified and not yet built. What is already true is that there's a single file that counts as the checklist, so there is something definite to compare against."</p>
+          <div class="cue"><strong>If pushed further</strong>
+          <em>Is it hard?</em> No — it is a string comparison. The reason it isn't done is sequencing, not difficulty.<br>
+          <em>What about legitimate rewording?</em> There isn't any. That is the point of a fixed checklist; if Priya changes it, the file changes and the check follows.</div>
+        </template>
+      </section>
+
+      <!-- ══════════ B3 · PUBLISHED VERSIONS ══════════ -->
+      <section class="slide" data-eyebrow="Slide 4, row 3 — detail" data-title="The shelf is backed by evidence">
+        <h2>The version on the shelf is the version that was <span class="hl">graded</span></h2>
+        <div class="headrule"></div>
+        <div class="rowhead an"><span>Control</span><span>Detail</span></div>
+        <div class="rows an">
+          <div class="split"><div>The risk</div><div>A hand-edited version number publishes to every machine with no evidence behind it</div></div>
+          <div class="split"><div>The control</div><div>One publisher. It writes nothing unless the gate passes</div></div>
+          <div class="split"><div>What it stamps</div><div>The graded version into the plugin, the shelf, the skill text and the changelog</div></div>
+          <div class="split"><div>The assertion</div><div>Every published version must have a stored, passing gate report</div></div>
+          <div class="split"><div>Where it runs</div><div>A blocking step in continuous integration, on every push</div></div>
+        </div>
+        <div class="claim an">Enforced in CI today. There is no separate "bump the version" step that can be got wrong.</div>
+        <template data-notes>
+          <span class="presenter">Emily</span>
+          <p><strong>READ ALOUD:</strong> "This is the part that is genuinely finished, so I'll say it plainly.</p>
+          <p>The danger with a shared shelf is that a version number is just text. Change one character and ten machines update to something nobody assessed. So publishing is not a manual step here. One script does it, and it writes nothing at all unless the gate passes. When it does pass, it stamps the same version the gate just graded into the plugin, the shelf listing, the skill text and the changelog — all at once. There is no separate bump step to get wrong.</p>
+          <p>On top of that, continuous integration refuses the build unless every published version has a stored gate report saying it passed. If the evidence isn't there, the version isn't legitimate."</p>
+          <div class="cue"><strong>Precision — do not overstate</strong>
+          The <b>blocking</b> CI step is <code>check_published.py</code>. The score report <code>gate.py --all</code> runs with <code>continue-on-error</code> and is informational, so do not say "CI blocks a low score". The publish path is what refuses on a failing score. If Tom reads the workflow he will see this.</div>
+          <div class="cue"><strong>If pushed further</strong>
+          <em>Who can publish?</em> Anyone can propose; only the gate can approve, and the branch is protected in the production model.<br>
+          <em>Can we roll back?</em> Yes — every version keeps its changelog entry and gate report, so you can identify and withdraw the version used on a given matter.</div>
+        </template>
+      </section>
+
+      <!-- ══════════ B4 · THE MACHINE ══════════ -->
+      <section class="slide" data-eyebrow="Slide 4, row 4 — detail" data-title="We verify the shelf, not the machine">
+        <h2>We verify the shelf. We do not yet verify the <span class="hl">machine</span></h2>
+        <div class="headrule"></div>
+        <div class="rowhead an"><span>The gap</span><span>Detail</span></div>
+        <div class="rows an">
+          <div class="split"><div>What is checked</div><div>The shelf, the plugin manifest and the stored gate evidence agree</div></div>
+          <div class="split"><div>What is not</div><div>Whether the copy on a given laptop matches any of that</div></div>
+          <div class="split"><div>How it goes wrong</div><div>A checkout behind the shelf silently serves an old catalogue</div></div>
+          <div class="split"><div>Why it is nasty</div><div>A stale install and a broken install look identical — no error either way</div></div>
+          <div class="split"><div>The fix</div><div>Stamp the package with what was approved; verify it where it runs; refuse on mismatch</div></div>
+        </div>
+        <div class="claim an">Not built. This is the boundary of what the gate can see.</div>
+        <template data-notes>
+          <span class="presenter">Emily</span>
+          <p><strong>READ ALOUD:</strong> "This is the gap, and I'd rather name it than have you find it.</p>
+          <p>Everything I've described checks the shelf — that the approved version is consistent and backed by evidence. None of it checks the laptop. Nothing today looks at what a particular lawyer actually has installed and compares it to what was approved.</p>
+          <p>We hit this ourselves. A machine that was simply behind on updates served an old catalogue, and it took a while to work out, because a stale install and a broken install look exactly the same — no error in either case.</p>
+          <p>The fix follows the same principle as everything else here: stamp the package with a record of what was approved, check that record where the skill actually runs, and make a mismatch refuse rather than quietly carry on. Think of it as chain of custody. Our gate proves the document was sound when we examined it; this proves the copy in the room is that same document.</p>
+          <p>That's not built. It's the first thing we'd do in a next phase."</p>
+          <div class="cue"><strong>If pushed further</strong>
+          <em>So we can't trust installs today?</em> You can, with a manual step: confirm the machine is up to date before relying on it. What is missing is the automatic assertion.<br>
+          <em>Does this block a pilot?</em> No. A pilot is small enough to check by hand. It blocks firm-wide rollout without a manual step, which is why it is first in the next phase.</div>
+        </template>
+      </section>
+
+      <!-- ══════════ B5 · IF TIME — HOW WE WOULD BUILD ══════════ -->
+      <section class="slide" data-eyebrow="If time — process" data-title="What we would set up on day one">
+        <h2>What we would set up on <span class="hl">day one</span>, next time</h2>
+        <div class="headrule"></div>
+        <div class="rowhead an"><span>What</span><span>Why it would have helped</span></div>
+        <div class="rows an">
+          <div class="split"><div>Shared working memory</div><div>One file every session reads first and writes status to — who holds what, what changed</div></div>
+          <div class="split"><div>Shared skills, not shared prompts</div><div>The team's methods packaged and versioned, so every session starts equal</div></div>
+          <div class="split"><div>A build loop with separated roles</div><div>Planner, generator and evaluator kept apart, with an agreed contract between them</div></div>
+          <div class="split"><div>Adversarial grading by default</div><div>Something whose job is to attack the output, from the first hour</div></div>
+        </div>
+        <div class="claim an">Most of what we found late, we would have found on day one.</div>
+        <template data-notes>
+          <span class="presenter">Emily</span>
+          <p><strong>READ ALOUD:</strong> "One last thing, on how we worked rather than what we built.</p>
+          <p>We ran this across several parallel sessions, and the coordination was the hard part. We adopted a shared working memory partway through — one file that every session reads before starting and updates when it stops, recording who is working on what and what has changed. That helped a great deal, and it should have been there from the first hour rather than the middle.</p>
+          <p>The bigger lesson is about testing. We have a house pattern at Negative Zero for this kind of build: you separate the roles, so the thing that plans, the thing that produces and the thing that grades are kept apart and have to agree a contract between them, and you have something adversarial attacking the output from the start. We brought that discipline in late, and every significant defect we found came from it.</p>
+          <p>If we started again on Monday, that setup would be the first day's work, not the last. It is also, frankly, the most transferable part of this engagement — it isn't specific to term sheets."</p>
+          <div class="cue"><strong>Honesty — do not overclaim</strong>
+          Do not say the loop harness was used to build this. It was not. The true, narrower claim: the defects were found by adversarial testing, and adopting that discipline earlier would have found them earlier. The shared working-memory file <b>was</b> genuinely adopted mid-build, so that one may be described in the past tense.</div>
+        </template>
+      </section>
+
+      <!-- ══════════ B6 · THE OPEN-BOOK EXAM ══════════ -->
+      <section class="slide" data-eyebrow="Evaluation integrity — detail" data-title="Every test was an open-book exam">
+        <h2>Every test we had run was an <span class="hl">open-book exam</span></h2>
+        <div class="headrule"></div>
+        <div class="rowhead an"><span>What we found</span><span>Detail</span></div>
+        <div class="rows an">
+          <div class="split"><div>What we did</div><div>Graded the skill against our four sample term sheets. It passed</div></div>
+          <div class="split"><div>What we missed</div><div>The skill ships worked answers for those same four documents</div></div>
+          <div class="split"><div>Why that matters</div><div>It can recognise the document and return the stored answer without doing the work</div></div>
+          <div class="split"><div>What we did about it</div><div>Wrote a fifth term sheet it has never seen — unfamiliar format, deliberate traps</div></div>
+          <div class="split"><div>Where it stands</div><div>The document exists. It is not yet wired into the gate, and nothing has been graded against it</div></div>
+        </div>
+        <div class="claim an">The four samples no longer prove much. That is why we stopped saying "verified".</div>
+        <template data-notes>
+          <span class="presenter">Emily</span>
+          <p><strong>READ ALOUD:</strong> "This one is about our own testing rather than the skill, and it is the finding I would want you to hold on to.</p>
+          <p>We graded the skill against four sample term sheets and it passed everything. Then we noticed something awkward. The skill ships worked examples for those same four documents — they travel inside it, as reference material. So when we tested it, it could recognise the document in front of it and hand back the answer it already carried, without doing the reasoning at all. We would not have been able to tell the difference from the output. Every test we had run was an open-book exam.</p>
+          <p>So we wrote a fifth term sheet it has never seen, in a format unlike the other four, with deliberate traps in it. I want to be precise about where that stands: the document is written, it is not yet wired into the gate, and nothing has been graded against it. So I am not going to tell you the skill has been verified — that word does not apply yet.</p>
+          <p>The reason I am telling you at all is that this is the sort of thing that is easy to never notice. The tests were green. They were green for the wrong reason."</p>
+          <div class="cue"><strong>Language discipline</strong>
+          Do <b>not</b> say "we tested against it", "held-out test passing", or "verified". The correct verbs are
+          <em>we have written</em> and <em>the principle we took from it</em>. If asked directly whether the fifth
+          document has been run: <b>it has not</b>.</div>
+          <div class="cue"><strong>If pushed further</strong>
+          <em>Why not just remove the worked examples?</em> They are genuinely useful to the skill at run time — they show it the expected output shape. The answer is not to delete them; it is to grade against something they do not cover.<br>
+          <em>How many held-out documents would you want?</em> One breaks the open-book problem. A handful is what you would want before trusting a score. That is next-phase work.<br>
+          <em>Does this mean the earlier scores were meaningless?</em> Not meaningless — they show the skill produces well-formed, consistent output across four very different formats, which was the original question. They just cannot tell you it reasons correctly on something new.</div>
+        </template>
+      </section>
+
+
+
+
+    </div>
+
+    <div class="nav-zone l" id="zoneL" aria-hidden="true"></div>
+    <div class="nav-zone r" id="zoneR" aria-hidden="true"></div>
+  </div>
+
+  <div class="bar">
+    <div class="prog"><i id="prog"></i></div>
+    <button id="prev" title="Previous (←)">←</button>
+    <button id="next" title="Next (→)">→</button>
+    <div class="dots" id="dots"></div>
+    <span class="count" id="count"></span>
+    <span class="clock" id="clock">00:00</span>
+    <button id="btime" title="Start / pause timer (T)">Timer</button>
+    <button id="bnotes" title="Presenter notes (N)">Notes</button>
+    <button id="bjump" title="Jump to slide (O)">Slides</button>
+    <button id="bfs" title="Fullscreen (F)">⛶</button>
+    <button id="bhelp" title="Keyboard shortcuts (?)">?</button>
+  </div>
+</div>
+
+<aside class="notes" id="notes" aria-live="polite">
+  <h4><span id="notesTitle">Presenter notes</span><em>Press N to hide · not shown on the slide</em></h4>
+  <div class="body" id="notesBody"></div>
+</aside>
+
+<div class="jump" id="jump">
+  <h3>Jump to slide</h3>
+  <div class="jgrid" id="jgrid"></div>
+</div>
+
+<div class="help" id="help">
+  <div><b>Click</b> left half back · right half forward</div>
+  <div><b>← →</b> move &nbsp;<kbd>Space</kbd></div>
+  <div><b>N</b> presenter notes</div>
+  <div><b>O</b> slide list</div>
+  <div><b>F</b> fullscreen</div>
+  <div><b>T</b> start / pause timer &nbsp; <b>R</b> reset</div>
+  <div><b>Home / End</b> first / last</div>
+  <div><b>Esc</b> close overlays</div>
+</div>
+
+<script>
+(function(){
+  var deck     = document.getElementById('deck');
+  var viewport = document.getElementById('viewport');
+  var slides   = Array.prototype.slice.call(deck.querySelectorAll('.slide'));
+  var i = 0;
+
+  /* ---------- fit the fixed 1600×900 stage to the viewport ---------- */
+  function fit(){
+    var s = Math.min(viewport.clientWidth / 1600, viewport.clientHeight / 900);
+    deck.style.transform = 'scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+
+  /* ---------- wrap slide content so it can be measured and auto-scaled ----------
+     Guards against a slide overflowing the stage if the presentation machine
+     substitutes wider fallback fonts for Jost / Inter.                        */
+  slides.forEach(function(sl){
+    var body = document.createElement('div');
+    body.className = 's-body';
+    Array.prototype.slice.call(sl.childNodes).forEach(function(n){
+      if (n.nodeType === 1 && (n.tagName === 'TEMPLATE' || n.classList.contains('foot'))) return;
+      body.appendChild(n);
+    });
+    sl.insertBefore(body, sl.firstChild);
+  });
+  function autofit(){
+    slides.forEach(function(sl){
+      var body = sl.querySelector('.s-body');
+      if (!body) return;
+      body.style.transform = 'none';
+      var cs = getComputedStyle(sl);
+      var avail = 900 - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      var h = body.scrollHeight;
+      var k = h > avail ? Math.max(0.62, avail / h) : 1;
+      body.style.transform = k < 1 ? 'scale(' + k.toFixed(4) + ')' : 'none';
+    });
+  }
+  window.addEventListener('resize', autofit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(autofit);
+  setTimeout(autofit, 400);
+
+  /* ---------- build per-slide chrome ---------- */
+  slides.forEach(function(sl, k){
+    if (sl.classList.contains('title')) return;
+    var stamp = document.createElement('div');
+    stamp.className = 'stamp';
+    stamp.innerHTML = '<img src="data:image/png;base64,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" alt=""><span class="rule"></span>' +
+                      '<span class="eyebrow"></span>';
+    stamp.querySelector('.eyebrow').textContent = sl.getAttribute('data-eyebrow') || '';
+    sl.appendChild(stamp);
+    var pn = document.createElement('div');
+    pn.className = 'pageno';
+    pn.innerHTML = '<b>' + String(k + 1).padStart(2, '0') + '</b> / ' + String(slides.length).padStart(2, '0');
+    sl.appendChild(pn);
+  });
+
+  /* ---------- dots ---------- */
+  var dotsWrap = document.getElementById('dots');
+  slides.forEach(function(sl, k){
+    var d = document.createElement('span');
+    d.className = 'dot' + (sl.hasAttribute('data-demo') ? ' demo' : '');
+    d.title = (k + 1) + '. ' + (sl.getAttribute('data-title') || '') +
+              (sl.hasAttribute('data-demo') ? ' — demo ' + sl.getAttribute('data-demo') : '');
+    d.addEventListener('click', function(){ go(k); });
+    dotsWrap.appendChild(d);
+  });
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  /* ---------- jump grid ---------- */
+  var jgrid = document.getElementById('jgrid'), jump = document.getElementById('jump');
+  slides.forEach(function(sl, k){
+    var b = document.createElement('button');
+    b.className = 'jcard';
+    var demo = sl.hasAttribute('data-demo') ? ' · Demo ' + sl.getAttribute('data-demo') : '';
+    b.innerHTML = '<div class="jn">' + String(k + 1).padStart(2, '0') + demo + '</div><div class="jt"></div>';
+    b.querySelector('.jt').textContent = sl.getAttribute('data-title') || '';
+    b.addEventListener('click', function(){ go(k); jump.classList.remove('open'); });
+    jgrid.appendChild(b);
+  });
+  var jcards = Array.prototype.slice.call(jgrid.children);
+
+  /* ---------- notes ---------- */
+  var notes = document.getElementById('notes'),
+      notesBody = document.getElementById('notesBody'),
+      notesTitle = document.getElementById('notesTitle');
+  function paintNotes(){
+    var tpl = slides[i].querySelector('template[data-notes]');
+    notesBody.innerHTML = '';
+    if (tpl) notesBody.appendChild(tpl.content.cloneNode(true));
+    notesTitle.textContent = 'Slide ' + (i + 1) + ' — ' + (slides[i].getAttribute('data-title') || '');
+    notes.scrollTop = 0;
+  }
+
+  /* ---------- navigate ---------- */
+  function go(n){
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function(sl, k){
+      sl.classList.toggle('active', k === i);
+      sl.classList.toggle('past',   k <  i);
+    });
+    dots.forEach(function(d, k){ d.classList.toggle('on', k === i); });
+    jcards.forEach(function(c, k){ c.classList.toggle('on', k === i); });
+    document.getElementById('count').textContent = (i + 1) + ' / ' + slides.length;
+    document.getElementById('prog').style.width = (i / (slides.length - 1) * 100) + '%';
+    // stagger the entrance of animated children
+    var an = slides[i].querySelectorAll('.an, h1, h2, .headrule');
+    Array.prototype.forEach.call(an, function(el, k){
+      el.style.animation = 'none';
+      void el.offsetWidth;                       // force reflow → restart animation
+      el.style.animation = '';
+      el.style.animationDelay = (0.10 + k * 0.085).toFixed(3) + 's';
+    });
+    paintNotes();
+  }
+
+  document.getElementById('next').addEventListener('click', function(){ go(i + 1); });
+  document.getElementById('prev').addEventListener('click', function(){ go(i - 1); });
+
+  /* ---------- click the left / right half of the stage to move ----------
+     No visual affordance of any kind — the zones are transparent and silent. */
+  var zoneL = document.getElementById('zoneL'), zoneR = document.getElementById('zoneR');
+  var downX = 0, downY = 0, swipedAt = 0;
+  function armZone(zone, delta){
+    zone.addEventListener('mousedown', function(e){ downX = e.clientX; downY = e.clientY; });
+    zone.addEventListener('click', function(e){
+      if (Date.now() - swipedAt < 500) return;                       // a swipe just handled it
+      if (Math.abs(e.clientX - downX) > 8 || Math.abs(e.clientY - downY) > 8) return;  // drag, not a click
+      var sel = window.getSelection();
+      if (sel && sel.toString().length > 2) return;                  // user was selecting text
+      go(i + delta);
+    });
+  }
+  armZone(zoneL, -1);
+  armZone(zoneR, 1);
+
+  /* ---------- timer ---------- */
+  var t0 = 0, acc = 0, running = false, clock = document.getElementById('clock');
+  function tick(){
+    var ms = acc + (running ? Date.now() - t0 : 0);
+    var s = Math.floor(ms / 1000);
+    clock.textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+    clock.className = 'clock' + (s >= 900 ? ' over' : s >= 720 ? ' warn' : '');
+  }
+  setInterval(tick, 250);
+  function toggleTimer(){
+    if (running){ acc += Date.now() - t0; running = false; }
+    else { t0 = Date.now(); running = true; }
+    document.getElementById('btime').classList.toggle('on', running);
+    tick();
+  }
+  document.getElementById('btime').addEventListener('click', toggleTimer);
+
+  /* ---------- buttons ---------- */
+  var help = document.getElementById('help');
+  function toggleNotes(){ notes.classList.toggle('open'); document.getElementById('bnotes').classList.toggle('on', notes.classList.contains('open')); }
+  function toggleJump(){ jump.classList.toggle('open'); }
+  document.getElementById('bnotes').addEventListener('click', toggleNotes);
+  document.getElementById('bjump').addEventListener('click', toggleJump);
+  document.getElementById('bhelp').addEventListener('click', function(){ help.classList.toggle('open'); });
+  document.getElementById('bfs').addEventListener('click', function(){
+    if (!document.fullscreenElement){ if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); }
+    else if (document.exitFullscreen) document.exitFullscreen();
+  });
+
+  /* ---------- keyboard ---------- */
+  document.addEventListener('keydown', function(e){
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' '){ go(i + 1); e.preventDefault(); }
+    else if (k === 'ArrowLeft' || k === 'PageUp'){ go(i - 1); e.preventDefault(); }
+    else if (k === 'Home'){ go(0); }
+    else if (k === 'End'){ go(slides.length - 1); }
+    else if (k === 'n' || k === 'N'){ toggleNotes(); }
+    else if (k === 'o' || k === 'O'){ toggleJump(); }
+    else if (k === 't' || k === 'T'){ toggleTimer(); }
+    else if (k === 'r' || k === 'R'){ acc = 0; t0 = Date.now(); tick(); }
+    else if (k === 'f' || k === 'F'){ document.getElementById('bfs').click(); }
+    else if (k === '?'){ help.classList.toggle('open'); }
+    else if (k === 'Escape'){ jump.classList.remove('open'); help.classList.remove('open'); }
+  });
+
+  /* ---------- touch ---------- */
+  var sx = null;
+  viewport.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+  viewport.addEventListener('touchend', function(e){
+    if (sx === null) return;
+    var dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 55){ swipedAt = Date.now(); go(i + (dx < 0 ? 1 : -1)); }
+    sx = null;
+  });
+
+  fit(); autofit(); go(0);
+
+  /* ---------- self-check (visible only in the console) ---------- */
+  window.__deckCheck = function(){
+    var report = slides.map(function(sl, k){
+      var body = sl.querySelector('.s-body'), cs = getComputedStyle(sl);
+      var avail = 900 - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      var prev = body.style.transform; body.style.transform = 'none';
+      var h = body.scrollHeight; body.style.transform = prev;
+      return {slide: k + 1, title: sl.getAttribute('data-title'),
+              contentHeight: h, available: avail, scaled: h > avail};
+    });
+    console.table(report);
+    return report;
+  };
+})();
+</script>
+</body>
+</html>
